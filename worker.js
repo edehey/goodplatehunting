@@ -19,7 +19,7 @@ function mergeDocs(a,b){
 
 const CODE_RE=/^[A-Z2-9]{10}$/;
 const ALPHA="ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-const MAX_BODY=400000, MAX_PHOTO=500000, MAX_PHOTOS=40, TTL=60*60*24*365;
+const MAX_BODY=400000, MAX_PHOTO=500000, MAX_PHOTOS=100, TTL=60*60*24*365;
 const ID_RE=/^[A-Za-z0-9_-]{6,40}$/, IMG_RE=/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
 const json=(o,s=200)=>new Response(JSON.stringify(o),{status:s,headers:{"content-type":"application/json","cache-control":"no-store"}});
 const str=(v,n)=>typeof v==="string"?v.replace(/[\u0000-\u001f<>]/g,"").slice(0,n):"";
@@ -45,11 +45,36 @@ function clean(d){
     events:(Array.isArray(d.events)?d.events:[]).slice(0,2000).map(cleanEvent).filter(Boolean),
     photos:[]}}
 
+const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const enc=s=>new TextEncoder().encode(s);
+// Web Push (VAPID, no payload): the keys are created once and kept in KV, never in the repository.
+async function vapid(env){
+  const v=await env.GROUPS.get("vapid");if(v)return JSON.parse(v);
+  const kp=await crypto.subtle.generateKey({name:"ECDSA",namedCurve:"P-256"},true,["sign","verify"]);
+  const o={priv:await crypto.subtle.exportKey("jwk",kp.privateKey),pub:b64u(await crypto.subtle.exportKey("raw",kp.publicKey))};
+  await env.GROUPS.put("vapid",JSON.stringify(o));return o}
+async function vapidAuth(env,ep){
+  const v=await vapid(env),h=b64u(enc(JSON.stringify({typ:"JWT",alg:"ES256"}))),
+    p=b64u(enc(JSON.stringify({aud:new URL(ep).origin,exp:Math.floor(Date.now()/1000)+12*3600,sub:"mailto:hello@goodplatehunting.com"})));
+  const key=await crypto.subtle.importKey("jwk",v.priv,{name:"ECDSA",namedCurve:"P-256"},false,["sign"]);
+  const sig=b64u(await crypto.subtle.sign({name:"ECDSA",hash:"SHA-256"},key,enc(h+"."+p)));
+  return"vapid t="+h+"."+p+"."+sig+", k="+v.pub}
+async function pushGroup(env,code,skipDv){
+  const k="ps:"+code,raw=await env.GROUPS.get(k);if(!raw)return;
+  const subs=JSON.parse(raw),keep=[];
+  await Promise.all(subs.map(async s=>{
+    if(s.dv&&s.dv===skipDv){keep.push(s);return}
+    try{const r=await fetch(s.ep,{method:"POST",headers:{TTL:"3600",Urgency:"high",Authorization:await vapidAuth(env,s.ep)}});
+      if(r.status===404||r.status===410)return}catch(_){}
+    keep.push(s)}));
+  if(keep.length!==subs.length)await env.GROUPS.put(k,JSON.stringify(keep),{expirationTtl:TTL})}
+
 function newCode(){const b=crypto.getRandomValues(new Uint8Array(10));return[...b].map(x=>ALPHA[x%ALPHA.length]).join("")}
 
-async function api(req,env,url){
+async function api(req,env,url,ctx){
   if(!env.GROUPS)return json({error:"storage"},500);
   const p=url.pathname.replace(/\/+$/,"").split("/").filter(Boolean); // ["api","g",CODE?,"sync"?]
+  if(p[1]==="vapid"&&req.method==="GET")return json({pub:(await vapid(env)).pub});
   if(p[1]!=="g")return json({error:"not found"},404);
   if(p.length===2){
     if(req.method!=="POST")return json({error:"method"},405);
@@ -63,16 +88,27 @@ async function api(req,env,url){
   const stored=JSON.parse(raw);
   if(p.length===3){
     if(req.method==="GET")return json({doc:stored});
-    if(req.method==="DELETE"){for(const x of(stored.photos||[]))await env.GROUPS.delete("ph:"+code+":"+x.id);await env.GROUPS.delete(key);return json({ok:true})}
+    if(req.method==="DELETE"){for(const x of(stored.photos||[]))await env.GROUPS.delete("ph:"+code+":"+x.id);await env.GROUPS.delete(key);await env.GROUPS.delete("ps:"+code);return json({ok:true})}
     return json({error:"method"},405)}
   if(p.length===4&&p[3]==="sync"&&req.method==="POST"){
     const text=await req.text();if(text.length>MAX_BODY)return json({error:"too big"},413);
     let body;try{body=JSON.parse(text)}catch(_){return json({error:"bad json"},400)}
+    const oldIds=new Set((stored.events||[]).map(e=>e.id));
     const merged=clean(mergeDocs(stored,clean(body)));merged.photos=stored.photos||[];
     const out=JSON.stringify(merged);
     if(out.length>MAX_BODY*2)return json({error:"group full"},413);
     if(out!==raw)await env.GROUPS.put(key,out,{expirationTtl:TTL});
+    const fresh=merged.events.filter(e=>e.t==="spot"&&!oldIds.has(e.id)&&Date.now()-e.ts<10*60*1000);
+    if(fresh.length&&ctx)ctx.waitUntil(pushGroup(env,code,str(body&&body.dv,40)));
     return json({doc:merged})}
+  if(p.length===4&&p[3]==="push"&&(req.method==="POST"||req.method==="DELETE")){
+    const text=await req.text();if(text.length>2000)return json({error:"too big"},413);
+    let b;try{b=JSON.parse(text)}catch(_){return json({error:"bad json"},400)}
+    const ep=typeof b.ep==="string"?b.ep:"";if(!/^https:\/\/[^\s]{10,600}$/.test(ep))return json({error:"bad"},400);
+    const k="ps:"+code;let subs=[];try{subs=JSON.parse(await env.GROUPS.get(k)||"[]")}catch(_){}
+    subs=subs.filter(s=>s.ep!==ep);
+    if(req.method==="POST")subs.push({ep,dv:str(b.dv,40),ts:Date.now()});
+    await env.GROUPS.put(k,JSON.stringify(subs.slice(-40)),{expirationTtl:TTL});return json({ok:true})}
   if(p[3]==="photo"){
     const photos=stored.photos||[];
     if(p.length===4&&req.method==="POST"){
@@ -93,8 +129,8 @@ async function api(req,env,url){
   return json({error:"not found"},404)}
 
 export default{
-  async fetch(req,env){
+  async fetch(req,env,ctx){
     const url=new URL(req.url);
-    if(url.pathname.startsWith("/api/")){try{return await api(req,env,url)}catch(e){return json({error:"server"},500)}}
+    if(url.pathname.startsWith("/api/")){try{return await api(req,env,url,ctx)}catch(e){return json({error:"server"},500)}}
     return env.ASSETS.fetch(req)}
 };
