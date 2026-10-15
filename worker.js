@@ -13,13 +13,14 @@ function mergeDocs(a,b){
   const aT=A.numT||0,bT=B.numT||0;
   const la=(A.nums||[]).length,lb=(B.nums||[]).length;
   const pickA=aT>bT||(aT===bT&&(la>lb||(la===lb&&JSON.stringify(A.nums||[])>=JSON.stringify(B.nums||[]))));
-  return{pt:mx(A.pt,B.pt),rt:mx(A.rt,B.rt),nums:(pickA?A.nums:B.nums)||[],numT:Math.max(aT,bT),rmE,events};
+  return{pt:mx(A.pt,B.pt),rt:mx(A.rt,B.rt),nums:(pickA?A.nums:B.nums)||[],numT:Math.max(aT,bT),cs:(pickA?A.cs:B.cs)||0,ce:(pickA?A.ce:B.ce)||0,rmE,events};
 }
 /*ENDMERGE*/
 
 const CODE_RE=/^[A-Z2-9]{10}$/;
 const ALPHA="ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-const MAX_BODY=400000, TTL=60*60*24*365;
+const MAX_BODY=400000, MAX_PHOTO=500000, MAX_PHOTOS=40, TTL=60*60*24*365;
+const ID_RE=/^[A-Za-z0-9_-]{6,40}$/, IMG_RE=/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
 const json=(o,s=200)=>new Response(JSON.stringify(o),{status:s,headers:{"content-type":"application/json","cache-control":"no-store"}});
 const str=(v,n)=>typeof v==="string"?v.replace(/[\u0000-\u001f<>]/g,"").slice(0,n):"";
 const num=v=>Number.isFinite(+v)?+v:0;
@@ -39,9 +40,10 @@ function cleanEvent(e){
 function clean(d){
   d=d&&typeof d==="object"?d:{};
   const nums=(Array.isArray(d.nums)?d.nums:[]).slice(0,1).map(x=>str(x,8).toUpperCase().replace(/[^A-Z0-9]/g,"")).filter(Boolean);
-  return{pt:cleanMap(d.pt),rt:cleanMap(d.rt),nums,numT:num(d.numT),
+  return{pt:cleanMap(d.pt),rt:cleanMap(d.rt),nums,numT:num(d.numT),cs:num(d.cs),ce:num(d.ce),
     rmE:(Array.isArray(d.rmE)?d.rmE:[]).slice(0,3000).map(x=>str(x,40)).filter(Boolean),
-    events:(Array.isArray(d.events)?d.events:[]).slice(0,2000).map(cleanEvent).filter(Boolean)}}
+    events:(Array.isArray(d.events)?d.events:[]).slice(0,2000).map(cleanEvent).filter(Boolean),
+    photos:[]}}
 
 function newCode(){const b=crypto.getRandomValues(new Uint8Array(10));return[...b].map(x=>ALPHA[x%ALPHA.length]).join("")}
 
@@ -61,16 +63,33 @@ async function api(req,env,url){
   const stored=JSON.parse(raw);
   if(p.length===3){
     if(req.method==="GET")return json({doc:stored});
-    if(req.method==="DELETE"){await env.GROUPS.delete(key);return json({ok:true})}
+    if(req.method==="DELETE"){for(const x of(stored.photos||[]))await env.GROUPS.delete("ph:"+code+":"+x.id);await env.GROUPS.delete(key);return json({ok:true})}
     return json({error:"method"},405)}
   if(p.length===4&&p[3]==="sync"&&req.method==="POST"){
     const text=await req.text();if(text.length>MAX_BODY)return json({error:"too big"},413);
     let body;try{body=JSON.parse(text)}catch(_){return json({error:"bad json"},400)}
-    const merged=clean(mergeDocs(stored,clean(body)));
+    const merged=clean(mergeDocs(stored,clean(body)));merged.photos=stored.photos||[];
     const out=JSON.stringify(merged);
     if(out.length>MAX_BODY*2)return json({error:"group full"},413);
     if(out!==raw)await env.GROUPS.put(key,out,{expirationTtl:TTL});
     return json({doc:merged})}
+  if(p[3]==="photo"){
+    const photos=stored.photos||[];
+    if(p.length===4&&req.method==="POST"){
+      const text=await req.text();if(text.length>MAX_PHOTO)return json({error:"too big"},413);
+      let b;try{b=JSON.parse(text)}catch(_){return json({error:"bad json"},400)}
+      const id=str(b&&b.id,40),img=b&&b.img;
+      if(!ID_RE.test(id)||typeof img!=="string"||!IMG_RE.test(img))return json({error:"bad photo"},400);
+      if(photos.some(x=>x.id===id))return json({doc:stored});
+      if(photos.length>=MAX_PHOTOS)return json({error:"too many photos"},413);
+      await env.GROUPS.put("ph:"+code+":"+id,JSON.stringify({img,cap:str(b.cap,120)}),{expirationTtl:TTL});
+      stored.photos=[...photos,{id,cap:str(b.cap,120),ts:Date.now()}];
+      await env.GROUPS.put(key,JSON.stringify(stored),{expirationTtl:TTL});
+      return json({doc:stored})}
+    const pid=p[4]||"";
+    if(p.length===5&&ID_RE.test(pid)){
+      if(req.method==="GET"){const v=await env.GROUPS.get("ph:"+code+":"+pid);return v===null?json({error:"not found"},404):new Response(v,{headers:{"content-type":"application/json","cache-control":"no-store"}})}
+      if(req.method==="DELETE"){await env.GROUPS.delete("ph:"+code+":"+pid);stored.photos=photos.filter(x=>x.id!==pid);await env.GROUPS.put(key,JSON.stringify(stored),{expirationTtl:TTL});return json({ok:true})}}}
   return json({error:"not found"},404)}
 
 export default{
