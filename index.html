@@ -44,7 +44,31 @@ button.x{background:transparent;color:var(--mut);padding:2px 8px;font-size:15px;
 .th{max-width:140px;border-radius:8px;margin-top:4px;display:block}
 canvas.cv{width:100%;touch-action:none;border-radius:10px;border:1px solid var(--line);cursor:crosshair}
 .up{cursor:pointer;padding:10px 14px;border-radius:999px;border:1px solid var(--line);color:var(--mut);display:inline-block}
-.hero{position:relative;background:linear-gradient(160deg,#1f4fd8,#12308f);margin:-16px -16px 20px;padding:44px 20px 24px;text-align:center;border-radius:0 0 32px 32px;box-shadow:0 10px 30px rgba(18,48,143,.25)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 12% 30%,#ffd21f 0 3px,transparent 4px),radial-gradient(circle at 90% 20%,#ff7ab8 0 4px,transparent 5px),radial-gradient(circle at 80% 62%,#5ef0c8 0 3px,transparent 4px),radial-gradient(circle at 22% 70%,#fff 0 2px,transparent 3px),radial-gradient(circle at 50% 8%,#fff 0 2px,transparent 3px),linear-gradient(160deg,#2f7bff 0%,#4b45e6 55%,#8a3ff0 100%);margin:-16px -16px 20px;padding:46px 20px 16px;text-align:center;border-radius:0 0 32px 32px;box-shadow:0 10px 30px rgba(60,50,200,.3)}
+.hero>svg,.hero>h1,.hero>p,.hero>button{position:relative;z-index:1}
+.belt{direction:ltr;overflow:hidden;margin:0 -20px;padding:4px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.belt.b2{margin-top:16px}
+.belt-in{display:flex;width:max-content;animation:belt 34s linear infinite}
+.belt.b2 .belt-in{animation-direction:reverse}
+.belt .set{display:flex;gap:12px;padding-right:12px;align-items:center}
+@keyframes belt{to{transform:translateX(-50%)}}
+.pp{flex:none;display:flex;align-items:center;gap:6px;font:800 14px/1 ui-monospace,Menlo,Consolas,monospace;padding:6px 10px;border-radius:7px;border:2px solid #111;box-shadow:0 3px 0 rgba(0,0,0,.35);letter-spacing:.06em;white-space:nowrap;background:#fff;color:#111}
+.pp:nth-child(odd){transform:rotate(-4deg)}.pp:nth-child(even){transform:rotate(3deg) translateY(2px)}
+.pp i{font-style:normal;background:#1f4fd8;color:#ffd21f;font-size:9px;letter-spacing:0;padding:0 4px;margin:-6px 0 -6px -10px;border-radius:5px 0 0 5px;align-self:stretch;display:flex;align-items:center;min-width:16px;justify-content:center}
+.pp.yl{background:#ffd21f}.pp.bk{background:#111;color:#fff;border-color:#fff}.pp.gn{background:#1d8f4e;color:#fff}.pp.bl{background:#1f4fd8;color:#fff;border-color:#fff}.pp.rd{background:#e5484d;color:#fff}
+.pp.us{flex-direction:column;gap:3px;padding:3px 12px 5px}.pp.us small{font:700 7px/1 system-ui,sans-serif;letter-spacing:.14em;color:#1f4fd8}
+.gcode{font:900 26px ui-monospace,Menlo,monospace;letter-spacing:.12em;background:var(--bg);border:2px dashed var(--acc2);border-radius:14px;padding:8px;text-align:center;direction:ltr;user-select:all}
+a.up{text-decoration:none;color:var(--ink)}
+button.star{background:transparent;color:#f5a300;font-size:30px;padding:0 4px;line-height:1}
+.rules{border-top:6px solid #ffd21f}
+.rules ol{list-style:none;margin:0;padding:0;display:grid;gap:9px;counter-reset:r}
+.rules li{counter-increment:r;position:relative;padding-inline-start:38px;min-height:28px;font-size:14px;line-height:1.4}
+.rules li:before{content:counter(r);position:absolute;inset-inline-start:0;top:0;width:26px;height:26px;border-radius:50%;background:#ffd21f;color:#111;border:2px solid #111;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 0 #111}
+.drive{background:#fff3c4;color:#111;border:2px solid #111;border-radius:16px;padding:10px 14px;font-size:14px;line-height:1.4;margin-bottom:14px}
+.chip,#score div[data-pf],#pdN,.debt b{text-transform:uppercase}
+#pn{text-transform:uppercase}
+#pn::placeholder{text-transform:none}
+.hero>svg{display:inline-block;margin-top:10px}
 .hero svg{width:min(300px,80%);height:auto;filter:drop-shadow(0 8px 12px rgba(0,0,0,.3));transform:rotate(-3deg)}
 .hero h1{color:#fff;font-size:26px;font-weight:900;letter-spacing:.08em;margin:14px 0 4px}
 .hero h1 span{color:#ffd21f}
@@ -65,7 +89,7 @@ details#howd p{font-size:14px;margin:8px 0 0;padding:10px;border-radius:12px;bac
 @keyframes wig{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(1deg) translateY(-5px)}}
 .tw{animation:tw 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 @keyframes tw{50%{transform:scale(.4);opacity:.5}}
-@media (prefers-reduced-motion:reduce){.hero svg,.tw{animation:none}}
+@media (prefers-reduced-motion:reduce){.hero svg,.tw,.belt-in{animation:none}}
 .ava{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--line);display:block;margin:0 auto 4px}
 .ava.big{width:96px;height:96px;margin:0 auto 8px}
 .score div[data-pf]{cursor:pointer}
@@ -81,22 +105,40 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
 .dots i.on{background:var(--acc2)}
 .gal video{width:100%;border-radius:12px;display:block}
+.plate,#pl,#nn{direction:ltr;unicode-bidi:isolate}
+#pl,#nn{text-align:start}
+.ini{margin-left:0;margin-inline-start:4px}
 </style></head><body><main>
 <div class="hero">
-<select id="lang" class="lang" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="nl">Nederlands</option></select>
+<select id="lang" class="lang" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="nl">Nederlands</option><option value="id">Bahasa Indonesia</option><option value="ar">العربية</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pt">Português</option><option value="tr">Türkçe</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="zh">中文</option></select>
+<div class="belt" aria-hidden="true"><div class="belt-in"><span class="set"><b class="pp"><i>E</i>4830 FDY</b><b class="pp yl"><i>NL</i>GP-48-30</b><b class="pp us"><small>SUNNY STATE</small>HUN·4830</b><b class="pp bk">B 4830 GPH</b><b class="pp"><i>D</i>B-GP 4830</b><b class="pp gn">EV·4830</b><b class="pp">あ 48-30</b><b class="pp rd">FUN 123</b></span></div></div>
 <svg viewBox="36 160 440 240" role="img" aria-label="Good Plate Hunting"><defs><clipPath id="c2"><rect x="56" y="170" width="400" height="150" rx="24"/></clipPath></defs><g><circle cx="128" cy="322" r="30" fill="#111"/><circle cx="128" cy="322" r="12" fill="#ffd21f"/><circle cx="384" cy="322" r="30" fill="#111"/><circle cx="384" cy="322" r="12" fill="#ffd21f"/></g><rect x="56" y="170" width="400" height="150" rx="24" fill="#fff"/><g clip-path="url(#c2)"><rect x="56" y="170" width="58" height="150" fill="#1f4fd8"/></g><g fill="#ffd21f"><circle cx="85" cy="212" r="5"/><circle cx="85" cy="278" r="5"/><circle cx="68" cy="245" r="5"/><circle cx="102" cy="245" r="5"/><circle cx="74" cy="223" r="5"/><circle cx="96" cy="223" r="5"/><circle cx="74" cy="267" r="5"/><circle cx="96" cy="267" r="5"/></g><rect x="56" y="170" width="400" height="150" rx="24" fill="none" stroke="#111" stroke-width="10"/><text x="128" y="270" font-family="ui-monospace,Menlo,Consolas,monospace" font-weight="800" font-size="80" fill="#111" letter-spacing="2">4830</text><g fill="#9a9a9a"><rect x="352" y="208" width="26" height="26"/><rect x="378" y="234" width="26" height="26" fill="#c4c4c4"/><rect x="404" y="208" width="26" height="26" fill="#bbb"/><rect x="352" y="260" width="26" height="26" fill="#bbb"/><rect x="404" y="260" width="26" height="26"/></g><circle cx="330" cy="248" r="96" fill="#ffd21f" fill-opacity=".18" stroke="#ffd21f" stroke-width="24"/><line x1="398" y1="316" x2="454" y2="378" stroke="#ffd21f" stroke-width="34" stroke-linecap="round"/><g fill="#ffd21f"><path class="tw" d="M64 170Q64 184 78 184Q64 184 64 198Q64 184 50 184Q64 184 64 170Z"/><path class="tw" style="animation-delay:.5s" d="M462 186Q462 196 472 196Q462 196 462 206Q462 196 452 196Q462 196 462 186Z"/><path class="tw" style="animation-delay:1s" d="M46 363Q46 372 55 372Q46 372 46 381Q46 372 37 372Q46 372 46 363Z"/></g></svg>
 <h1>GOOD PLATE <span>HUNTING</span></h1>
 <p class="sub" data-i="tag"></p>
 <button class="share" id="share" data-i="share"></button>
+<div class="belt b2" aria-hidden="true"><div class="belt-in"><span class="set"><b class="pp us"><small>LUNCH LAND</small>YUM 4830</b><b class="pp"><i>I</i>GP 483 HT</b><b class="pp yl">LU 74 NCH</b><b class="pp">٤٨٣٠ · 4830</b><b class="pp bl">42·HUNT</b><b class="pp"><i>F</i>GP-483-HT</b><b class="pp bk">7 GPH 483</b><b class="pp yl"><i>P</i>48-30-GP</b></span></div></div>
 </div>
+
+<div class="card rules"><h2 data-i="hr"></h2><ol><li data-i="r1"></li><li data-i="r2"></li><li data-i="r3"></li><li data-i="r4"></li><li data-i="r5"></li><li data-i="r6"></li></ol></div>
+<div class="drive" role="note" data-i="drive"></div>
 
 <div class="card"><h2 data-i="h1"></h2><p class="empty" data-i="initInfo" style="margin:0 0 10px"></p>
 <div id="players" class="row" style="margin-bottom:10px"></div>
-<div class="row"><input id="pn" data-ph="phName"><button id="addP" data-i="add"></button></div></div>
+<div class="row"><input id="pn" data-ph="phName" maxlength="24"><button id="addP" data-i="add"></button></div></div>
+
+<div class="card" id="gcard"><h2 data-i="gT"></h2><p class="empty" data-i="gInfo" style="margin:0 0 10px"></p>
+<div id="gOff"><div class="row"><button id="gNew" data-i="gCreate"></button></div>
+<div class="row" style="margin-top:8px"><input id="gIn" data-ph="gCode" maxlength="12" autocapitalize="characters" autocomplete="off" style="direction:ltr"><button id="gGo" data-i="gJoin"></button></div></div>
+<div id="gOn" hidden><div class="gcode" id="gC"></div>
+<div class="row" style="margin-top:8px"><button id="gInv" data-i="gInvite"></button></div>
+<div id="gSt" class="pc" style="margin-top:8px"></div>
+<div class="row" style="margin-top:8px"><button class="ghost" id="gLv" data-i="gLeave"></button><button class="ghost" id="gDl" data-i="gDel"></button></div></div></div>
 
 <div class="card"><details id="howd"><summary class="h2s"><span data-i="h2"></span> ⓘ</summary><p data-i="how"></p></details>
 <div id="nums" class="row" style="margin-bottom:10px"></div>
-<div class="row"><input id="nn" data-ph="phNum" maxlength="8" inputmode="numeric"><button id="addN" data-i="setN"></button></div></div>
+<div class="row"><input id="nn" data-ph="phNum" maxlength="8" inputmode="numeric"><button id="addN" data-i="setN"></button></div>
+<div class="row" style="margin-top:10px"><label class="up"><span data-i="addProof"></span><input id="stP" type="file" accept="image/*" hidden></label><label class="up"><span data-i="addVideo"></span><input id="stV" type="file" accept="video/*" hidden></label></div>
+<p class="empty" data-i="storyNote" style="margin:8px 0 0"></p></div>
 
 <div class="card"><h2 data-i="h3"></h2>
 <div class="row"><select id="sp"></select></div>
@@ -105,20 +147,27 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 <label class="up"><span data-i="take"></span><input id="ph2" type="file" accept="image/*" capture="environment" hidden></label>
 <label class="up"><span data-i="pick"></span><input id="ph" type="file" accept="image/*" hidden></label>
 <button class="ghost" id="undo" hidden data-i="undo"></button></div>
+<div class="row" style="margin-top:8px"><label class="up"><span data-i="addClip"></span><input id="sv" type="file" accept="video/*" hidden></label><button class="ghost" id="svX" hidden aria-label="remove">✕</button></div>
+<div id="vs" class="pc" style="margin-top:6px;color:var(--ok)" hidden></div>
 <div id="pcs" class="pc" style="margin-top:6px" hidden></div>
 <div id="abs" class="pc" style="margin-top:4px" hidden></div>
 <div id="cw" hidden><p class="empty" data-i="blur"></p><canvas id="cv" class="cv"></canvas></div>
 <button class="big" id="spot" data-i="spot"></button></div>
 
-<div class="card"><h2 data-i="hs"></h2><div id="score" class="score"></div></div>
+<div class="card"><h2 data-i="hs"></h2><div id="score" class="score"></div><div id="tot" style="margin-top:10px;font-weight:700"></div><button class="ghost" id="undoS" style="margin-top:10px" hidden data-i="undoS"></button></div>
 <div class="card"><h2 data-i="ho"></h2><div id="debts"></div></div>
-<div class="card"><h2 data-i="hl"></h2><div id="log"></div></div>
+<div class="card"><h2 data-i="mT"></h2><div id="mL"></div>
+<div class="row" style="margin-top:8px"><select id="mw"></select></div>
+<div class="row" style="margin-top:8px"><input id="mt" data-ph="mPh" maxlength="200"><button id="mSend" data-i="mSend"></button></div></div>
+<div class="card"><h2 data-i="spT"></h2><div id="spL" class="row"></div></div>
 <div class="card" id="story"><h2 data-i="hst"></h2>
 <p id="stT" style="white-space:pre-wrap;margin:0"></p>
 <div id="stG" class="gal"></div>
 <div id="stVd" class="gal"></div>
-<div id="stE" hidden><textarea id="stX" rows="10"></textarea><label class="up"><span data-i="addProof"></span><input id="stP" type="file" accept="image/*" hidden></label> <label class="up"><span data-i="addVideo"></span><input id="stV" type="file" accept="video/*" hidden></label><p class="empty" data-i="storyNote" style="margin:8px 0 0"></p></div>
+<div id="stE" hidden><textarea id="stX" rows="10"></textarea></div>
 <button class="ghost" id="stB" style="margin-top:10px"></button></div>
+<div class="card" id="rvCard"><h2 data-i="rvT"></h2><div id="rvL"></div><p class="empty" id="rvE" data-i="rvNone" style="margin:0 0 8px"></p>
+<div id="rvS" style="margin-bottom:6px"></div><textarea id="rvX" rows="2" maxlength="300" data-ph="rvPh"></textarea><button id="rvBtn" data-i="rvSend"></button></div>
 <div class="card" id="slideCard" hidden><h2 data-i="hshow"></h2><div class="show" id="show"></div><div class="dots" id="dots"></div></div>
 
 <div class="row" style="justify-content:center;margin-bottom:10px">
@@ -134,58 +183,525 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 <div id="toast" role="status"></div>
 <script>
 const LANGS={
-en:{tag:"Hunt your number on a car plate, win a free lunch 🍽️",share:"📣 Challenge a friend",h1:"1 · Players",h2:"2 · Plate to hunt",setN:"Set",ini:"Initiator",initInfo:"The first person added is the Initiator and has to pay the lunch.",hshow:"Slideshow",addVideo:"🎬 Add video (max 9 seconds)",storyNote:"Photos and videos here are shown exactly as uploaded. Only add your own car, or blur other people's plates first. Videos stay on this device.",vBad:"Couldn't read this video. Please try another file.",vLong:"That video is longer than 9 seconds. Please trim it (max 9 seconds).",pfPhoto:"📷 Profile picture",pfBio:"Short bio…",pfSave:"Save",pfClose:"Close",pfCars:n=>`🚗 ${n} car${n===1?"":"s"} spotted`,chgQ:n=>`Change the plate to hunt to ${n}? Past sightings stay.`,how:"How the game works: pick ONE plate number to hunt, for example 4830 (our family's plate was 4830 FDY). Whenever you spot a car with that number, log it with the full plate and, if you want, a photo with the letters blurred. Whoever spots a car first wins a free lunch from every other player. Each car counts only once, so no double lunches. You can change the number any time by typing a new one.",h3:"3 · I spotted one!",hs:"Scoreboard",ho:"Who owes lunch",hl:"Sightings",hst:"Our story",
-phName:"Name (e.g. Mum)",add:"Add",phNum:"e.g. 4830",phPlate:"Full plate, e.g. 4830 FDY",take:"📷 Take photo",pick:"🖼️ Choose photo",undo:"Undo last blur",blur:"Drag a box over the letters to blur them 👇",abWait:"🔎 Looking for the plate letters to blur…",abOk:"✅ Letters blurred automatically. Please check the photo, and blur more by hand if needed.",abNone:"⚠️ Couldn't find the letters automatically. Please drag a box over them.",abFail:"⚠️ Automatic blur isn't available right now (offline?). Please blur by hand.",spot:"🎉 Spotted it! They owe me lunch",
-addTwo:"Add at least two people",addNum:"Add a number",noPl:"No players yet",allSq:"All square 🎈",none:"Nothing spotted yet. Keep your eyes on the road (as a passenger!)",paid:"Paid ✓",
+en:{tag:"Hunt your number on a car plate, win a free lunch 🍽️",share:"📣 Challenge a friend",carsTot:n=>`🚗 Cars found with our plate: ${n}`,h1:"1 · Hunters",mT:"Messages",mPh:"Leave a message for the other hunters…",mSend:"Send",mNone:"No messages yet. Say hi to the other hunters! 👋",rvT:"Reviews",rvNone:"No reviews yet. Be the first to tell us what you think! ⭐",rvPh:"What do you think of Good Plate Hunting?",rvSend:"📧 Send review",rvPick:"Tap the stars first ⭐",rvSub:"My Good Plate Hunting review",gT:"Hunt group",gInfo:"Hunt together: create a group, share the code or invite link, and everyone sees the same scoreboard. Names, scores and masked plates are stored on our server. Photos and videos stay on each phone.",gCreate:"➕ Create a group",gCode:"Group code",gJoin:"Join",gInvite:"📣 Invite friends",gInvTxt:"Join my Good Plate Hunting group and let's see who wins the free lunch!",gSync:t=>`✅ Synced ${t}`,gErr:"⚠️ Can't reach the group right now. We'll try again.",gNotFound:"Group not found. Please check the code.",gJoinQ:c=>`Join group ${c}?`,gReplaceQ:"The hunters and sightings on this phone will be replaced by the group's.",gLeave:"Leave group",gLeaveQ:"Leave this group? This phone keeps its own copy.",gDel:"🗑️ Delete group for everyone",gDelQ:"Delete this group and its data for everyone? This can't be undone.",spT:"Spread the fun",addClip:"🎬 Add video clip (max 6 seconds)",vLong6:"That clip is longer than 6 seconds. Please trim it (max 6 seconds).",vWarn:"Videos can't be blurred. Only add this clip if the plate isn't readable in it, or if it's your own car. Add it anyway?",clipOk:n=>`🎬 Clip ready (${n} s)`,drive:"🚦 <b>Driving?</b> Don't use this app while you drive. Keep your eyes on the road and let a passenger spot and log!",undoS:"↩ Undo last sighting",hr:"Game rules",r1:"<b>Pick one plate number</b> to hunt, like 4830, preferably from your own (family) car.",r2:"<b>Spot the same number on another car</b>, wherever in the world. The first hunter to see it wins.",r3:"<b>Log the full plate</b>, with a photo or a video clip of max 6 seconds if you like. Photos must be real, and the letters get blurred.",r4:"<b>The winner gets a free lunch.</b> The other hunters in the group pay for it.",r5:"<b>One car, one lunch.</b> Each unique car counts only once.",r6:"<b>The Head Hunter plays too.</b> The first hunter, who started the game, hunts along with everyone else.",story:"It all started in our old Mazda. Me, Eddy, with my kids Diego and Eliza, when a car passed with the plate 4830 FDY. “Let's make it a game,” we said. “Whoever spots 4830 first gets a free lunch from the others.”\n\nSince then we have found 4830 in many countries, and every time somebody shouts “THERE!” the lunch is already decided.\n\nFriends and neighbours heard about it, wanted in, and now Good Plate Hunting is spreading around Barcelona, one lunch at a time.\n\nEddy, Diego & Eliza, plate hunters. Every plate is a chance for lunch. 🍽️",h2:"2 · Plate to hunt",setN:"Set",ini:"Head Hunter",initInfo:"The first hunter added is the Head Hunter and has to pay the lunch if the same plate is found.",hshow:"Slideshow",addVideo:"🎬 Add video (max 9 seconds)",storyNote:"Photos and videos here are shown exactly as uploaded. Only add your own car, or blur other people's plates first. Videos stay on this device.",vBad:"Couldn't read this video. Please try another file.",vLong:"That video is longer than 9 seconds. Please trim it (max 9 seconds).",pfPhoto:"📷 Profile picture",pfBio:"Short bio…",pfSave:"Save",pfClose:"Close",pfCars:n=>`🚗 ${n} car${n===1?"":"s"} spotted`,chgQ:n=>`Change the plate to hunt to ${n}? Past sightings stay.`,how:"How the game works: pick ONE plate number to hunt, for example 4830 (our family's plate was 4830 FDY). Whenever you spot a car with that number, log it with the full plate and, if you want, a photo with the letters blurred. Whoever spots a car first wins a free lunch from every other player. Each car counts only once, so no double lunches. You can change the number any time by typing a new one.",h3:"3 · I spotted our Plate!",hs:"Scoreboard",ho:"Who owes lunch",hl:"Sightings",hst:"Our story",
+phName:"Name (e.g. Layla)",add:"Add",phNum:"e.g. 4830",phPlate:"Full plate, e.g. 4830 FDY",take:"📷 Take photo",pick:"🖼️ Choose photo",undo:"Undo last blur",blur:"Drag a box over the letters to blur them 👇",abWait:"🔎 Looking for the plate letters to blur…",abOk:"✅ Letters blurred automatically. Please check the photo, and blur more by hand if needed.",abNone:"⚠️ Couldn't find the letters automatically. Please drag a box over them.",abFail:"⚠️ Automatic blur isn't available right now (offline?). Please blur by hand.",spot:"🎉 Spotted it! They owe me lunch",
+addTwo:"Add at least two people",addNum:"Add a number",noPl:"No hunters yet",allSq:"All square 🎈",none:"Nothing spotted yet. Keep your eyes on the road (as a passenger!)",paid:"Paid ✓",
 owes:(a,b,n)=>`<b>${a}</b> owes <b>${b}</b> ${n} lunch${n>1?"es":""}`,spotW:"spotted",treatW:"treated",
-setup:"Add at least 2 players and 1 number first",needPlate:"Please type the full plate (like 4830 FDY) so we can check it.",
+setup:"Add at least 2 hunters and 1 number first",needPlate:"Please type the full plate (like 4830 FDY) so we can check it.",
 badFmt:"That doesn't look like a valid Spanish plate (4 numbers + 3 letters, like 4830 FDY). The letters A, E, I, O, U, Ñ and Q are not used.",
 wrongNum:n=>`Rejected ❌ This plate doesn't contain your number ${n}.`,dbl:w=>`This car was already counted 🚫 ${w} spotted it first, so no double lunches!`,photoDup:w=>`This photo looks like one ${w} already uploaded. Count it anyway?`,noBlur:"You haven't blurred anything yet. Save the photo as is?",
 old:"Rejected ❌ This photo was taken more than 2 days ago. Please take a fresh one.",edited:s=>`Rejected ❌ This photo was edited with ${s}. Please use the original camera photo.`,noMeta:"This photo has no camera information (it may be a screenshot or edited). Count it anyway?",
 pcOk:d=>`✅ Camera photo, taken ${d}`,pcOld:"❌ Photo older than 2 days",pcEd:s=>`❌ Edited with ${s}`,pcNo:"⚠️ No camera info (screenshot or edited?)",
 toast:w=>`Lunch earned! 🍽️ ${w} wins`,del:"Delete",delQ:"Delete this entry?",shareTxt:"I'm hunting number plates for free lunches! Can you beat me?",copied:"Link copied 📋",
 exp:"💾 Backup",imp:"📂 Restore",impQ:"Replace everything on this phone with the backup?",impBad:"That file isn't a Good Plate Hunting backup.",impOk:"Restored ✅",install:"📲 Install app",
-editSt:"✏️ Edit story",saveSt:"💾 Save story",addProof:"📷 Add original car photo (your own car)",rm:"Remove",cap:"Caption (where and when?)",full:"Storage is full, remove a photo first",reset:"Reset everything",resetQ:"Delete all players, numbers and sightings?",
+editSt:"✏️ Edit story",saveSt:"💾 Save story",addProof:"📷 Upload the original car with our plate to hunt",rm:"Remove",cap:"Caption (where and when?)",full:"Storage is full, remove a photo first",reset:"Reset everything",resetQ:"Delete all hunters, numbers and sightings?",
 priv:"🔒 <b>Recognise your car</b> in a photo, even though the plate is blurred, and want it removed from our app? Please reach out to us and we'll delete it.",rmBtn:"📧 Request removal",rmSub:"Please remove my car from Good Plate Hunting",rmBody:"Hi,\n\nI recognise my car in a photo and would like it removed.\n\nWhere and when was it spotted: \n\nThank you"},
-es:{tag:"Caza tu número en una matrícula y gana un almuerzo gratis 🍽️",share:"📣 Reta a un amigo",h1:"1 · Jugadores",h2:"2 · Matrícula a cazar",setN:"Fijar",ini:"Iniciador",initInfo:"La primera persona añadida es el Iniciador y tiene que pagar el almuerzo.",hshow:"Presentación",addVideo:"🎬 Añadir vídeo (máx. 9 segundos)",storyNote:"Las fotos y vídeos se muestran tal cual se suben. Añade solo tu propio coche o difumina antes las matrículas de otros. Los vídeos se quedan en este dispositivo.",vBad:"No se pudo leer este vídeo. Prueba con otro archivo.",vLong:"Ese vídeo dura más de 9 segundos. Recórtalo (máx. 9 segundos).",pfPhoto:"📷 Foto de perfil",pfBio:"Biografía corta…",pfSave:"Guardar",pfClose:"Cerrar",pfCars:n=>`🚗 ${n} coche${n===1?"":"s"} visto${n===1?"":"s"}`,chgQ:n=>`¿Cambiar la matrícula a cazar a ${n}? Los avistamientos anteriores se mantienen.`,how:"Cómo se juega: elige UN número de matrícula a cazar, por ejemplo 4830 (la matrícula de nuestra familia era 4830 FDY). Cuando veas un coche con ese número, regístralo con la matrícula completa y, si quieres, una foto con las letras difuminadas. Quien vea primero un coche gana un almuerzo gratis de todos los demás jugadores. Cada coche cuenta una sola vez, así que no hay almuerzos dobles. Puedes cambiar el número cuando quieras escribiendo uno nuevo.",h3:"3 · ¡He visto uno!",hs:"Marcador",ho:"Quién debe un almuerzo",hl:"Avistamientos",hst:"Nuestra historia",
-phName:"Nombre (p. ej. Mamá)",add:"Añadir",phNum:"p. ej. 4830",phPlate:"Matrícula completa, p. ej. 4830 FDY",take:"📷 Hacer foto",pick:"🖼️ Elegir foto",undo:"Deshacer último difuminado",blur:"Arrastra un recuadro sobre las letras para difuminarlas 👇",abWait:"🔎 Buscando las letras de la matrícula para difuminarlas…",abOk:"✅ Letras difuminadas automáticamente. Revisa la foto y difumina más a mano si hace falta.",abNone:"⚠️ No pude encontrar las letras automáticamente. Arrastra un recuadro sobre ellas.",abFail:"⚠️ El difuminado automático no está disponible ahora (¿sin conexión?). Difumina a mano.",spot:"🎉 ¡Lo vi! Me debe un almuerzo",
-addTwo:"Añade al menos dos personas",addNum:"Añade un número",noPl:"Aún no hay jugadores",allSq:"Estamos en paz 🎈",none:"Todavía nada. ¡Atento a la carretera (como pasajero)!",paid:"Pagado ✓",
+es:{tag:"Caza tu número en una matrícula y gana un almuerzo gratis 🍽️",share:"📣 Reta a un amigo",carsTot:n=>`🚗 Coches encontrados con nuestra matrícula: ${n}`,h1:"1 · Cazadores",mT:"Mensajes",mPh:"Deja un mensaje a los otros cazadores…",mSend:"Enviar",mNone:"Aún no hay mensajes. ¡Saluda a los otros cazadores! 👋",rvT:"Reseñas",rvNone:"Aún no hay reseñas. ¡Sé el primero en contarnos qué piensas! ⭐",rvPh:"¿Qué te parece Good Plate Hunting?",rvSend:"📧 Enviar reseña",rvPick:"Toca primero las estrellas ⭐",rvSub:"Mi reseña de Good Plate Hunting",gT:"Grupo de caza",gInfo:"Cazad juntos: crea un grupo, comparte el código o el enlace de invitación y todos verán el mismo marcador. Los nombres, puntos y matrículas ocultas se guardan en nuestro servidor. Las fotos y los vídeos se quedan en cada móvil.",gCreate:"➕ Crear un grupo",gCode:"Código del grupo",gJoin:"Unirse",gInvite:"📣 Invitar amigos",gInvTxt:"¡Únete a mi grupo de Good Plate Hunting y veamos quién gana el almuerzo gratis!",gSync:t=>`✅ Sincronizado ${t}`,gErr:"⚠️ No se puede conectar con el grupo ahora. Lo intentaremos de nuevo.",gNotFound:"Grupo no encontrado. Revisa el código.",gJoinQ:c=>`¿Unirte al grupo ${c}?`,gReplaceQ:"Los cazadores y avistamientos de este móvil se sustituirán por los del grupo.",gLeave:"Salir del grupo",gLeaveQ:"¿Salir de este grupo? Este móvil conserva su propia copia.",gDel:"🗑️ Borrar el grupo para todos",gDelQ:"¿Borrar este grupo y sus datos para todos? No se puede deshacer.",spT:"Comparte la diversión",addClip:"🎬 Añadir videoclip (máx. 6 segundos)",vLong6:"Ese clip dura más de 6 segundos. Recórtalo (máx. 6 segundos).",vWarn:"Los vídeos no se pueden difuminar. Añade este clip solo si la matrícula no se lee o si es tu propio coche. ¿Añadirlo igualmente?",clipOk:n=>`🎬 Clip listo (${n} s)`,drive:"🚦 <b>¿Conduciendo?</b> No uses esta app mientras conduces. ¡Mira la carretera y que un pasajero vea y anote!",undoS:"↩ Deshacer último avistamiento",hr:"Reglas del juego",r1:"<b>Elige un número de matrícula</b> a cazar, como el 4830, preferiblemente el de tu propio coche (familiar).",r2:"<b>Encuentra el mismo número en otro coche</b>, en cualquier lugar del mundo. El primer cazador que lo vea gana.",r3:"<b>Anota la matrícula completa</b>, con foto o un videoclip de máx. 6 segundos si quieres. Las fotos deben ser reales y las letras se difuminan.",r4:"<b>El ganador recibe un almuerzo gratis.</b> Los demás cazadores del grupo lo pagan.",r5:"<b>Un coche, un almuerzo.</b> Cada coche distinto cuenta solo una vez.",r6:"<b>El Cazador Jefe también juega.</b> El primer cazador, que empezó el juego, caza junto con los demás.",story:"Todo empezó en nuestro viejo Mazda. Yo, Eddy, con mis hijos Diego y Eliza, cuando pasó un coche con la matrícula 4830 FDY. “Hagamos un juego”, dijimos. “Quien vea primero el 4830 recibe un almuerzo gratis de los demás.”\n\nDesde entonces hemos encontrado el 4830 en muchos países, y cada vez que alguien grita “¡AHÍ!” el almuerzo ya está decidido.\n\nAmigos y vecinos se enteraron, quisieron jugar, y ahora Good Plate Hunting se va extendiendo por Barcelona, un almuerzo a la vez.\n\nEddy, Diego y Eliza, cazadores de matrículas. Cada matrícula es una oportunidad de almuerzo. 🍽️",h2:"2 · Matrícula a cazar",setN:"Fijar",ini:"Cazador Jefe",initInfo:"El primer cazador añadido es el Cazador Jefe y tiene que pagar el almuerzo si se encuentra la misma matrícula.",hshow:"Presentación",addVideo:"🎬 Añadir vídeo (máx. 9 segundos)",storyNote:"Las fotos y vídeos se muestran tal cual se suben. Añade solo tu propio coche o difumina antes las matrículas de otros. Los vídeos se quedan en este dispositivo.",vBad:"No se pudo leer este vídeo. Prueba con otro archivo.",vLong:"Ese vídeo dura más de 9 segundos. Recórtalo (máx. 9 segundos).",pfPhoto:"📷 Foto de perfil",pfBio:"Biografía corta…",pfSave:"Guardar",pfClose:"Cerrar",pfCars:n=>`🚗 ${n} coche${n===1?"":"s"} visto${n===1?"":"s"}`,chgQ:n=>`¿Cambiar la matrícula a cazar a ${n}? Los avistamientos anteriores se mantienen.`,how:"Cómo se juega: elige UN número de matrícula a cazar, por ejemplo 4830 (la matrícula de nuestra familia era 4830 FDY). Cuando veas un coche con ese número, regístralo con la matrícula completa y, si quieres, una foto con las letras difuminadas. Quien vea primero un coche gana un almuerzo gratis de todos los demás jugadores. Cada coche cuenta una sola vez, así que no hay almuerzos dobles. Puedes cambiar el número cuando quieras escribiendo uno nuevo.",h3:"3 · ¡He visto nuestra matrícula!",hs:"Marcador",ho:"Quién debe un almuerzo",hl:"Avistamientos",hst:"Nuestra historia",
+phName:"Nombre (p. ej. Layla)",add:"Añadir",phNum:"p. ej. 4830",phPlate:"Matrícula completa, p. ej. 4830 FDY",take:"📷 Hacer foto",pick:"🖼️ Elegir foto",undo:"Deshacer último difuminado",blur:"Arrastra un recuadro sobre las letras para difuminarlas 👇",abWait:"🔎 Buscando las letras de la matrícula para difuminarlas…",abOk:"✅ Letras difuminadas automáticamente. Revisa la foto y difumina más a mano si hace falta.",abNone:"⚠️ No pude encontrar las letras automáticamente. Arrastra un recuadro sobre ellas.",abFail:"⚠️ El difuminado automático no está disponible ahora (¿sin conexión?). Difumina a mano.",spot:"🎉 ¡Lo vi! Me debe un almuerzo",
+addTwo:"Añade al menos dos personas",addNum:"Añade un número",noPl:"Aún no hay cazadores",allSq:"Estamos en paz 🎈",none:"Todavía nada. ¡Atento a la carretera (como pasajero)!",paid:"Pagado ✓",
 owes:(a,b,n)=>`<b>${a}</b> debe <b>${b}</b> ${n} almuerzo${n>1?"s":""}`,spotW:"vio",treatW:"invitó a",
-setup:"Añade al menos 2 jugadores y 1 número primero",needPlate:"Escribe la matrícula completa (como 4830 FDY) para poder comprobarla.",
+setup:"Añade al menos 2 cazadores y 1 número primero",needPlate:"Escribe la matrícula completa (como 4830 FDY) para poder comprobarla.",
 badFmt:"Eso no parece una matrícula española válida (4 números + 3 letras, como 4830 FDY). No se usan las letras A, E, I, O, U, Ñ ni Q.",
 wrongNum:n=>`Rechazado ❌ Esta matrícula no contiene tu número ${n}.`,dbl:w=>`Este coche ya se contó 🚫 ¡${w} lo vio primero, nada de almuerzos dobles!`,photoDup:w=>`Esta foto se parece a otra que ya subió ${w}. ¿Contarla de todos modos?`,noBlur:"Aún no has difuminado nada. ¿Guardar la foto tal cual?",
 old:"Rechazado ❌ Esta foto se hizo hace más de 2 días. Haz una nueva.",edited:s=>`Rechazado ❌ Esta foto fue editada con ${s}. Usa la foto original de la cámara.`,noMeta:"Esta foto no tiene datos de cámara (¿captura de pantalla o editada?). ¿Contarla de todos modos?",
 pcOk:d=>`✅ Foto de cámara, hecha el ${d}`,pcOld:"❌ Foto de hace más de 2 días",pcEd:s=>`❌ Editada con ${s}`,pcNo:"⚠️ Sin datos de cámara (¿captura o editada?)",
 toast:w=>`¡Almuerzo ganado! 🍽️ Gana ${w}`,del:"Borrar",delQ:"¿Borrar esta entrada?",shareTxt:"¡Cazo matrículas para ganar almuerzos gratis! ¿Puedes ganarme?",copied:"Enlace copiado 📋",
 exp:"💾 Copia",imp:"📂 Restaurar",impQ:"¿Reemplazar todo en este móvil con la copia de seguridad?",impBad:"Ese archivo no es una copia de Good Plate Hunting.",impOk:"Restaurado ✅",install:"📲 Instalar app",
-editSt:"✏️ Editar historia",saveSt:"💾 Guardar historia",addProof:"📷 Añadir foto original del coche (tu propio coche)",rm:"Quitar",cap:"Pie de foto (¿dónde y cuándo?)",full:"Almacenamiento lleno, quita una foto primero",reset:"Borrar todo",resetQ:"¿Borrar todos los jugadores, números y avistamientos?",
+editSt:"✏️ Editar historia",saveSt:"💾 Guardar historia",addProof:"📷 Sube el coche original con nuestra matrícula a cazar",rm:"Quitar",cap:"Pie de foto (¿dónde y cuándo?)",full:"Almacenamiento lleno, quita una foto primero",reset:"Borrar todo",resetQ:"¿Borrar todos los cazadores, números y avistamientos?",
 priv:"🔒 <b>¿Reconoces tu coche</b> en una foto, aunque la matrícula esté difuminada, y quieres que se elimine de la app? Escríbenos y lo borraremos.",rmBtn:"📧 Solicitar eliminación",rmSub:"Eliminar mi coche de Good Plate Hunting",rmBody:"Hola,\n\nReconozco mi coche en una foto y quiero que se elimine.\n\n¿Dónde y cuándo se vio?: \n\nGracias"},
-ca:{tag:"Caça el teu número en una matrícula i guanya un dinar gratis 🍽️",share:"📣 Repta un amic",h1:"1 · Jugadors",h2:"2 · Matrícula a caçar",setN:"Fixa",ini:"Iniciador",initInfo:"La primera persona afegida és l'Iniciador i ha de pagar el dinar.",hshow:"Presentació",addVideo:"🎬 Afegeix vídeo (màx. 9 segons)",storyNote:"Les fotos i vídeos es mostren tal com es pugen. Afegeix només el teu propi cotxe o difumina abans les matrícules d'altres. Els vídeos es queden en aquest dispositiu.",vBad:"No s'ha pogut llegir aquest vídeo. Prova un altre fitxer.",vLong:"Aquest vídeo dura més de 9 segons. Retalla'l (màx. 9 segons).",pfPhoto:"📷 Foto de perfil",pfBio:"Biografia curta…",pfSave:"Desa",pfClose:"Tanca",pfCars:n=>`🚗 ${n} cotxe${n===1?"":"s"} vist${n===1?"":"os"}`,chgQ:n=>`Canviar la matrícula a caçar a ${n}? Els albiraments anteriors es mantenen.`,how:"Com es juga: tria UN número de matrícula a caçar, per exemple 4830 (la matrícula de la nostra família era 4830 FDY). Quan vegis un cotxe amb aquest número, registra'l amb la matrícula completa i, si vols, una foto amb les lletres difuminades. Qui veu primer un cotxe guanya un dinar gratis de tots els altres jugadors. Cada cotxe compta només una vegada, així que no hi ha dinars dobles. Pots canviar el número quan vulguis escrivint-ne un de nou.",h3:"3 · N'he vist un!",hs:"Marcador",ho:"Qui deu un dinar",hl:"Albiraments",hst:"La nostra història",
-phName:"Nom (p. ex. Mama)",add:"Afegeix",phNum:"p. ex. 4830",phPlate:"Matrícula completa, p. ex. 4830 FDY",take:"📷 Fes una foto",pick:"🖼️ Tria una foto",undo:"Desfés l'últim difuminat",blur:"Arrossega un requadre sobre les lletres per difuminar-les 👇",abWait:"🔎 Buscant les lletres de la matrícula per difuminar-les…",abOk:"✅ Lletres difuminades automàticament. Revisa la foto i difumina'n més a mà si cal.",abNone:"⚠️ No he pogut trobar les lletres automàticament. Arrossega un requadre sobre elles.",abFail:"⚠️ El difuminat automàtic no està disponible ara (sense connexió?). Difumina a mà.",spot:"🎉 L'he vist! Em deu un dinar",
-addTwo:"Afegeix almenys dues persones",addNum:"Afegeix un número",noPl:"Encara no hi ha jugadors",allSq:"Estem en pau 🎈",none:"Encara res. Vigila la carretera (com a passatger)!",paid:"Pagat ✓",
+ca:{tag:"Caça el teu número en una matrícula i guanya un dinar gratis 🍽️",share:"📣 Repta un amic",carsTot:n=>`🚗 Cotxes trobats amb la nostra matrícula: ${n}`,h1:"1 · Caçadors",mT:"Missatges",mPh:"Deixa un missatge als altres caçadors…",mSend:"Envia",mNone:"Encara no hi ha missatges. Saluda els altres caçadors! 👋",rvT:"Ressenyes",rvNone:"Encara no hi ha ressenyes. Sigues el primer a dir-nos què en penses! ⭐",rvPh:"Què et sembla Good Plate Hunting?",rvSend:"📧 Envia la ressenya",rvPick:"Toca primer les estrelles ⭐",rvSub:"La meva ressenya de Good Plate Hunting",gT:"Grup de caça",gInfo:"Cacem junts: crea un grup, comparteix el codi o l'enllaç d'invitació i tothom veurà el mateix marcador. Els noms, els punts i les matrícules amagades es guarden al nostre servidor. Les fotos i els vídeos es queden a cada mòbil.",gCreate:"➕ Crea un grup",gCode:"Codi del grup",gJoin:"Uneix-te",gInvite:"📣 Convida amics",gInvTxt:"Uneix-te al meu grup de Good Plate Hunting i vegem qui guanya el dinar gratis!",gSync:t=>`✅ Sincronitzat ${t}`,gErr:"⚠️ Ara no es pot connectar amb el grup. Ho tornarem a provar.",gNotFound:"Grup no trobat. Revisa el codi.",gJoinQ:c=>`Vols unir-te al grup ${c}?`,gReplaceQ:"Els caçadors i albiraments d'aquest mòbil se substituiran pels del grup.",gLeave:"Surt del grup",gLeaveQ:"Vols sortir d'aquest grup? Aquest mòbil conserva la seva còpia.",gDel:"🗑️ Esborra el grup per a tothom",gDelQ:"Vols esborrar aquest grup i les seves dades per a tothom? No es pot desfer.",spT:"Comparteix la diversió",addClip:"🎬 Afegeix un videoclip (màx. 6 segons)",vLong6:"Aquest clip dura més de 6 segons. Retalla'l (màx. 6 segons).",vWarn:"Els vídeos no es poden difuminar. Afegeix aquest clip només si la matrícula no es llegeix o si és el teu propi cotxe. Vols afegir-lo igualment?",clipOk:n=>`🎬 Clip llest (${n} s)`,drive:"🚦 <b>Conduint?</b> No facis servir aquesta app mentre condueixes. Mira la carretera i que un passatger vegi i anoti!",undoS:"↩ Desfés l'últim albirament",hr:"Regles del joc",r1:"<b>Tria un número de matrícula</b> a caçar, com el 4830, preferiblement el del teu propi cotxe (familiar).",r2:"<b>Troba el mateix número en un altre cotxe</b>, a qualsevol lloc del món. El primer caçador que el vegi guanya.",r3:"<b>Anota la matrícula completa</b>, amb foto o un videoclip de màx. 6 segons si vols. Les fotos han de ser reals i les lletres es difuminen.",r4:"<b>El guanyador rep un dinar gratis.</b> Els altres caçadors del grup el paguen.",r5:"<b>Un cotxe, un dinar.</b> Cada cotxe diferent compta només una vegada.",r6:"<b>El Caçador Cap també juga.</b> El primer caçador, que va començar el joc, caça amb tots els altres.",story:"Tot va començar al nostre vell Mazda. Jo, Eddy, amb els meus fills Diego i Eliza, quan va passar un cotxe amb la matrícula 4830 FDY. “En fem un joc”, vam dir. “Qui vegi primer el 4830 rep un dinar gratis dels altres.”\n\nDes d'aleshores hem trobat el 4830 a molts països, i cada vegada que algú crida “AQUÍ!” el dinar ja està decidit.\n\nAmics i veïns se'n van assabentar, s'hi van voler apuntar, i ara Good Plate Hunting s'escampa per Barcelona, un dinar rere l'altre.\n\nEddy, Diego i Eliza, caçadors de matrícules. Cada matrícula és una oportunitat de dinar. 🍽️",h2:"2 · Matrícula a caçar",setN:"Fixa",ini:"Caçador Cap",initInfo:"El primer caçador afegit és el Caçador Cap i ha de pagar el dinar si es troba la mateixa matrícula.",hshow:"Presentació",addVideo:"🎬 Afegeix vídeo (màx. 9 segons)",storyNote:"Les fotos i vídeos es mostren tal com es pugen. Afegeix només el teu propi cotxe o difumina abans les matrícules d'altres. Els vídeos es queden en aquest dispositiu.",vBad:"No s'ha pogut llegir aquest vídeo. Prova un altre fitxer.",vLong:"Aquest vídeo dura més de 9 segons. Retalla'l (màx. 9 segons).",pfPhoto:"📷 Foto de perfil",pfBio:"Biografia curta…",pfSave:"Desa",pfClose:"Tanca",pfCars:n=>`🚗 ${n} cotxe${n===1?"":"s"} vist${n===1?"":"os"}`,chgQ:n=>`Canviar la matrícula a caçar a ${n}? Els albiraments anteriors es mantenen.`,how:"Com es juga: tria UN número de matrícula a caçar, per exemple 4830 (la matrícula de la nostra família era 4830 FDY). Quan vegis un cotxe amb aquest número, registra'l amb la matrícula completa i, si vols, una foto amb les lletres difuminades. Qui veu primer un cotxe guanya un dinar gratis de tots els altres jugadors. Cada cotxe compta només una vegada, així que no hi ha dinars dobles. Pots canviar el número quan vulguis escrivint-ne un de nou.",h3:"3 · He vist la nostra matrícula!",hs:"Marcador",ho:"Qui deu un dinar",hl:"Albiraments",hst:"La nostra història",
+phName:"Nom (p. ex. Layla)",add:"Afegeix",phNum:"p. ex. 4830",phPlate:"Matrícula completa, p. ex. 4830 FDY",take:"📷 Fes una foto",pick:"🖼️ Tria una foto",undo:"Desfés l'últim difuminat",blur:"Arrossega un requadre sobre les lletres per difuminar-les 👇",abWait:"🔎 Buscant les lletres de la matrícula per difuminar-les…",abOk:"✅ Lletres difuminades automàticament. Revisa la foto i difumina'n més a mà si cal.",abNone:"⚠️ No he pogut trobar les lletres automàticament. Arrossega un requadre sobre elles.",abFail:"⚠️ El difuminat automàtic no està disponible ara (sense connexió?). Difumina a mà.",spot:"🎉 L'he vist! Em deu un dinar",
+addTwo:"Afegeix almenys dues persones",addNum:"Afegeix un número",noPl:"Encara no hi ha caçadors",allSq:"Estem en pau 🎈",none:"Encara res. Vigila la carretera (com a passatger)!",paid:"Pagat ✓",
 owes:(a,b,n)=>`<b>${a}</b> deu <b>${b}</b> ${n} dinar${n>1?"s":""}`,spotW:"ha vist",treatW:"ha convidat",
-setup:"Afegeix almenys 2 jugadors i 1 número primer",needPlate:"Escriu la matrícula completa (com 4830 FDY) per poder comprovar-la.",
+setup:"Afegeix almenys 2 caçadors i 1 número primer",needPlate:"Escriu la matrícula completa (com 4830 FDY) per poder comprovar-la.",
 badFmt:"Això no sembla una matrícula espanyola vàlida (4 números + 3 lletres, com 4830 FDY). No s'utilitzen les lletres A, E, I, O, U, Ñ ni Q.",
 wrongNum:n=>`Rebutjat ❌ Aquesta matrícula no conté el teu número ${n}.`,dbl:w=>`Aquest cotxe ja s'ha comptat 🚫 ${w} l'ha vist primer, res de dinars dobles!`,photoDup:w=>`Aquesta foto s'assembla a una que ja ha pujat ${w}. Comptar-la igualment?`,noBlur:"Encara no has difuminat res. Desar la foto tal qual?",
 old:"Rebutjat ❌ Aquesta foto es va fer fa més de 2 dies. Fes-ne una de nova.",edited:s=>`Rebutjat ❌ Aquesta foto s'ha editat amb ${s}. Fes servir la foto original de la càmera.`,noMeta:"Aquesta foto no té dades de càmera (captura de pantalla o editada?). Comptar-la igualment?",
 pcOk:d=>`✅ Foto de càmera, feta el ${d}`,pcOld:"❌ Foto de fa més de 2 dies",pcEd:s=>`❌ Editada amb ${s}`,pcNo:"⚠️ Sense dades de càmera (captura o editada?)",
 toast:w=>`Dinar guanyat! 🍽️ Guanya ${w}`,del:"Esborra",delQ:"Esborrar aquesta entrada?",shareTxt:"Caço matrícules per guanyar dinars gratis! Em pots guanyar?",copied:"Enllaç copiat 📋",
 exp:"💾 Còpia",imp:"📂 Restaura",impQ:"Substituir tot en aquest mòbil per la còpia de seguretat?",impBad:"Aquest fitxer no és una còpia de Good Plate Hunting.",impOk:"Restaurat ✅",install:"📲 Instal·la l'app",
-editSt:"✏️ Edita la història",saveSt:"💾 Desa la història",addProof:"📷 Afegeix foto original del cotxe (el teu propi cotxe)",rm:"Treu",cap:"Peu de foto (on i quan?)",full:"Emmagatzematge ple, treu una foto primer",reset:"Esborra-ho tot",resetQ:"Esborrar tots els jugadors, números i albiraments?",
+editSt:"✏️ Edita la història",saveSt:"💾 Desa la història",addProof:"📷 Puja el cotxe original amb la nostra matrícula a caçar",rm:"Treu",cap:"Peu de foto (on i quan?)",full:"Emmagatzematge ple, treu una foto primer",reset:"Esborra-ho tot",resetQ:"Esborrar tots els caçadors, números i albiraments?",
 priv:"🔒 <b>Reconeixes el teu cotxe</b> en una foto, encara que la matrícula estigui difuminada, i vols que s'elimini de l'app? Escriu-nos i l'esborrarem.",rmBtn:"📧 Sol·licita l'eliminació",rmSub:"Eliminar el meu cotxe de Good Plate Hunting",rmBody:"Hola,\n\nReconec el meu cotxe en una foto i voldria que s'eliminés.\n\nOn i quan es va veure: \n\nMoltes gràcies"},
-nl:{tag:"Jaag op jouw nummer op een kenteken en win een gratis lunch 🍽️",share:"📣 Daag een vriend uit",h1:"1 · Spelers",h2:"2 · Kenteken om te jagen",setN:"Instellen",ini:"Initiatiefnemer",initInfo:"De eerste persoon die wordt toegevoegd is de Initiatiefnemer en moet de lunch betalen.",hshow:"Diavoorstelling",addVideo:"🎬 Video toevoegen (max. 9 seconden)",storyNote:"Foto's en video's worden getoond zoals ze zijn geüpload. Voeg alleen je eigen auto toe of vervaag eerst de kentekens van anderen. Video's blijven op dit apparaat.",vBad:"Deze video kon niet worden gelezen. Probeer een ander bestand.",vLong:"Die video is langer dan 9 seconden. Knip hem bij (max. 9 seconden).",pfPhoto:"📷 Profielfoto",pfBio:"Korte bio…",pfSave:"Opslaan",pfClose:"Sluiten",pfCars:n=>`🚗 ${n} auto${n===1?"":"'s"} gezien`,chgQ:n=>`Het kenteken om op te jagen wijzigen naar ${n}? Eerdere waarnemingen blijven bewaard.`,how:"Zo werkt het spel: kies ÉÉN kentekennummer om op te jagen, bijvoorbeeld 4830 (het kenteken van ons gezin was 4830 FDY). Zie je een auto met dat nummer, log hem dan met het volledige kenteken en, als je wilt, een foto met vervaagde letters. Wie een auto als eerste ziet, wint een gratis lunch van alle andere spelers. Elke auto telt maar één keer, dus geen dubbele lunches. Je kunt het nummer altijd wijzigen door een nieuw nummer in te typen.",h3:"3 · Ik zag er een!",hs:"Scorebord",ho:"Wie een lunch verschuldigd is",hl:"Waarnemingen",hst:"Ons verhaal",
-phName:"Naam (bijv. Mama)",add:"Toevoegen",phNum:"bijv. 4830",phPlate:"Volledig kenteken, bijv. 4830 FDY",take:"📷 Foto maken",pick:"🖼️ Foto kiezen",undo:"Laatste vervaging ongedaan maken",blur:"Sleep een kader over de letters om ze te vervagen 👇",abWait:"🔎 Letters van het kenteken zoeken om te vervagen…",abOk:"✅ Letters automatisch vervaagd. Controleer de foto en vervaag zo nodig meer met de hand.",abNone:"⚠️ Ik kon de letters niet automatisch vinden. Sleep een kader eroverheen.",abFail:"⚠️ Automatisch vervagen is nu niet beschikbaar (offline?). Vervaag met de hand.",spot:"🎉 Gezien! Hij/zij trakteert me op lunch",
-addTwo:"Voeg minstens twee personen toe",addNum:"Voeg een nummer toe",noPl:"Nog geen spelers",allSq:"Alles vierkant 🎈",none:"Nog niets gezien. Houd de weg in de gaten (als passagier!)",paid:"Betaald ✓",
+nl:{tag:"Jaag op jouw nummer op een kenteken en win een gratis lunch 🍽️",share:"📣 Daag een vriend uit",carsTot:n=>`🚗 Auto's gevonden met ons kenteken: ${n}`,h1:"1 · Jagers",mT:"Berichten",mPh:"Laat een bericht achter voor de andere jagers…",mSend:"Versturen",mNone:"Nog geen berichten. Zeg hallo tegen de andere jagers! 👋",rvT:"Beoordelingen",rvNone:"Nog geen beoordelingen. Wees de eerste die ons vertelt wat je ervan vindt! ⭐",rvPh:"Wat vind je van Good Plate Hunting?",rvSend:"📧 Beoordeling versturen",rvPick:"Tik eerst op de sterren ⭐",rvSub:"Mijn beoordeling van Good Plate Hunting",gT:"Jachtgroep",gInfo:"Jaag samen: maak een groep, deel de code of uitnodigingslink en iedereen ziet hetzelfde scorebord. Namen, scores en afgeschermde kentekens staan op onze server. Foto's en video's blijven op elke telefoon.",gCreate:"➕ Groep maken",gCode:"Groepscode",gJoin:"Meedoen",gInvite:"📣 Vrienden uitnodigen",gInvTxt:"Doe mee met mijn Good Plate Hunting-groep en kijk wie de gratis lunch wint!",gSync:t=>`✅ Gesynchroniseerd ${t}`,gErr:"⚠️ De groep is nu niet bereikbaar. We proberen het opnieuw.",gNotFound:"Groep niet gevonden. Controleer de code.",gJoinQ:c=>`Meedoen met groep ${c}?`,gReplaceQ:"De jagers en waarnemingen op deze telefoon worden vervangen door die van de groep.",gLeave:"Groep verlaten",gLeaveQ:"Deze groep verlaten? Deze telefoon houdt zijn eigen kopie.",gDel:"🗑️ Groep voor iedereen verwijderen",gDelQ:"Deze groep en de gegevens voor iedereen verwijderen? Dit kan niet ongedaan worden gemaakt.",spT:"Verspreid het plezier",addClip:"🎬 Videoclip toevoegen (max. 6 seconden)",vLong6:"Die clip is langer dan 6 seconden. Knip hem in (max. 6 seconden).",vWarn:"Video's kunnen niet worden vervaagd. Voeg deze clip alleen toe als het kenteken niet leesbaar is of het je eigen auto is. Toch toevoegen?",clipOk:n=>`🎬 Clip klaar (${n} s)`,drive:"🚦 <b>Aan het rijden?</b> Gebruik deze app niet tijdens het rijden. Let op de weg en laat een passagier spotten en noteren!",undoS:"↩ Laatste waarneming ongedaan maken",hr:"Spelregels",r1:"<b>Kies één kentekennummer</b> om te jagen, zoals 4830, bij voorkeur van je eigen (familie)auto.",r2:"<b>Spot hetzelfde nummer op een andere auto</b>, waar ter wereld dan ook. De eerste jager die het ziet wint.",r3:"<b>Noteer het volledige kenteken</b>, eventueel met een foto of videoclip van max. 6 seconden. Foto's moeten echt zijn en de letters worden vervaagd.",r4:"<b>De winnaar krijgt een gratis lunch.</b> De andere jagers in de groep betalen die.",r5:"<b>Eén auto, één lunch.</b> Elke unieke auto telt maar één keer.",r6:"<b>De Hoofdjager doet ook mee.</b> De eerste jager, die het spel begon, jaagt gewoon mee met de anderen.",story:"Het begon allemaal in onze oude Mazda. Ik, Eddy, met mijn kinderen Diego en Eliza, toen er een auto voorbijreed met het kenteken 4830 FDY. “Laten we er een spel van maken”, zeiden we. “Wie als eerste 4830 ziet, krijgt een gratis lunch van de anderen.”\n\nSindsdien hebben we 4830 in veel landen gevonden, en elke keer als iemand “DAAR!” roept, is de lunch al beslist.\n\nVrienden en buren hoorden ervan, wilden meedoen, en nu verspreidt Good Plate Hunting zich door Barcelona, lunch na lunch.\n\nEddy, Diego & Eliza, kentekenjagers. Elk kenteken is een kans op lunch. 🍽️",h2:"2 · Kenteken om te jagen",setN:"Instellen",ini:"Hoofdjager",initInfo:"De eerste jager die wordt toegevoegd is de Hoofdjager en moet de lunch betalen als hetzelfde kenteken wordt gevonden.",hshow:"Diavoorstelling",addVideo:"🎬 Video toevoegen (max. 9 seconden)",storyNote:"Foto's en video's worden getoond zoals ze zijn geüpload. Voeg alleen je eigen auto toe of vervaag eerst de kentekens van anderen. Video's blijven op dit apparaat.",vBad:"Deze video kon niet worden gelezen. Probeer een ander bestand.",vLong:"Die video is langer dan 9 seconden. Knip hem bij (max. 9 seconden).",pfPhoto:"📷 Profielfoto",pfBio:"Korte bio…",pfSave:"Opslaan",pfClose:"Sluiten",pfCars:n=>`🚗 ${n} auto${n===1?"":"'s"} gezien`,chgQ:n=>`Het kenteken om op te jagen wijzigen naar ${n}? Eerdere waarnemingen blijven bewaard.`,how:"Zo werkt het spel: kies ÉÉN kentekennummer om op te jagen, bijvoorbeeld 4830 (het kenteken van ons gezin was 4830 FDY). Zie je een auto met dat nummer, log hem dan met het volledige kenteken en, als je wilt, een foto met vervaagde letters. Wie een auto als eerste ziet, wint een gratis lunch van alle andere spelers. Elke auto telt maar één keer, dus geen dubbele lunches. Je kunt het nummer altijd wijzigen door een nieuw nummer in te typen.",h3:"3 · Ik zag ons kenteken!",hs:"Scorebord",ho:"Wie een lunch verschuldigd is",hl:"Waarnemingen",hst:"Ons verhaal",
+phName:"Naam (bijv. Layla)",add:"Toevoegen",phNum:"bijv. 4830",phPlate:"Volledig kenteken, bijv. 4830 FDY",take:"📷 Foto maken",pick:"🖼️ Foto kiezen",undo:"Laatste vervaging ongedaan maken",blur:"Sleep een kader over de letters om ze te vervagen 👇",abWait:"🔎 Letters van het kenteken zoeken om te vervagen…",abOk:"✅ Letters automatisch vervaagd. Controleer de foto en vervaag zo nodig meer met de hand.",abNone:"⚠️ Ik kon de letters niet automatisch vinden. Sleep een kader eroverheen.",abFail:"⚠️ Automatisch vervagen is nu niet beschikbaar (offline?). Vervaag met de hand.",spot:"🎉 Gezien! Hij/zij trakteert me op lunch",
+addTwo:"Voeg minstens twee personen toe",addNum:"Voeg een nummer toe",noPl:"Nog geen jagers",allSq:"Alles vierkant 🎈",none:"Nog niets gezien. Houd de weg in de gaten (als passagier!)",paid:"Betaald ✓",
 owes:(a,b,n)=>`<b>${a}</b> is <b>${b}</b> ${n} lunch${n>1?"es":""} verschuldigd`,spotW:"zag",treatW:"trakteerde",
-setup:"Voeg eerst minstens 2 spelers en 1 nummer toe",needPlate:"Typ het volledige kenteken (zoals 4830 FDY) zodat we het kunnen controleren.",
+setup:"Voeg eerst minstens 2 jagers en 1 nummer toe",needPlate:"Typ het volledige kenteken (zoals 4830 FDY) zodat we het kunnen controleren.",
 badFmt:"Dit lijkt geen geldig Spaans kenteken (4 cijfers + 3 letters, zoals 4830 FDY). De letters A, E, I, O, U, Ñ en Q worden niet gebruikt.",
 wrongNum:n=>`Afgewezen ❌ Dit kenteken bevat jouw nummer ${n} niet.`,dbl:w=>`Deze auto is al geteld 🚫 ${w} zag hem als eerste, dus geen dubbele lunches!`,photoDup:w=>`Deze foto lijkt op een foto die ${w} al uploadde. Toch meetellen?`,noBlur:"Je hebt nog niets vervaagd. De foto toch opslaan?",
 old:"Afgewezen ❌ Deze foto is meer dan 2 dagen geleden gemaakt. Maak een verse foto.",edited:s=>`Afgewezen ❌ Deze foto is bewerkt met ${s}. Gebruik de originele camerafoto.`,noMeta:"Deze foto heeft geen cameragegevens (screenshot of bewerkt?). Toch meetellen?",
 pcOk:d=>`✅ Camerafoto, gemaakt op ${d}`,pcOld:"❌ Foto ouder dan 2 dagen",pcEd:s=>`❌ Bewerkt met ${s}`,pcNo:"⚠️ Geen cameragegevens (screenshot of bewerkt?)",
 toast:w=>`Lunch verdiend! 🍽️ ${w} wint`,del:"Verwijderen",delQ:"Dit item verwijderen?",shareTxt:"Ik jaag op kentekens voor gratis lunches! Kun jij me verslaan?",copied:"Link gekopieerd 📋",
 exp:"💾 Back-up",imp:"📂 Herstellen",impQ:"Alles op deze telefoon vervangen door de back-up?",impBad:"Dat bestand is geen Good Plate Hunting-back-up.",impOk:"Hersteld ✅",install:"📲 App installeren",
-editSt:"✏️ Verhaal bewerken",saveSt:"💾 Verhaal opslaan",addProof:"📷 Originele autofoto toevoegen (je eigen auto)",rm:"Verwijder",cap:"Bijschrift (waar en wanneer?)",full:"Opslag vol, verwijder eerst een foto",reset:"Alles wissen",resetQ:"Alle spelers, nummers en waarnemingen wissen?",
-priv:"🔒 <b>Herken je jouw auto</b> op een foto, ook al is het kenteken vervaagd, en wil je dat die uit onze app wordt verwijderd? Neem contact met ons op en we verwijderen hem.",rmBtn:"📧 Verwijdering aanvragen",rmSub:"Mijn auto verwijderen uit Good Plate Hunting",rmBody:"Hallo,\n\nIk herken mijn auto op een foto en wil dat die wordt verwijderd.\n\nWaar en wanneer is hij gezien: \n\nBedankt"}
+editSt:"✏️ Verhaal bewerken",saveSt:"💾 Verhaal opslaan",addProof:"📷 Upload de originele auto met ons te jagen kenteken",rm:"Verwijder",cap:"Bijschrift (waar en wanneer?)",full:"Opslag vol, verwijder eerst een foto",reset:"Alles wissen",resetQ:"Alle jagers, nummers en waarnemingen wissen?",
+priv:"🔒 <b>Herken je jouw auto</b> op een foto, ook al is het kenteken vervaagd, en wil je dat die uit onze app wordt verwijderd? Neem contact met ons op en we verwijderen hem.",rmBtn:"📧 Verwijdering aanvragen",rmSub:"Mijn auto verwijderen uit Good Plate Hunting",rmBody:"Hallo,\n\nIk herken mijn auto op een foto en wil dat die wordt verwijderd.\n\nWaar en wanneer is hij gezien: \n\nBedankt"},
+id:{tag:"Buru nomormu di plat mobil dan menangkan makan siang gratis 🍽️",share:"📣 Tantang teman",carsTot:n=>`🚗 Mobil yang ditemukan dengan plat kita: ${n}`,h1:"1 · Pemburu",mT:"Pesan",mPh:"Tinggalkan pesan untuk pemburu lain…",mSend:"Kirim",mNone:"Belum ada pesan. Sapa pemburu lain! 👋",rvT:"Ulasan",rvNone:"Belum ada ulasan. Jadilah yang pertama menyampaikan pendapatmu! ⭐",rvPh:"Bagaimana menurutmu tentang Good Plate Hunting?",rvSend:"📧 Kirim ulasan",rvPick:"Ketuk bintangnya dulu ⭐",rvSub:"Ulasanku tentang Good Plate Hunting",gT:"Grup perburuan",gInfo:"Berburu bersama: buat grup, bagikan kode atau tautan undangan, dan semua orang melihat papan skor yang sama. Nama, skor, dan plat yang disamarkan disimpan di server kami. Foto dan video tetap di setiap ponsel.",gCreate:"➕ Buat grup",gCode:"Kode grup",gJoin:"Gabung",gInvite:"📣 Undang teman",gInvTxt:"Gabung ke grup Good Plate Hunting-ku dan lihat siapa yang menang makan siang gratis!",gSync:t=>`✅ Tersinkron ${t}`,gErr:"⚠️ Grup tidak dapat dijangkau sekarang. Kami akan coba lagi.",gNotFound:"Grup tidak ditemukan. Periksa kodenya.",gJoinQ:c=>`Gabung ke grup ${c}?`,gReplaceQ:"Pemburu dan penampakan di ponsel ini akan diganti dengan milik grup.",gLeave:"Keluar dari grup",gLeaveQ:"Keluar dari grup ini? Ponsel ini tetap menyimpan salinannya sendiri.",gDel:"🗑️ Hapus grup untuk semua orang",gDelQ:"Hapus grup ini beserta datanya untuk semua orang? Tindakan ini tidak dapat dibatalkan.",spT:"Sebarkan keseruannya",addClip:"🎬 Tambah klip video (maks. 6 detik)",vLong6:"Klip itu lebih panjang dari 6 detik. Silakan potong (maks. 6 detik).",vWarn:"Video tidak bisa diburamkan. Tambahkan klip ini hanya jika plat tidak terbaca di dalamnya, atau jika itu mobilmu sendiri. Tetap tambahkan?",clipOk:n=>`🎬 Klip siap (${n} dtk)`,drive:"🚦 <b>Sedang mengemudi?</b> Jangan gunakan aplikasi ini saat mengemudi. Perhatikan jalan dan biarkan penumpang yang melihat dan mencatat!",undoS:"↩ Batalkan penampakan terakhir",hr:"Aturan main",r1:"<b>Pilih satu nomor plat</b> untuk diburu, misalnya 4830, sebaiknya dari mobil sendiri (keluarga).",r2:"<b>Temukan nomor yang sama di mobil lain</b>, di mana pun di dunia. Pemburu pertama yang melihatnya menang.",r3:"<b>Catat plat lengkapnya</b>, dengan foto atau klip video maks. 6 detik jika mau. Foto harus asli dan huruf akan diburamkan.",r4:"<b>Pemenang mendapat makan siang gratis.</b> Pemburu lain di grup yang membayarnya.",r5:"<b>Satu mobil, satu makan siang.</b> Setiap mobil unik hanya dihitung sekali.",r6:"<b>Kepala Pemburu ikut bermain.</b> Pemburu pertama, yang memulai permainan, berburu bersama yang lain.",story:"Semuanya bermula di Mazda tua kami. Aku, Eddy, bersama anak-anakku Diego dan Eliza, saat sebuah mobil lewat dengan plat 4830 FDY. “Ayo jadikan permainan,” kata kami. “Siapa yang pertama melihat 4830 mendapat makan siang gratis dari yang lain.”\n\nSejak itu kami menemukan 4830 di banyak negara, dan setiap kali ada yang berteriak “ITU!” makan siangnya sudah ditentukan.\n\nTeman dan tetangga mendengarnya, ingin ikut, dan kini Good Plate Hunting menyebar di Barcelona, satu makan siang demi satu.\n\nEddy, Diego & Eliza, pemburu plat. Setiap plat adalah kesempatan makan siang. 🍽️",h2:"2 · Plat yang diburu",h3:"3 · Aku lihat plat kita!",hs:"Papan skor",ho:"Siapa berutang makan siang",hl:"Penampakan",hst:"Cerita kami",
+phName:"Nama (mis. Layla)",add:"Tambah",phNum:"mis. 4830",phPlate:"Plat lengkap, mis. 4830 FDY",take:"📷 Ambil foto",pick:"🖼️ Pilih foto",undo:"Batalkan blur terakhir",blur:"Seret kotak di atas huruf untuk memburamkannya 👇",spot:"🎉 Ketemu! Dia berutang makan siang padaku",
+addTwo:"Tambahkan minimal dua orang",addNum:"Tambahkan nomor",noPl:"Belum ada pemburu",allSq:"Impas 🎈",none:"Belum ada yang terlihat. Awasi jalan (sebagai penumpang!)",paid:"Lunas ✓",
+owes:(a,b,n)=>`<b>${a}</b> berutang <b>${b}</b> ${n} makan siang`,spotW:"melihat",treatW:"mentraktir",
+setup:"Tambahkan dulu minimal 2 pemburu dan 1 nomor",needPlate:"Ketik plat lengkap (seperti 4830 FDY) agar bisa kami periksa.",
+badFmt:"Itu tidak terlihat seperti plat Spanyol yang valid (4 angka + 3 huruf, seperti 4830 FDY). Huruf A, E, I, O, U, Ñ, dan Q tidak digunakan.",
+wrongNum:n=>`Ditolak ❌ Plat ini tidak memuat nomormu ${n}.`,dbl:w=>`Mobil ini sudah dihitung 🚫 ${w} yang melihatnya lebih dulu, jadi tidak ada makan siang ganda!`,photoDup:w=>`Foto ini mirip dengan foto yang sudah diunggah ${w}. Tetap hitung?`,noBlur:"Kamu belum memburamkan apa pun. Simpan foto apa adanya?",
+edited:s=>`Ditolak ❌ Foto ini diedit dengan ${s}. Gunakan foto asli dari kamera.`,noMeta:"Foto ini tidak punya info kamera (mungkin tangkapan layar atau diedit). Tetap hitung?",
+pcOk:d=>`✅ Foto kamera, diambil pada ${d}`,pcEd:s=>`❌ Diedit dengan ${s}`,pcNo:"⚠️ Tanpa info kamera (tangkapan layar atau diedit?)",
+toast:w=>`Makan siang didapat! 🍽️ ${w} menang`,del:"Hapus",delQ:"Hapus entri ini?",shareTxt:"Aku memburu plat mobil demi makan siang gratis! Bisakah kamu mengalahkanku?",copied:"Tautan disalin 📋",
+exp:"💾 Cadangkan",imp:"📂 Pulihkan",impQ:"Ganti semuanya di ponsel ini dengan cadangan?",impBad:"File itu bukan cadangan Good Plate Hunting.",impOk:"Dipulihkan ✅",install:"📲 Pasang aplikasi",
+editSt:"✏️ Edit cerita",saveSt:"💾 Simpan cerita",addProof:"📷 Unggah mobil asli dengan plat yang kita buru",rm:"Hapus",cap:"Keterangan (di mana dan kapan?)",full:"Penyimpanan penuh, hapus satu foto dulu",reset:"Reset semuanya",resetQ:"Hapus semua pemburu, nomor, dan penampakan?",
+priv:"🔒 <b>Mengenali mobilmu</b> di sebuah foto, meskipun platnya diburamkan, dan ingin menghapusnya dari aplikasi kami? Hubungi kami dan akan kami hapus.",rmBtn:"📧 Ajukan penghapusan",rmSub:"Tolong hapus mobil saya dari Good Plate Hunting",rmBody:"Halo,\n\nSaya mengenali mobil saya di sebuah foto dan ingin foto itu dihapus.\n\nDi mana dan kapan terlihat: \n\nTerima kasih",
+setN:"Atur",ini:"Kepala Pemburu",initInfo:"Pemburu pertama yang ditambahkan adalah Kepala Pemburu dan harus membayar makan siang jika plat yang sama ditemukan.",hshow:"Tayangan slide",addVideo:"🎬 Tambah video (maks. 9 detik)",storyNote:"Foto dan video ditampilkan persis seperti yang diunggah. Tambahkan hanya mobilmu sendiri, atau buramkan dulu plat milik orang lain. Video tetap berada di perangkat ini.",
+vBad:"Video ini tidak bisa dibaca. Coba file lain.",vLong:"Video itu lebih dari 9 detik. Silakan potong (maks. 9 detik).",pfPhoto:"📷 Foto profil",pfBio:"Bio singkat…",pfSave:"Simpan",pfClose:"Tutup",pfCars:n=>`🚗 ${n} mobil terlihat`,
+chgQ:n=>`Ubah plat yang diburu menjadi ${n}? Penampakan sebelumnya tetap ada.`,
+how:"Cara bermain: pilih SATU nomor plat untuk diburu, misalnya 4830 (plat keluarga kami adalah 4830 FDY). Setiap kali kamu melihat mobil dengan nomor itu, catat dengan plat lengkap dan, jika mau, foto dengan huruf yang diburamkan. Siapa yang melihat sebuah mobil lebih dulu menang makan siang gratis dari semua pemain lain. Setiap mobil hanya dihitung sekali, jadi tidak ada makan siang ganda. Kamu bisa mengganti nomor kapan saja dengan mengetik yang baru.",
+abWait:"🔎 Mencari huruf plat untuk diburamkan…",abOk:"✅ Huruf diburamkan otomatis. Periksa fotonya, dan buramkan lagi secara manual jika perlu.",abNone:"⚠️ Huruf tidak ditemukan secara otomatis. Seret kotak di atasnya.",abFail:"⚠️ Blur otomatis tidak tersedia saat ini (offline?). Buramkan secara manual."},
+ar:{tag:"اصطد رقمك على لوحة سيارة واربح غداءً مجانيًا 🍽️",share:"📣 تحدَّ صديقًا",carsTot:n=>`🚗 السيارات التي وُجدت بلوحتنا: ${n}`,h1:"1 · الصيّادون",mT:"الرسائل",mPh:"اترك رسالة للصيّادين الآخرين…",mSend:"إرسال",mNone:"لا توجد رسائل بعد. ألقِ التحية على الصيّادين الآخرين! 👋",rvT:"التقييمات",rvNone:"لا توجد تقييمات بعد. كن أول من يخبرنا برأيه! ⭐",rvPh:"ما رأيك في Good Plate Hunting؟",rvSend:"📧 إرسال التقييم",rvPick:"اضغط على النجوم أولًا ⭐",rvSub:"تقييمي لـ Good Plate Hunting",gT:"مجموعة الصيد",gInfo:"اصطادوا معًا: أنشئ مجموعة وشارك الرمز أو رابط الدعوة ليرى الجميع لوحة النتائج نفسها. تُحفظ الأسماء والنتائج واللوحات المموَّهة على خادمنا، بينما تبقى الصور والفيديوهات على كل هاتف.",gCreate:"➕ إنشاء مجموعة",gCode:"رمز المجموعة",gJoin:"انضمام",gInvite:"📣 ادعُ أصدقاءك",gInvTxt:"انضم إلى مجموعتي في Good Plate Hunting ولنرَ من يربح الغداء المجاني!",gSync:t=>`✅ تمت المزامنة ${t}`,gErr:"⚠️ لا يمكن الوصول إلى المجموعة الآن. سنحاول مرة أخرى.",gNotFound:"لم يتم العثور على المجموعة. تحقق من الرمز.",gJoinQ:c=>`الانضمام إلى المجموعة ${c}؟`,gReplaceQ:"سيتم استبدال الصيّادين والمشاهدات على هذا الهاتف بما في المجموعة.",gLeave:"مغادرة المجموعة",gLeaveQ:"مغادرة هذه المجموعة؟ سيحتفظ هذا الهاتف بنسخته الخاصة.",gDel:"🗑️ حذف المجموعة للجميع",gDelQ:"حذف هذه المجموعة وبياناتها للجميع؟ لا يمكن التراجع عن ذلك.",spT:"انشر المرح",addClip:"🎬 أضف مقطع فيديو (بحد أقصى 6 ثوانٍ)",vLong6:"هذا المقطع أطول من 6 ثوانٍ. يرجى قصّه (الحد الأقصى 6 ثوانٍ).",vWarn:"لا يمكن تمويه الفيديو. أضف هذا المقطع فقط إذا كانت اللوحة غير مقروءة فيه أو إذا كانت سيارتك أنت. هل تريد إضافته على أي حال؟",clipOk:n=>`🎬 المقطع جاهز (${n} ث)`,drive:"🚦 <b>تقود؟</b> لا تستخدم هذا التطبيق أثناء القيادة. ركّز على الطريق ودع أحد الركاب يرصد ويسجّل!",undoS:"↩ تراجع عن آخر مشاهدة",hr:"قواعد اللعبة",r1:"<b>اختر رقم لوحة واحدًا</b> لاصطياده، مثل 4830، ويُفضَّل أن يكون من سيارتك الخاصة (سيارة العائلة).",r2:"<b>اعثر على الرقم نفسه على سيارة أخرى</b>، في أي مكان في العالم. أول صيّاد يراه يفوز.",r3:"<b>سجّل اللوحة كاملة</b>، مع صورة أو مقطع فيديو بحد أقصى 6 ثوانٍ إن شئت. يجب أن تكون الصور حقيقية وتُموَّه الحروف.",r4:"<b>يحصل الفائز على غداء مجاني.</b> ويدفع ثمنه الصيّادون الآخرون في المجموعة.",r5:"<b>سيارة واحدة، غداء واحد.</b> كل سيارة مختلفة تُحتسب مرة واحدة فقط.",r6:"<b>كبير الصيّادين يلعب أيضًا.</b> الصيّاد الأول الذي بدأ اللعبة يصطاد مع الجميع.",story:"بدأ كل شيء في سيارتنا المازدا القديمة. أنا إدّي مع أولادي دييغو وإليزا، عندما مرّت سيارة بلوحة 4830 FDY. قلنا: “لنحوّلها إلى لعبة. من يرى 4830 أولًا يحصل على غداء مجاني من الباقين.”\n\nومنذ ذلك الحين وجدنا 4830 في بلدان كثيرة، وفي كل مرة يصرخ أحدنا “هناك!” يكون الغداء قد حُسم.\n\nسمع الأصدقاء والجيران بالأمر وأرادوا المشاركة، والآن تنتشر Good Plate Hunting في برشلونة، غداءً بعد غداء.\n\nإدّي ودييغو وإليزا، صيّادو لوحات. كل لوحة فرصة لغداء. 🍽️",h2:"2 · اللوحة المطلوب اصطيادها",h3:"3 · رأيتُ لوحتنا!",hs:"لوحة النتائج",ho:"من يدين بغداء",hl:"المشاهدات",hst:"قصتنا",
+phName:"الاسم (مثل: ليلى)",add:"إضافة",phNum:"مثل: 4830",phPlate:"اللوحة كاملة، مثل: 4830 FDY",take:"📷 التقاط صورة",pick:"🖼️ اختيار صورة",undo:"تراجع عن آخر تمويه",blur:"اسحب مربعًا فوق الحروف لتمويهها 👇",spot:"🎉 رأيتها! هو مدين لي بغداء",
+addTwo:"أضف شخصين على الأقل",addNum:"أضف رقمًا",noPl:"لا يوجد صيّادون بعد",allSq:"الحسابات متعادلة 🎈",none:"لم تُرصد أي سيارة بعد. أبقِ عينيك على الطريق (كراكب!)",paid:"تم الدفع ✓",
+owes:(a,b,n)=>`<b>${a}</b> مدين لـ <b>${b}</b> بـ ${n} غداء`,spotW:"رأى",treatW:"دعا",
+setup:"أضف أولًا صيّادَين على الأقل ورقمًا واحدًا",needPlate:"من فضلك اكتب اللوحة كاملة (مثل 4830 FDY) لنتمكن من التحقق منها.",
+badFmt:"لا تبدو هذه لوحة إسبانية صالحة (4 أرقام + 3 أحرف، مثل 4830 FDY). لا تُستخدم الأحرف A وE وI وO وU وÑ وQ.",
+wrongNum:n=>`مرفوضة ❌ لا تحتوي هذه اللوحة على رقمك ${n}.`,dbl:w=>`تم احتساب هذه السيارة مسبقًا 🚫 ${w} رآها أولًا، فلا غداء مضاعف!`,photoDup:w=>`تشبه هذه الصورة صورة رفعها ${w} من قبل. هل تحتسبها رغم ذلك؟`,noBlur:"لم تموّه أي شيء بعد. هل تحفظ الصورة كما هي؟",
+edited:s=>`مرفوضة ❌ تم تعديل هذه الصورة باستخدام ${s}. استخدم الصورة الأصلية من الكاميرا.`,noMeta:"لا تحتوي هذه الصورة على بيانات الكاميرا (ربما لقطة شاشة أو معدّلة). هل تحتسبها رغم ذلك؟",
+pcOk:d=>`✅ صورة كاميرا، التُقطت في ${d}`,pcEd:s=>`❌ معدّلة باستخدام ${s}`,pcNo:"⚠️ لا توجد بيانات كاميرا (لقطة شاشة أو معدّلة؟)",
+toast:w=>`تم كسب الغداء! 🍽️ فاز ${w}`,del:"حذف",delQ:"حذف هذا الإدخال؟",shareTxt:"أصطاد لوحات السيارات لأربح غداءً مجانيًا! هل تستطيع التغلب عليّ؟",copied:"تم نسخ الرابط 📋",
+exp:"💾 نسخ احتياطي",imp:"📂 استعادة",impQ:"استبدال كل شيء على هذا الهاتف بالنسخة الاحتياطية؟",impBad:"هذا الملف ليس نسخة احتياطية من Good Plate Hunting.",impOk:"تمت الاستعادة ✅",install:"📲 تثبيت التطبيق",
+editSt:"✏️ تعديل القصة",saveSt:"💾 حفظ القصة",addProof:"📷 ارفع صورة السيارة الأصلية بلوحتنا المطلوب اصطيادها",rm:"إزالة",cap:"تعليق (أين ومتى؟)",full:"التخزين ممتلئ، أزل صورة أولًا",reset:"إعادة ضبط كل شيء",resetQ:"حذف جميع الصيّادين والأرقام والمشاهدات؟",
+priv:"🔒 هل <b>تعرّفت على سيارتك</b> في صورة رغم تمويه اللوحة وتريد إزالتها من تطبيقنا؟ تواصل معنا وسنحذفها.",rmBtn:"📧 طلب الإزالة",rmSub:"إزالة سيارتي من Good Plate Hunting",rmBody:"مرحبًا،\n\nتعرّفت على سيارتي في صورة وأرغب في إزالتها.\n\nأين ومتى تم رصدها: \n\nشكرًا",
+setN:"تعيين",ini:"كبير الصيّادين",initInfo:"أول صيّاد تتم إضافته هو كبير الصيّادين، وعليه دفع الغداء إذا تم العثور على اللوحة نفسها.",hshow:"عرض الشرائح",addVideo:"🎬 إضافة فيديو (9 ثوانٍ كحد أقصى)",storyNote:"تُعرض الصور ومقاطع الفيديو تمامًا كما تم رفعها. أضف سيارتك أنت فقط، أو موّه لوحات الآخرين أولًا. تبقى مقاطع الفيديو على هذا الجهاز.",
+vBad:"تعذّرت قراءة هذا الفيديو. جرّب ملفًا آخر.",vLong:"مدة هذا الفيديو أكثر من 9 ثوانٍ. يرجى قصّه (9 ثوانٍ كحد أقصى).",pfPhoto:"📷 صورة الملف الشخصي",pfBio:"نبذة قصيرة…",pfSave:"حفظ",pfClose:"إغلاق",pfCars:n=>`🚗 ${n} سيارة مرصودة`,
+chgQ:n=>`تغيير اللوحة المطلوب اصطيادها إلى ${n}؟ تبقى المشاهدات السابقة.`,
+how:"طريقة اللعب: اختر رقم لوحة واحدًا لاصطياده، مثل 4830 (كانت لوحة عائلتنا 4830 FDY). كلما رأيت سيارة بهذا الرقم، سجّلها باللوحة كاملة، ومعها صورة بحروف مموّهة إن شئت. من يرى السيارة أولًا يربح غداءً مجانيًا من جميع اللاعبين الآخرين. تُحتسب كل سيارة مرة واحدة فقط، فلا غداء مضاعف. يمكنك تغيير الرقم في أي وقت بكتابة رقم جديد.",
+abWait:"🔎 جارٍ البحث عن حروف اللوحة لتمويهها…",abOk:"✅ تم تمويه الحروف تلقائيًا. تحقق من الصورة وموّه المزيد يدويًا عند الحاجة.",abNone:"⚠️ تعذّر العثور على الحروف تلقائيًا. اسحب مربعًا فوقها.",abFail:"⚠️ التمويه التلقائي غير متاح حاليًا (لا يوجد اتصال؟). موّه يدويًا."},
+fr:{tag:"Chasse ton numéro sur une plaque et gagne un déjeuner gratuit 🍽️",share:"📣 Défie un ami",carsTot:n=>`🚗 Voitures trouvées avec notre plaque : ${n}`,h1:"1 · Chasseurs",mT:"Messages",mPh:"Laisse un message aux autres chasseurs…",mSend:"Envoyer",mNone:"Pas encore de messages. Dis bonjour aux autres chasseurs ! 👋",rvT:"Avis",rvNone:"Pas encore d'avis. Sois le premier à nous dire ce que tu en penses ! ⭐",rvPh:"Que penses-tu de Good Plate Hunting ?",rvSend:"📧 Envoyer l'avis",rvPick:"Touche d'abord les étoiles ⭐",rvSub:"Mon avis sur Good Plate Hunting",gT:"Groupe de chasse",gInfo:"Chassez ensemble : crée un groupe, partage le code ou le lien d'invitation, et tout le monde voit le même tableau des scores. Les noms, scores et plaques masquées sont stockés sur notre serveur. Les photos et vidéos restent sur chaque téléphone.",gCreate:"➕ Créer un groupe",gCode:"Code du groupe",gJoin:"Rejoindre",gInvite:"📣 Inviter des amis",gInvTxt:"Rejoins mon groupe Good Plate Hunting et voyons qui gagne le déjeuner gratuit !",gSync:t=>`✅ Synchronisé ${t}`,gErr:"⚠️ Impossible de joindre le groupe pour le moment. Nous réessaierons.",gNotFound:"Groupe introuvable. Vérifie le code.",gJoinQ:c=>`Rejoindre le groupe ${c} ?`,gReplaceQ:"Les chasseurs et repérages de ce téléphone seront remplacés par ceux du groupe.",gLeave:"Quitter le groupe",gLeaveQ:"Quitter ce groupe ? Ce téléphone garde sa propre copie.",gDel:"🗑️ Supprimer le groupe pour tout le monde",gDelQ:"Supprimer ce groupe et ses données pour tout le monde ? Cette action est irréversible.",spT:"Partage le plaisir",addClip:"🎬 Ajouter un clip vidéo (max. 6 secondes)",vLong6:"Ce clip dépasse 6 secondes. Merci de le raccourcir (max. 6 secondes).",vWarn:"Les vidéos ne peuvent pas être floutées. N'ajoute ce clip que si la plaque n'y est pas lisible ou s'il s'agit de ta propre voiture. L'ajouter quand même ?",clipOk:n=>`🎬 Clip prêt (${n} s)`,drive:"🚦 <b>Au volant ?</b> N'utilise pas cette appli en conduisant. Garde les yeux sur la route et laisse un passager repérer et noter !",undoS:"↩ Annuler le dernier repérage",hr:"Règles du jeu",r1:"<b>Choisis un numéro de plaque</b> à chasser, comme 4830, de préférence celui de ta propre voiture (familiale).",r2:"<b>Repère le même numéro sur une autre voiture</b>, n'importe où dans le monde. Le premier chasseur qui le voit gagne.",r3:"<b>Note la plaque complète</b>, avec une photo ou un clip vidéo de 6 secondes max. si tu veux. Les photos doivent être vraies et les lettres sont floutées.",r4:"<b>Le gagnant reçoit un déjeuner gratuit.</b> Les autres chasseurs du groupe le paient.",r5:"<b>Une voiture, un déjeuner.</b> Chaque voiture différente ne compte qu'une fois.",r6:"<b>Le Chasseur en chef joue aussi.</b> Le premier chasseur, qui a lancé le jeu, chasse avec tous les autres.",story:"Tout a commencé dans notre vieille Mazda. Moi, Eddy, avec mes enfants Diego et Eliza, quand une voiture est passée avec la plaque 4830 FDY. « Faisons-en un jeu », avons-nous dit. « Celui qui voit le 4830 en premier gagne un déjeuner offert par les autres. »\n\nDepuis, nous avons trouvé le 4830 dans de nombreux pays, et chaque fois que quelqu'un crie « LÀ ! », le déjeuner est déjà décidé.\n\nDes amis et des voisins en ont entendu parler, ont voulu jouer, et maintenant Good Plate Hunting se répand dans Barcelone, un déjeuner à la fois.\n\nEddy, Diego et Eliza, chasseurs de plaques. Chaque plaque est une chance de déjeuner. 🍽️",h2:"2 · Plaque à chasser",h3:"3 · J'ai vu notre plaque !",hs:"Tableau des scores",ho:"Qui doit un déjeuner",hl:"Repérages",hst:"Notre histoire",
+phName:"Nom (p. ex. Layla)",add:"Ajouter",phNum:"p. ex. 4830",phPlate:"Plaque complète, p. ex. 4830 FDY",take:"📷 Prendre une photo",pick:"🖼️ Choisir une photo",undo:"Annuler le dernier flou",blur:"Trace un cadre sur les lettres pour les flouter 👇",spot:"🎉 Repérée ! Il/elle me doit un déjeuner",
+addTwo:"Ajoute au moins deux personnes",addNum:"Ajoute un numéro",noPl:"Pas encore de chasseurs",allSq:"Comptes équilibrés 🎈",none:"Rien repéré pour l'instant. Garde l'œil sur la route (en passager !)",paid:"Payé ✓",
+owes:(a,b,n)=>`<b>${a}</b> doit <b>${b}</b> ${n} déjeuner${n>1?"s":""}`,spotW:"a repéré",treatW:"a invité",
+setup:"Ajoute d'abord au moins 2 chasseurs et 1 numéro",needPlate:"Saisis la plaque complète (comme 4830 FDY) pour qu'on puisse la vérifier.",
+badFmt:"Ce n'est pas une plaque espagnole valide (4 chiffres + 3 lettres, comme 4830 FDY). Les lettres A, E, I, O, U, Ñ et Q ne sont pas utilisées.",
+wrongNum:n=>`Refusé ❌ Cette plaque ne contient pas ton numéro ${n}.`,dbl:w=>`Cette voiture a déjà été comptée 🚫 ${w} l'a repérée en premier, pas de double déjeuner !`,photoDup:w=>`Cette photo ressemble à une photo déjà envoyée par ${w}. La compter quand même ?`,noBlur:"Tu n'as encore rien flouté. Enregistrer la photo telle quelle ?",
+edited:s=>`Refusé ❌ Cette photo a été retouchée avec ${s}. Utilise la photo originale de l'appareil.`,noMeta:"Cette photo n'a pas d'infos d'appareil (capture d'écran ou retouchée ?). La compter quand même ?",
+pcOk:d=>`✅ Photo d'appareil, prise le ${d}`,pcEd:s=>`❌ Retouchée avec ${s}`,pcNo:"⚠️ Pas d'infos d'appareil (capture ou retouchée ?)",
+toast:w=>`Déjeuner gagné ! 🍽️ ${w} gagne`,del:"Supprimer",delQ:"Supprimer cette entrée ?",shareTxt:"Je chasse les plaques d'immatriculation pour des déjeuners gratuits ! Tu peux me battre ?",copied:"Lien copié 📋",
+exp:"💾 Sauvegarde",imp:"📂 Restaurer",impQ:"Remplacer tout sur ce téléphone par la sauvegarde ?",impBad:"Ce fichier n'est pas une sauvegarde de Good Plate Hunting.",impOk:"Restauré ✅",install:"📲 Installer l'appli",
+editSt:"✏️ Modifier l'histoire",saveSt:"💾 Enregistrer l'histoire",addProof:"📷 Téléverse la voiture d'origine avec notre plaque à chasser",rm:"Retirer",cap:"Légende (où et quand ?)",full:"Stockage plein, retire d'abord une photo",reset:"Tout effacer",resetQ:"Supprimer tous les chasseurs, numéros et repérages ?",
+priv:"🔒 <b>Tu reconnais ta voiture</b> sur une photo, même si la plaque est floutée, et tu veux qu'elle soit retirée de l'appli ? Contacte-nous et nous la supprimerons.",rmBtn:"📧 Demander la suppression",rmSub:"Supprimer ma voiture de Good Plate Hunting",rmBody:"Bonjour,\n\nJe reconnais ma voiture sur une photo et je souhaite qu'elle soit retirée.\n\nOù et quand a-t-elle été repérée : \n\nMerci",
+setN:"Définir",ini:"Chasseur en chef",initInfo:"Le premier chasseur ajouté est le Chasseur en chef et doit payer le déjeuner si la même plaque est trouvée.",hshow:"Diaporama",addVideo:"🎬 Ajouter une vidéo (9 secondes max)",storyNote:"Les photos et vidéos s'affichent telles qu'envoyées. Ajoute uniquement ta propre voiture, ou floute d'abord les plaques des autres. Les vidéos restent sur cet appareil.",
+vBad:"Impossible de lire cette vidéo. Essaie un autre fichier.",vLong:"Cette vidéo dure plus de 9 secondes. Raccourcis-la (9 secondes max).",pfPhoto:"📷 Photo de profil",pfBio:"Courte bio…",pfSave:"Enregistrer",pfClose:"Fermer",pfCars:n=>`🚗 ${n} voiture${n>1?"s":""} repérée${n>1?"s":""}`,
+chgQ:n=>`Changer la plaque à chasser pour ${n} ? Les repérages passés restent.`,
+how:"Comment jouer : choisis UN numéro de plaque à chasser, par exemple 4830 (la plaque de notre famille était 4830 FDY). Chaque fois que tu vois une voiture avec ce numéro, enregistre-la avec la plaque complète et, si tu veux, une photo avec les lettres floutées. Celui qui repère une voiture en premier gagne un déjeuner gratuit de la part de tous les autres joueurs. Chaque voiture ne compte qu'une fois, donc pas de double déjeuner. Tu peux changer le numéro à tout moment en en saisissant un nouveau.",
+abWait:"🔎 Recherche des lettres de la plaque à flouter…",abOk:"✅ Lettres floutées automatiquement. Vérifie la photo et floute à la main si besoin.",abNone:"⚠️ Impossible de trouver les lettres automatiquement. Trace un cadre dessus.",abFail:"⚠️ Le flou automatique n'est pas disponible pour l'instant (hors ligne ?). Floute à la main."},
+de:{tag:"Jage deine Nummer auf einem Kennzeichen und gewinne ein kostenloses Mittagessen 🍽️",share:"📣 Freund herausfordern",carsTot:n=>`🚗 Gefundene Autos mit unserem Kennzeichen: ${n}`,h1:"1 · Jäger",mT:"Nachrichten",mPh:"Hinterlasse eine Nachricht für die anderen Jäger…",mSend:"Senden",mNone:"Noch keine Nachrichten. Sag den anderen Jägern Hallo! 👋",rvT:"Bewertungen",rvNone:"Noch keine Bewertungen. Sei der Erste, der uns seine Meinung sagt! ⭐",rvPh:"Was hältst du von Good Plate Hunting?",rvSend:"📧 Bewertung senden",rvPick:"Tippe zuerst auf die Sterne ⭐",rvSub:"Meine Bewertung von Good Plate Hunting",gT:"Jagdgruppe",gInfo:"Jagt gemeinsam: Erstelle eine Gruppe, teile den Code oder den Einladungslink, und alle sehen dieselbe Rangliste. Namen, Punkte und unkenntlich gemachte Kennzeichen liegen auf unserem Server. Fotos und Videos bleiben auf jedem Handy.",gCreate:"➕ Gruppe erstellen",gCode:"Gruppencode",gJoin:"Beitreten",gInvite:"📣 Freunde einladen",gInvTxt:"Tritt meiner Good-Plate-Hunting-Gruppe bei und finde heraus, wer das kostenlose Mittagessen gewinnt!",gSync:t=>`✅ Synchronisiert ${t}`,gErr:"⚠️ Die Gruppe ist gerade nicht erreichbar. Wir versuchen es erneut.",gNotFound:"Gruppe nicht gefunden. Bitte prüfe den Code.",gJoinQ:c=>`Gruppe ${c} beitreten?`,gReplaceQ:"Die Jäger und Sichtungen auf diesem Handy werden durch die der Gruppe ersetzt.",gLeave:"Gruppe verlassen",gLeaveQ:"Diese Gruppe verlassen? Dieses Handy behält seine eigene Kopie.",gDel:"🗑️ Gruppe für alle löschen",gDelQ:"Diese Gruppe und ihre Daten für alle löschen? Das lässt sich nicht rückgängig machen.",spT:"Verbreite den Spaß",addClip:"🎬 Videoclip hinzufügen (max. 6 Sekunden)",vLong6:"Dieser Clip ist länger als 6 Sekunden. Bitte kürze ihn (max. 6 Sekunden).",vWarn:"Videos lassen sich nicht unkenntlich machen. Füge diesen Clip nur hinzu, wenn das Kennzeichen darin nicht lesbar ist oder es dein eigenes Auto ist. Trotzdem hinzufügen?",clipOk:n=>`🎬 Clip bereit (${n} s)`,drive:"🚦 <b>Am Steuer?</b> Nutze diese App nicht beim Fahren. Augen auf die Straße – lass einen Beifahrer spotten und eintragen!",undoS:"↩ Letzte Sichtung rückgängig",hr:"Spielregeln",r1:"<b>Wähle eine Kennzeichennummer</b> zum Jagen, zum Beispiel 4830, am besten von deinem eigenen (Familien-)Auto.",r2:"<b>Entdecke dieselbe Nummer auf einem anderen Auto</b>, irgendwo auf der Welt. Der erste Jäger, der sie sieht, gewinnt.",r3:"<b>Trage das vollständige Kennzeichen ein</b>, auf Wunsch mit Foto oder Videoclip (max. 6 Sekunden). Fotos müssen echt sein, die Buchstaben werden unkenntlich gemacht.",r4:"<b>Der Gewinner bekommt ein kostenloses Mittagessen.</b> Die anderen Jäger in der Gruppe bezahlen es.",r5:"<b>Ein Auto, ein Mittagessen.</b> Jedes einzelne Auto zählt nur einmal.",r6:"<b>Der Chefjäger spielt mit.</b> Der erste Jäger, der das Spiel gestartet hat, jagt wie alle anderen.",story:"Alles begann in unserem alten Mazda. Ich, Eddy, mit meinen Kindern Diego und Eliza, als ein Auto mit dem Kennzeichen 4830 FDY vorbeifuhr. „Machen wir ein Spiel daraus“, sagten wir. „Wer die 4830 zuerst sieht, bekommt ein kostenloses Mittagessen von den anderen.“\n\nSeitdem haben wir die 4830 in vielen Ländern gefunden, und jedes Mal, wenn jemand „DA!“ ruft, ist das Mittagessen schon entschieden.\n\nFreunde und Nachbarn haben davon gehört, wollten mitmachen, und jetzt breitet sich Good Plate Hunting in Barcelona aus, ein Mittagessen nach dem anderen.\n\nEddy, Diego & Eliza, Kennzeichenjäger. Jedes Kennzeichen ist eine Chance auf ein Mittagessen. 🍽️",h2:"2 · Kennzeichen zum Jagen",h3:"3 · Ich hab unser Kennzeichen gesehen!",hs:"Punktestand",ho:"Wer ein Mittagessen schuldet",hl:"Sichtungen",hst:"Unsere Geschichte",
+phName:"Name (z. B. Layla)",add:"Hinzufügen",phNum:"z. B. 4830",phPlate:"Vollständiges Kennzeichen, z. B. 4830 FDY",take:"📷 Foto aufnehmen",pick:"🖼️ Foto wählen",undo:"Letzte Unschärfe rückgängig",blur:"Ziehe einen Rahmen über die Buchstaben, um sie zu verwischen 👇",spot:"🎉 Gesehen! Er/sie schuldet mir ein Mittagessen",
+addTwo:"Füge mindestens zwei Personen hinzu",addNum:"Füge eine Nummer hinzu",noPl:"Noch keine Jäger",allSq:"Alles ausgeglichen 🎈",none:"Noch nichts gesichtet. Behalte die Straße im Blick (als Beifahrer!)",paid:"Bezahlt ✓",
+owes:(a,b,n)=>`<b>${a}</b> schuldet <b>${b}</b> ${n} Mittagessen`,spotW:"sah",treatW:"spendierte",
+setup:"Füge zuerst mindestens 2 Jäger und 1 Nummer hinzu",needPlate:"Bitte gib das vollständige Kennzeichen ein (wie 4830 FDY), damit wir es prüfen können.",
+badFmt:"Das sieht nicht nach einem gültigen spanischen Kennzeichen aus (4 Ziffern + 3 Buchstaben, wie 4830 FDY). Die Buchstaben A, E, I, O, U, Ñ und Q werden nicht verwendet.",
+wrongNum:n=>`Abgelehnt ❌ Dieses Kennzeichen enthält deine Nummer ${n} nicht.`,dbl:w=>`Dieses Auto wurde schon gezählt 🚫 ${w} hat es zuerst gesehen, also keine doppelten Mittagessen!`,photoDup:w=>`Dieses Foto ähnelt einem, das ${w} schon hochgeladen hat. Trotzdem zählen?`,noBlur:"Du hast noch nichts verwischt. Foto trotzdem speichern?",
+edited:s=>`Abgelehnt ❌ Dieses Foto wurde mit ${s} bearbeitet. Bitte nutze das Originalfoto der Kamera.`,noMeta:"Dieses Foto hat keine Kamera-Infos (Screenshot oder bearbeitet?). Trotzdem zählen?",
+pcOk:d=>`✅ Kamerafoto, aufgenommen am ${d}`,pcEd:s=>`❌ Bearbeitet mit ${s}`,pcNo:"⚠️ Keine Kamera-Infos (Screenshot oder bearbeitet?)",
+toast:w=>`Mittagessen verdient! 🍽️ ${w} gewinnt`,del:"Löschen",delQ:"Diesen Eintrag löschen?",shareTxt:"Ich jage Kennzeichen für kostenlose Mittagessen! Kannst du mich schlagen?",copied:"Link kopiert 📋",
+exp:"💾 Sicherung",imp:"📂 Wiederherstellen",impQ:"Alles auf diesem Handy durch die Sicherung ersetzen?",impBad:"Diese Datei ist keine Good-Plate-Hunting-Sicherung.",impOk:"Wiederhergestellt ✅",install:"📲 App installieren",
+editSt:"✏️ Geschichte bearbeiten",saveSt:"💾 Geschichte speichern",addProof:"📷 Lade das Originalauto mit unserem Jagd-Kennzeichen hoch",rm:"Entfernen",cap:"Bildunterschrift (wo und wann?)",full:"Speicher voll, entferne zuerst ein Foto",reset:"Alles zurücksetzen",resetQ:"Alle Jäger, Nummern und Sichtungen löschen?",
+priv:"🔒 <b>Erkennst du dein Auto</b> auf einem Foto, obwohl das Kennzeichen verwischt ist, und möchtest es aus unserer App entfernen lassen? Melde dich bei uns, und wir löschen es.",rmBtn:"📧 Entfernung beantragen",rmSub:"Mein Auto aus Good Plate Hunting entfernen",rmBody:"Hallo,\n\nich erkenne mein Auto auf einem Foto und möchte, dass es entfernt wird.\n\nWo und wann wurde es gesehen: \n\nDanke",
+setN:"Festlegen",ini:"Chefjäger",initInfo:"Der erste hinzugefügte Jäger ist der Chefjäger und muss das Mittagessen bezahlen, wenn dasselbe Kennzeichen gefunden wird.",hshow:"Diashow",addVideo:"🎬 Video hinzufügen (max. 9 Sekunden)",storyNote:"Fotos und Videos werden genau so angezeigt, wie sie hochgeladen wurden. Füge nur dein eigenes Auto hinzu oder verwische vorher fremde Kennzeichen. Videos bleiben auf diesem Gerät.",
+vBad:"Dieses Video konnte nicht gelesen werden. Bitte versuche eine andere Datei.",vLong:"Das Video ist länger als 9 Sekunden. Bitte kürze es (max. 9 Sekunden).",pfPhoto:"📷 Profilbild",pfBio:"Kurze Bio…",pfSave:"Speichern",pfClose:"Schließen",pfCars:n=>`🚗 ${n} Auto${n===1?"":"s"} gesichtet`,
+chgQ:n=>`Das Kennzeichen zum Jagen auf ${n} ändern? Frühere Sichtungen bleiben.`,
+how:"So funktioniert das Spiel: Wähle EINE Kennzeichennummer zum Jagen, zum Beispiel 4830 (das Kennzeichen unserer Familie war 4830 FDY). Siehst du ein Auto mit dieser Nummer, trage es mit dem vollständigen Kennzeichen ein und, wenn du magst, mit einem Foto mit verwischten Buchstaben. Wer ein Auto zuerst sieht, gewinnt ein kostenloses Mittagessen von allen anderen Spielern. Jedes Auto zählt nur einmal, also gibt es keine doppelten Mittagessen. Du kannst die Nummer jederzeit ändern, indem du eine neue eingibst.",
+abWait:"🔎 Suche die Buchstaben des Kennzeichens zum Verwischen…",abOk:"✅ Buchstaben automatisch verwischt. Bitte prüfe das Foto und verwische bei Bedarf von Hand mehr.",abNone:"⚠️ Die Buchstaben wurden nicht automatisch gefunden. Ziehe einen Rahmen darüber.",abFail:"⚠️ Automatisches Verwischen ist gerade nicht verfügbar (offline?). Bitte verwische von Hand."},
+it:{tag:"Caccia il tuo numero su una targa e vinci un pranzo gratis 🍽️",share:"📣 Sfida un amico",carsTot:n=>`🚗 Auto trovate con la nostra targa: ${n}`,h1:"1 · Cacciatori",mT:"Messaggi",mPh:"Lascia un messaggio agli altri cacciatori…",mSend:"Invia",mNone:"Ancora nessun messaggio. Saluta gli altri cacciatori! 👋",rvT:"Recensioni",rvNone:"Ancora nessuna recensione. Sii il primo a dirci cosa ne pensi! ⭐",rvPh:"Cosa ne pensi di Good Plate Hunting?",rvSend:"📧 Invia recensione",rvPick:"Tocca prima le stelle ⭐",rvSub:"La mia recensione di Good Plate Hunting",gT:"Gruppo di caccia",gInfo:"Cacciate insieme: crea un gruppo, condividi il codice o il link d'invito e tutti vedranno la stessa classifica. Nomi, punteggi e targhe nascoste sono salvati sul nostro server. Foto e video restano su ogni telefono.",gCreate:"➕ Crea un gruppo",gCode:"Codice del gruppo",gJoin:"Unisciti",gInvite:"📣 Invita amici",gInvTxt:"Unisciti al mio gruppo Good Plate Hunting e vediamo chi vince il pranzo gratis!",gSync:t=>`✅ Sincronizzato ${t}`,gErr:"⚠️ Impossibile raggiungere il gruppo al momento. Riproveremo.",gNotFound:"Gruppo non trovato. Controlla il codice.",gJoinQ:c=>`Unirti al gruppo ${c}?`,gReplaceQ:"I cacciatori e gli avvistamenti su questo telefono saranno sostituiti da quelli del gruppo.",gLeave:"Esci dal gruppo",gLeaveQ:"Uscire da questo gruppo? Questo telefono conserva la propria copia.",gDel:"🗑️ Elimina il gruppo per tutti",gDelQ:"Eliminare questo gruppo e i suoi dati per tutti? Non si può annullare.",spT:"Diffondi il divertimento",addClip:"🎬 Aggiungi videoclip (max 6 secondi)",vLong6:"Questa clip dura più di 6 secondi. Accorciala (max 6 secondi).",vWarn:"I video non possono essere sfocati. Aggiungi questa clip solo se la targa non è leggibile o se è la tua auto. Aggiungerla comunque?",clipOk:n=>`🎬 Clip pronta (${n} s)`,drive:"🚦 <b>Stai guidando?</b> Non usare questa app mentre guidi. Occhi sulla strada: lascia che un passeggero cerchi e registri!",undoS:"↩ Annulla l'ultimo avvistamento",hr:"Regole del gioco",r1:"<b>Scegli un numero di targa</b> da cacciare, come 4830, preferibilmente quello della tua auto (di famiglia).",r2:"<b>Trova lo stesso numero su un'altra auto</b>, ovunque nel mondo. Il primo cacciatore che lo vede vince.",r3:"<b>Registra la targa completa</b>, con foto o videoclip di max 6 secondi se vuoi. Le foto devono essere vere e le lettere vengono sfocate.",r4:"<b>Il vincitore riceve un pranzo gratis.</b> Gli altri cacciatori del gruppo lo pagano.",r5:"<b>Un'auto, un pranzo.</b> Ogni auto diversa conta una sola volta.",r6:"<b>Anche il Capocacciatore gioca.</b> Il primo cacciatore, che ha iniziato il gioco, caccia insieme a tutti gli altri.",story:"Tutto è iniziato nella nostra vecchia Mazda. Io, Eddy, con i miei figli Diego ed Eliza, quando è passata un'auto con la targa 4830 FDY. «Facciamone un gioco», abbiamo detto. «Chi vede per primo il 4830 vince un pranzo gratis dagli altri.»\n\nDa allora abbiamo trovato il 4830 in tanti paesi, e ogni volta che qualcuno grida «LÀ!» il pranzo è già deciso.\n\nAmici e vicini l'hanno saputo, hanno voluto unirsi, e ora Good Plate Hunting si diffonde per Barcellona, un pranzo alla volta.\n\nEddy, Diego ed Eliza, cacciatori di targhe. Ogni targa è un'occasione di pranzo. 🍽️",h2:"2 · Targa da cacciare",h3:"3 · Ho visto la nostra targa!",hs:"Classifica",ho:"Chi deve un pranzo",hl:"Avvistamenti",hst:"La nostra storia",
+phName:"Nome (es. Layla)",add:"Aggiungi",phNum:"es. 4830",phPlate:"Targa completa, es. 4830 FDY",take:"📷 Scatta una foto",pick:"🖼️ Scegli una foto",undo:"Annulla l'ultima sfocatura",blur:"Trascina un riquadro sulle lettere per sfocarle 👇",spot:"🎉 Vista! Mi deve un pranzo",
+addTwo:"Aggiungi almeno due persone",addNum:"Aggiungi un numero",noPl:"Ancora nessun cacciatore",allSq:"Siamo pari 🎈",none:"Ancora niente. Tieni gli occhi sulla strada (da passeggero!)",paid:"Pagato ✓",
+owes:(a,b,n)=>`<b>${a}</b> deve <b>${b}</b> ${n} pranz${n>1?"i":"o"}`,spotW:"ha visto",treatW:"ha offerto a",
+setup:"Aggiungi prima almeno 2 cacciatori e 1 numero",needPlate:"Scrivi la targa completa (come 4830 FDY) così possiamo controllarla.",
+badFmt:"Non sembra una targa spagnola valida (4 numeri + 3 lettere, come 4830 FDY). Le lettere A, E, I, O, U, Ñ e Q non vengono usate.",
+wrongNum:n=>`Rifiutata ❌ Questa targa non contiene il tuo numero ${n}.`,dbl:w=>`Questa auto è già stata contata 🚫 Il primo avvistamento è di ${w}, quindi niente pranzi doppi!`,photoDup:w=>`Questa foto somiglia a una già caricata da ${w}. Contarla comunque?`,noBlur:"Non hai ancora sfocato nulla. Salvare la foto così com'è?",
+edited:s=>`Rifiutata ❌ Questa foto è stata modificata con ${s}. Usa la foto originale della fotocamera.`,noMeta:"Questa foto non ha dati della fotocamera (screenshot o modificata?). Contarla comunque?",
+pcOk:d=>`✅ Foto della fotocamera, scattata il ${d}`,pcEd:s=>`❌ Modificata con ${s}`,pcNo:"⚠️ Nessun dato della fotocamera (screenshot o modificata?)",
+toast:w=>`Pranzo guadagnato! 🍽️ Vince ${w}`,del:"Elimina",delQ:"Eliminare questa voce?",shareTxt:"Caccio le targhe per vincere pranzi gratis! Riesci a battermi?",copied:"Link copiato 📋",
+exp:"💾 Backup",imp:"📂 Ripristina",impQ:"Sostituire tutto su questo telefono con il backup?",impBad:"Quel file non è un backup di Good Plate Hunting.",impOk:"Ripristinato ✅",install:"📲 Installa l'app",
+editSt:"✏️ Modifica la storia",saveSt:"💾 Salva la storia",addProof:"📷 Carica l'auto originale con la nostra targa da cacciare",rm:"Rimuovi",cap:"Didascalia (dove e quando?)",full:"Spazio pieno, rimuovi prima una foto",reset:"Cancella tutto",resetQ:"Eliminare tutti i cacciatori, i numeri e gli avvistamenti?",
+priv:"🔒 <b>Riconosci la tua auto</b> in una foto, anche se la targa è sfocata, e vuoi che venga rimossa dall'app? Contattaci e la elimineremo.",rmBtn:"📧 Richiedi la rimozione",rmSub:"Rimuovere la mia auto da Good Plate Hunting",rmBody:"Ciao,\n\nriconosco la mia auto in una foto e vorrei che fosse rimossa.\n\nDove e quando è stata avvistata: \n\nGrazie",
+setN:"Imposta",ini:"Capocacciatore",initInfo:"Il primo cacciatore aggiunto è il Capocacciatore e deve pagare il pranzo se viene trovata la stessa targa.",hshow:"Presentazione",addVideo:"🎬 Aggiungi un video (max 9 secondi)",storyNote:"Foto e video vengono mostrati esattamente come caricati. Aggiungi solo la tua auto, oppure sfoca prima le targhe degli altri. I video restano su questo dispositivo.",
+vBad:"Impossibile leggere questo video. Prova con un altro file.",vLong:"Questo video dura più di 9 secondi. Accorcialo (max 9 secondi).",pfPhoto:"📷 Foto del profilo",pfBio:"Breve bio…",pfSave:"Salva",pfClose:"Chiudi",pfCars:n=>`🚗 ${n} auto avvistat${n===1?"a":"e"}`,
+chgQ:n=>`Cambiare la targa da cacciare in ${n}? Gli avvistamenti passati restano.`,
+how:"Come si gioca: scegli UN numero di targa da cacciare, per esempio 4830 (la targa della nostra famiglia era 4830 FDY). Quando vedi un'auto con quel numero, registrala con la targa completa e, se vuoi, con una foto con le lettere sfocate. Chi vede per primo un'auto vince un pranzo gratis da tutti gli altri giocatori. Ogni auto conta una sola volta, quindi niente pranzi doppi. Puoi cambiare il numero quando vuoi scrivendone uno nuovo.",
+abWait:"🔎 Cerco le lettere della targa da sfocare…",abOk:"✅ Lettere sfocate automaticamente. Controlla la foto e sfoca a mano se serve.",abNone:"⚠️ Non ho trovato le lettere automaticamente. Trascina un riquadro sopra.",abFail:"⚠️ La sfocatura automatica non è disponibile ora (offline?). Sfoca a mano."},
+pt:{tag:"Cace o seu número em uma placa e ganhe um almoço grátis 🍽️",share:"📣 Desafie um amigo",carsTot:n=>`🚗 Carros encontrados com a nossa placa: ${n}`,h1:"1 · Caçadores",mT:"Mensagens",mPh:"Deixe uma mensagem para os outros caçadores…",mSend:"Enviar",mNone:"Ainda não há mensagens. Diga oi para os outros caçadores! 👋",rvT:"Avaliações",rvNone:"Ainda não há avaliações. Seja o primeiro a nos dizer o que acha! ⭐",rvPh:"O que você acha do Good Plate Hunting?",rvSend:"📧 Enviar avaliação",rvPick:"Toque primeiro nas estrelas ⭐",rvSub:"Minha avaliação do Good Plate Hunting",gT:"Grupo de caça",gInfo:"Cacem juntos: crie um grupo, compartilhe o código ou o link de convite e todos veem o mesmo placar. Nomes, pontos e placas ocultas ficam guardados no nosso servidor. Fotos e vídeos ficam em cada celular.",gCreate:"➕ Criar um grupo",gCode:"Código do grupo",gJoin:"Entrar",gInvite:"📣 Convidar amigos",gInvTxt:"Entre no meu grupo do Good Plate Hunting e vamos ver quem ganha o almoço grátis!",gSync:t=>`✅ Sincronizado ${t}`,gErr:"⚠️ Não foi possível acessar o grupo agora. Vamos tentar de novo.",gNotFound:"Grupo não encontrado. Confira o código.",gJoinQ:c=>`Entrar no grupo ${c}?`,gReplaceQ:"Os caçadores e avistamentos deste celular serão substituídos pelos do grupo.",gLeave:"Sair do grupo",gLeaveQ:"Sair deste grupo? Este celular mantém a própria cópia.",gDel:"🗑️ Excluir o grupo para todos",gDelQ:"Excluir este grupo e seus dados para todos? Isso não pode ser desfeito.",spT:"Espalhe a diversão",addClip:"🎬 Adicionar videoclipe (máx. 6 segundos)",vLong6:"Esse clipe tem mais de 6 segundos. Corte-o (máx. 6 segundos).",vWarn:"Vídeos não podem ser desfocados. Adicione este clipe só se a placa não estiver legível ou se for o seu próprio carro. Adicionar mesmo assim?",clipOk:n=>`🎬 Clipe pronto (${n} s)`,drive:"🚦 <b>Dirigindo?</b> Não use este app enquanto dirige. Olhos na estrada: deixe um passageiro avistar e registrar!",undoS:"↩ Desfazer último avistamento",hr:"Regras do jogo",r1:"<b>Escolha um número de placa</b> para caçar, como 4830, de preferência o do seu próprio carro (da família).",r2:"<b>Encontre o mesmo número em outro carro</b>, em qualquer lugar do mundo. O primeiro caçador a ver vence.",r3:"<b>Registre a placa completa</b>, com foto ou videoclipe de no máx. 6 segundos se quiser. As fotos devem ser reais e as letras são desfocadas.",r4:"<b>O vencedor ganha um almoço grátis.</b> Os outros caçadores do grupo pagam.",r5:"<b>Um carro, um almoço.</b> Cada carro diferente conta só uma vez.",r6:"<b>O Caçador-chefe também joga.</b> O primeiro caçador, que começou o jogo, caça junto com todos os outros.",story:"Tudo começou no nosso velho Mazda. Eu, Eddy, com meus filhos Diego e Eliza, quando passou um carro com a placa 4830 FDY. “Vamos fazer disso um jogo”, dissemos. “Quem vir o 4830 primeiro ganha um almoço grátis dos outros.”\n\nDesde então encontramos o 4830 em muitos países, e toda vez que alguém grita “ALI!” o almoço já está decidido.\n\nAmigos e vizinhos souberam, quiseram entrar, e agora o Good Plate Hunting se espalha por Barcelona, um almoço de cada vez.\n\nEddy, Diego e Eliza, caçadores de placas. Cada placa é uma chance de almoço. 🍽️",h2:"2 · Placa para caçar",h3:"3 · Vi a nossa placa!",hs:"Placar",ho:"Quem deve um almoço",hl:"Avistamentos",hst:"Nossa história",
+phName:"Nome (ex.: Layla)",add:"Adicionar",phNum:"ex.: 4830",phPlate:"Placa completa, ex.: 4830 FDY",take:"📷 Tirar foto",pick:"🖼️ Escolher foto",undo:"Desfazer o último desfoque",blur:"Arraste um quadro sobre as letras para desfocá-las 👇",spot:"🎉 Vi! Me deve um almoço",
+addTwo:"Adicione pelo menos duas pessoas",addNum:"Adicione um número",noPl:"Ainda não há caçadores",allSq:"Estamos quites 🎈",none:"Nada avistado ainda. Fique de olho na estrada (como passageiro!)",paid:"Pago ✓",
+owes:(a,b,n)=>`<b>${a}</b> deve <b>${b}</b> ${n} almoço${n>1?"s":""}`,spotW:"viu",treatW:"pagou o almoço de",
+setup:"Adicione primeiro pelo menos 2 caçadores e 1 número",needPlate:"Digite a placa completa (como 4830 FDY) para podermos verificá-la.",
+badFmt:"Isso não parece uma placa espanhola válida (4 números + 3 letras, como 4830 FDY). As letras A, E, I, O, U, Ñ e Q não são usadas.",
+wrongNum:n=>`Recusada ❌ Esta placa não contém o seu número ${n}.`,dbl:w=>`Este carro já foi contado 🚫 ${w} viu primeiro, então nada de almoços em dobro!`,photoDup:w=>`Esta foto parece uma que ${w} já enviou. Contar mesmo assim?`,noBlur:"Você ainda não desfocou nada. Salvar a foto como está?",
+edited:s=>`Recusada ❌ Esta foto foi editada com ${s}. Use a foto original da câmera.`,noMeta:"Esta foto não tem dados da câmera (captura de tela ou editada?). Contar mesmo assim?",
+pcOk:d=>`✅ Foto da câmera, tirada em ${d}`,pcEd:s=>`❌ Editada com ${s}`,pcNo:"⚠️ Sem dados da câmera (captura de tela ou editada?)",
+toast:w=>`Almoço ganho! 🍽️ ${w} vence`,del:"Excluir",delQ:"Excluir esta entrada?",shareTxt:"Estou caçando placas por almoços grátis! Você consegue me vencer?",copied:"Link copiado 📋",
+exp:"💾 Backup",imp:"📂 Restaurar",impQ:"Substituir tudo neste celular pelo backup?",impBad:"Esse arquivo não é um backup do Good Plate Hunting.",impOk:"Restaurado ✅",install:"📲 Instalar app",
+editSt:"✏️ Editar história",saveSt:"💾 Salvar história",addProof:"📷 Envie o carro original com a nossa placa a caçar",rm:"Remover",cap:"Legenda (onde e quando?)",full:"Armazenamento cheio, remova uma foto primeiro",reset:"Apagar tudo",resetQ:"Excluir todos os caçadores, números e avistamentos?",
+priv:"🔒 <b>Reconhece o seu carro</b> em uma foto, mesmo com a placa desfocada, e quer que ele seja removido do app? Entre em contato e nós o apagaremos.",rmBtn:"📧 Solicitar remoção",rmSub:"Remover meu carro do Good Plate Hunting",rmBody:"Olá,\n\nReconheço meu carro em uma foto e gostaria que fosse removido.\n\nOnde e quando foi avistado: \n\nObrigado",
+setN:"Definir",ini:"Caçador-chefe",initInfo:"O primeiro caçador adicionado é o Caçador-chefe e precisa pagar o almoço se a mesma placa for encontrada.",hshow:"Apresentação",addVideo:"🎬 Adicionar vídeo (máx. 9 segundos)",storyNote:"Fotos e vídeos são mostrados exatamente como enviados. Adicione só o seu próprio carro ou desfoque antes as placas de outras pessoas. Os vídeos ficam neste dispositivo.",
+vBad:"Não foi possível ler este vídeo. Tente outro arquivo.",vLong:"Esse vídeo tem mais de 9 segundos. Corte-o (máx. 9 segundos).",pfPhoto:"📷 Foto de perfil",pfBio:"Bio curta…",pfSave:"Salvar",pfClose:"Fechar",pfCars:n=>`🚗 ${n} carro${n===1?"":"s"} avistado${n===1?"":"s"}`,
+chgQ:n=>`Mudar a placa para caçar para ${n}? Os avistamentos anteriores continuam.`,
+how:"Como jogar: escolha UM número de placa para caçar, por exemplo 4830 (a placa da nossa família era 4830 FDY). Sempre que vir um carro com esse número, registre-o com a placa completa e, se quiser, uma foto com as letras desfocadas. Quem avistar um carro primeiro ganha um almoço grátis de todos os outros jogadores. Cada carro conta apenas uma vez, então não há almoços em dobro. Você pode mudar o número a qualquer momento digitando um novo.",
+abWait:"🔎 Procurando as letras da placa para desfocar…",abOk:"✅ Letras desfocadas automaticamente. Confira a foto e desfoque mais à mão se precisar.",abNone:"⚠️ Não encontrei as letras automaticamente. Arraste um quadro sobre elas.",abFail:"⚠️ O desfoque automático não está disponível agora (sem internet?). Desfoque à mão."},
+tr:{tag:"Bir plakada numaranı avla ve bedava öğle yemeği kazan 🍽️",share:"📣 Bir arkadaşına meydan oku",carsTot:n=>`🚗 Plakamızla bulunan araba sayısı: ${n}`,h1:"1 · Avcılar",mT:"Mesajlar",mPh:"Diğer avcılara bir mesaj bırak…",mSend:"Gönder",mNone:"Henüz mesaj yok. Diğer avcılara merhaba de! 👋",rvT:"Yorumlar",rvNone:"Henüz yorum yok. Ne düşündüğünü bize ilk söyleyen sen ol! ⭐",rvPh:"Good Plate Hunting hakkında ne düşünüyorsun?",rvSend:"📧 Yorumu gönder",rvPick:"Önce yıldızlara dokun ⭐",rvSub:"Good Plate Hunting yorumum",gT:"Avcı grubu",gInfo:"Birlikte avlanın: bir grup oluştur, kodu veya davet bağlantısını paylaş, herkes aynı skor tablosunu görsün. İsimler, skorlar ve gizlenmiş plakalar sunucumuzda saklanır. Fotoğraflar ve videolar her telefonda kalır.",gCreate:"➕ Grup oluştur",gCode:"Grup kodu",gJoin:"Katıl",gInvite:"📣 Arkadaşlarını davet et",gInvTxt:"Good Plate Hunting grubuma katıl, bedava öğle yemeğini kimin kazanacağını görelim!",gSync:t=>`✅ Eşitlendi ${t}`,gErr:"⚠️ Gruba şu an ulaşılamıyor. Tekrar deneyeceğiz.",gNotFound:"Grup bulunamadı. Lütfen kodu kontrol et.",gJoinQ:c=>`${c} grubuna katılınsın mı?`,gReplaceQ:"Bu telefondaki avcılar ve görülenler grubunkilerle değiştirilecek.",gLeave:"Gruptan ayrıl",gLeaveQ:"Bu gruptan ayrılınsın mı? Bu telefon kendi kopyasını saklar.",gDel:"🗑️ Grubu herkes için sil",gDelQ:"Bu grup ve verileri herkes için silinsin mi? Bu geri alınamaz.",spT:"Eğlenceyi yay",addClip:"🎬 Video klip ekle (en fazla 6 saniye)",vLong6:"Bu klip 6 saniyeden uzun. Lütfen kısalt (en fazla 6 saniye).",vWarn:"Videolar bulanıklaştırılamaz. Bu klibi yalnızca plaka okunmuyorsa veya kendi arabansa ekle. Yine de eklensin mi?",clipOk:n=>`🎬 Klip hazır (${n} sn)`,drive:"🚦 <b>Araba mı kullanıyorsun?</b> Direksiyondayken bu uygulamayı kullanma. Gözlerin yolda olsun, yolcu görsün ve kaydetsin!",undoS:"↩ Son görüleni geri al",hr:"Oyun kuralları",r1:"<b>Avlamak için bir plaka numarası seç</b>, örneğin 4830; tercihen kendi (aile) arabanınki.",r2:"<b>Aynı numarayı başka bir arabada gör</b>, dünyanın neresinde olursa olsun. Onu ilk gören avcı kazanır.",r3:"<b>Plakanın tamamını kaydet</b>, istersen fotoğraf veya en fazla 6 saniyelik video klip ekle. Fotoğraflar gerçek olmalı ve harfler bulanıklaştırılır.",r4:"<b>Kazanan bedava öğle yemeği alır.</b> Gruptaki diğer avcılar öder.",r5:"<b>Bir araba, bir öğle yemeği.</b> Her farklı araba yalnızca bir kez sayılır.",r6:"<b>Baş Avcı da oynar.</b> Oyunu başlatan ilk avcı, herkesle birlikte avlanır.",story:"Her şey eski Mazda'mızda başladı. Ben, Eddy, çocuklarım Diego ve Eliza ile birlikteydim; yanımızdan 4830 FDY plakalı bir araba geçti. “Bunu oyuna çevirelim” dedik. “4830'u ilk kim görürse diğerlerinden bedava öğle yemeği kazanır.”\n\nO günden beri 4830'u birçok ülkede bulduk ve biri “İŞTE!” diye bağırdığında öğle yemeği zaten belli oluyor.\n\nArkadaşlar ve komşular duydu, katılmak istedi ve şimdi Good Plate Hunting Barselona'da yayılıyor, her seferinde bir öğle yemeğiyle.\n\nEddy, Diego ve Eliza, plaka avcıları. Her plaka bir öğle yemeği şansıdır. 🍽️",h2:"2 · Avlanacak plaka",h3:"3 · Plakamızı gördüm!",hs:"Skor tablosu",ho:"Kim öğle yemeği borçlu",hl:"Görülenler",hst:"Hikâyemiz",
+phName:"İsim (örn. Layla)",add:"Ekle",phNum:"örn. 4830",phPlate:"Tam plaka, örn. 4830 FDY",take:"📷 Fotoğraf çek",pick:"🖼️ Fotoğraf seç",undo:"Son bulanıklığı geri al",blur:"Harflerin üzerine bir kutu çizerek bulanıklaştır 👇",spot:"🎉 Gördüm! Bana öğle yemeği borçlu",
+addTwo:"En az iki kişi ekle",addNum:"Bir numara ekle",noPl:"Henüz avcı yok",allSq:"Hesaplar denk 🎈",none:"Henüz hiçbir şey görülmedi. Gözün yolda olsun (yolcu olarak!)",paid:"Ödendi ✓",
+owes:(a,b,n)=>`<b>${a}</b>, <b>${b}</b> kişisine ${n} öğle yemeği borçlu`,spotW:"gördü",treatW:"ısmarladı:",
+setup:"Önce en az 2 avcı ve 1 numara ekle",needPlate:"Kontrol edebilmemiz için lütfen tam plakayı yaz (4830 FDY gibi).",
+badFmt:"Bu geçerli bir İspanyol plakası gibi görünmüyor (4 rakam + 3 harf, 4830 FDY gibi). A, E, I, O, U, Ñ ve Q harfleri kullanılmaz.",
+wrongNum:n=>`Reddedildi ❌ Bu plaka ${n} numaranı içermiyor.`,dbl:w=>`Bu araç zaten sayıldı 🚫 İlk gören ${w} oldu, çifte öğle yemeği yok!`,photoDup:w=>`Bu fotoğraf ${w} kişisinin yüklediği birine benziyor. Yine de sayılsın mı?`,noBlur:"Henüz hiçbir şeyi bulanıklaştırmadın. Fotoğraf olduğu gibi kaydedilsin mi?",
+edited:s=>`Reddedildi ❌ Bu fotoğraf ${s} ile düzenlenmiş. Lütfen kameranın orijinal fotoğrafını kullan.`,noMeta:"Bu fotoğrafta kamera bilgisi yok (ekran görüntüsü ya da düzenlenmiş olabilir). Yine de sayılsın mı?",
+pcOk:d=>`✅ Kamera fotoğrafı, ${d} tarihinde çekildi`,pcEd:s=>`❌ ${s} ile düzenlenmiş`,pcNo:"⚠️ Kamera bilgisi yok (ekran görüntüsü ya da düzenlenmiş?)",
+toast:w=>`Öğle yemeği kazanıldı! 🍽️ ${w} kazandı`,del:"Sil",delQ:"Bu kayıt silinsin mi?",shareTxt:"Bedava öğle yemekleri için plaka avlıyorum! Beni yenebilir misin?",copied:"Bağlantı kopyalandı 📋",
+exp:"💾 Yedekle",imp:"📂 Geri yükle",impQ:"Bu telefondaki her şey yedekle değiştirilsin mi?",impBad:"Bu dosya bir Good Plate Hunting yedeği değil.",impOk:"Geri yüklendi ✅",install:"📲 Uygulamayı yükle",
+editSt:"✏️ Hikâyeyi düzenle",saveSt:"💾 Hikâyeyi kaydet",addProof:"📷 Avlayacağımız plakalı orijinal arabayı yükle",rm:"Kaldır",cap:"Açıklama (nerede ve ne zaman?)",full:"Depolama dolu, önce bir fotoğrafı kaldır",reset:"Her şeyi sıfırla",resetQ:"Tüm avcılar, numaralar ve görülenler silinsin mi?",
+priv:"🔒 Plaka bulanık olsa bile bir fotoğrafta <b>kendi arabanı tanıyor</b> ve uygulamamızdan kaldırılmasını mı istiyorsun? Bize ulaş, silelim.",rmBtn:"📧 Kaldırma talep et",rmSub:"Arabamı Good Plate Hunting'den kaldırın",rmBody:"Merhaba,\n\nBir fotoğrafta arabamı tanıdım ve kaldırılmasını istiyorum.\n\nNerede ve ne zaman görülmüştü: \n\nTeşekkürler",
+setN:"Ayarla",ini:"Baş Avcı",initInfo:"Eklenen ilk avcı Baş Avcı'dır ve aynı plaka bulunursa öğle yemeğini ödemek zorundadır.",hshow:"Slayt gösterisi",addVideo:"🎬 Video ekle (en fazla 9 saniye)",storyNote:"Fotoğraflar ve videolar yüklendiği gibi gösterilir. Yalnızca kendi arabanı ekle ya da başkalarının plakalarını önce bulanıklaştır. Videolar bu cihazda kalır.",
+vBad:"Bu video okunamadı. Lütfen başka bir dosya dene.",vLong:"Bu video 9 saniyeden uzun. Lütfen kısalt (en fazla 9 saniye).",pfPhoto:"📷 Profil fotoğrafı",pfBio:"Kısa biyografi…",pfSave:"Kaydet",pfClose:"Kapat",pfCars:n=>`🚗 ${n} araç görüldü`,
+chgQ:n=>`Avlanacak plaka ${n} olarak değiştirilsin mi? Önceki görülenler kalır.`,
+how:"Nasıl oynanır: avlamak için TEK bir plaka numarası seç, örneğin 4830 (ailemizin plakası 4830 FDY idi). Bu numaralı bir araç gördüğünde tam plakayla ve istersen harfleri bulanık bir fotoğrafla kaydet. Bir aracı ilk gören, diğer tüm oyunculardan bedava öğle yemeği kazanır. Her araç yalnızca bir kez sayılır, yani çifte öğle yemeği yok. Numarayı istediğin zaman yenisini yazarak değiştirebilirsin.",
+abWait:"🔎 Bulanıklaştırılacak plaka harfleri aranıyor…",abOk:"✅ Harfler otomatik bulanıklaştırıldı. Lütfen fotoğrafı kontrol et, gerekirse elle daha fazla bulanıklaştır.",abNone:"⚠️ Harfler otomatik bulunamadı. Üzerlerine bir kutu çiz.",abFail:"⚠️ Otomatik bulanıklaştırma şu anda kullanılamıyor (çevrimdışı mı?). Elle bulanıklaştır."},
+ja:{tag:"車のナンバープレートで自分の数字を見つけて、ランチをゲット 🍽️",
+share:"📣 友だちに挑戦",
+h1:"1 · ハンター",mT:"メッセージ",mPh:"ほかのハンターにメッセージを残そう…",mSend:"送信",mNone:"まだメッセージはありません。ほかのハンターにあいさつしよう！👋",rvT:"レビュー",rvNone:"まだレビューはありません。最初の感想をぜひ聞かせてください！⭐",rvPh:"Good Plate Huntingの感想は？",rvSend:"📧 レビューを送る",rvPick:"先に星をタップしてね ⭐",rvSub:"Good Plate Huntingのレビュー",gT:"ハンティンググループ",gInfo:"みんなで一緒にハント：グループを作って、コードか招待リンクを共有すれば、全員が同じスコアボードを見られます。名前、スコア、ぼかしたプレートは当社のサーバーに保存されます。写真と動画は各自のスマホに残ります。",gCreate:"➕ グループを作る",gCode:"グループコード",gJoin:"参加",gInvite:"📣 友だちを招待",gInvTxt:"私のGood Plate Huntingグループに参加して、無料ランチを誰が勝ち取るか見てみよう！",gSync:t=>`✅ 同期済み ${t}`,gErr:"⚠️ 今はグループに接続できません。もう一度試します。",gNotFound:"グループが見つかりません。コードを確認してください。",gJoinQ:c=>`グループ${c}に参加しますか？`,gReplaceQ:"このスマホのハンターと発見は、グループのものに置き換えられます。",gLeave:"グループを抜ける",gLeaveQ:"このグループを抜けますか？このスマホには自分のコピーが残ります。",gDel:"🗑️ 全員分のグループを削除",gDelQ:"このグループとデータを全員分削除しますか？元に戻せません。",spT:"楽しさを広めよう",
+addClip:"🎬 動画クリップを追加（最大6秒）",
+vLong6:"このクリップは6秒より長いです。6秒以内にトリミングしてください。",
+vWarn:"動画にはぼかしをかけられません。ナンバーが読めない場合か、自分の車の場合のみ追加してください。それでも追加しますか？",
+drive:"🚦 <b>運転中ですか？</b> 運転中はこのアプリを使わないでください。前をしっかり見て、見つけて記録するのは同乗者にお任せ！",
+undoS:"↩ 最後の発見を取り消す",
+hr:"ゲームのルール",
+r1:"<b>ナンバーの数字を1つ決める</b>（例：4830）。できれば自分の（家族の）車のナンバーがおすすめ。",
+r2:"<b>別の車で同じ数字を見つける</b>、世界中どこでもOK。最初に見つけたハンターの勝ち。",
+r3:"<b>プレート全体を記録</b>。写真や最大6秒の動画クリップも追加できます。写真は本物のみで、文字はぼかされます。",
+r4:"<b>勝者はランチが無料。</b>グループのほかのハンターが支払います。",
+r5:"<b>1台につき1ランチ。</b>同じ車は1回しか数えません。",r6:"<b>ヘッドハンターも一緒に遊ぶ。</b>ゲームを始めた最初のハンターも、みんなと一緒にハントします。",
+h2:"2 · 探すナンバー",
+setN:"設定",
+ini:"ヘッドハンター",
+initInfo:"最初に追加されたハンターがヘッドハンター。同じプレートが見つかったら、ランチをおごります。",
+hshow:"スライドショー",
+addVideo:"🎬 動画を追加（最大9秒）",
+vBad:"この動画を読み込めませんでした。別のファイルをお試しください。",
+vLong:"この動画は9秒より長いです。9秒以内にトリミングしてください。",
+pfPhoto:"📷 プロフィール写真",
+pfBio:"ひとこと自己紹介…",
+pfSave:"保存",
+pfClose:"閉じる",
+h3:"3 · うちのプレート見つけた！",
+hs:"スコアボード",
+ho:"ランチの貸し借り",
+hl:"発見ログ",
+hst:"私たちのストーリー",
+phName:"名前（例：Layla）",
+add:"追加",
+phNum:"例：4830",
+phPlate:"プレート全体（例：4830 FDY）",
+take:"📷 写真を撮る",
+pick:"🖼️ 写真を選ぶ",
+undo:"ぼかしを1つ戻す",
+blur:"文字の上をドラッグしてぼかしましょう 👇",
+abWait:"🔎 ぼかすプレートの文字を探しています…",
+abOk:"✅ 文字を自動でぼかしました。写真を確認して、必要なら手動でさらにぼかしてください。",
+abNone:"⚠️ 文字を自動で見つけられませんでした。文字の上をドラッグしてください。",
+abFail:"⚠️ 自動ぼかしは今使えません（オフライン？）。手動でぼかしてください。",
+spot:"🎉 見つけた！ランチおごってね",
+addTwo:"2人以上追加してください",
+addNum:"数字を追加してください",
+noPl:"ハンターはまだいません",
+allSq:"貸し借りなし 🎈",
+none:"まだ何も見つかっていません。目は道路に（同乗者として！）",
+paid:"支払い済み ✓",
+spotW:"が発見",
+treatW:"がおごった",
+setup:"先にハンター2人以上と数字を1つ追加してください",
+needPlate:"確認のため、プレート全体（例：4830 FDY）を入力してください。",
+badFmt:"有効なスペインのプレートではないようです（数字4桁＋文字3つ、例：4830 FDY）。A、E、I、O、U、Ñ、Qの文字は使われません。",
+noBlur:"まだ何もぼかしていません。このまま保存しますか？",
+noMeta:"この写真にはカメラ情報がありません（スクリーンショットか編集済みかも）。それでもカウントしますか？",
+pcNo:"⚠️ カメラ情報なし（スクリーンショットか編集済み？）",
+delQ:"この項目を削除しますか？",
+shareTxt:"無料ランチをかけてナンバープレートを探してます！私に勝てる？",
+copied:"リンクをコピーしました 📋",
+exp:"💾 バックアップ",
+imp:"📂 復元",
+impQ:"この端末のすべてのデータをバックアップで置き換えますか？",
+impBad:"そのファイルはGood Plate Huntingのバックアップではありません。",
+impOk:"復元しました ✅",
+install:"📲 アプリをインストール",
+editSt:"✏️ ストーリーを編集",
+saveSt:"💾 ストーリーを保存",
+addProof:"📷 探しているプレートの元の車をアップロード",
+rm:"削除",
+cap:"キャプション（いつ・どこで？）",
+full:"保存容量がいっぱいです。先に写真を削除してください",
+reset:"すべてリセット",
+resetQ:"すべてのハンター、数字、発見を削除しますか？",
+priv:"🔒 プレートがぼかされていても、写真に<b>自分の車</b>が写っていて削除してほしい場合は、ご連絡ください。削除します。",
+rmBtn:"📧 削除を依頼する",
+rmSub:"Good Plate Huntingから私の車を削除してください",
+rmBody:"こんにちは。\n\n写真に自分の車が写っているので、削除をお願いします。\n\nいつ・どこで撮影されたか：\n\nよろしくお願いします。",
+how:"遊び方：探すナンバーの数字を「1つだけ」決めます（例：4830。わが家のプレートは4830 FDYでした）。その数字の車を見つけたら、プレート全体を記録しましょう。希望すれば、文字をぼかした写真も付けられます。最初に見つけた人が、ほかの全員からランチをおごってもらえます。同じ車は1回しか数えないので、ダブルランチはありません。数字はいつでも新しく入力して変更できます。",
+storyNote:"ここにある写真や動画は、アップロードしたままの状態で表示されます。自分の車だけを追加するか、他の人のプレートを先にぼかしてください。動画はこの端末にのみ保存されます。",
+story:"すべては私たちの古いマツダから始まりました。私、エディと子どもたちのディエゴとエリザが乗っていたとき、4830 FDYのプレートの車が通り過ぎたのです。「ゲームにしよう」と私たちは言いました。「4830を最初に見つけた人が、ほかのみんなからランチをおごってもらえる」。\n\nそれ以来、私たちは多くの国で4830を見つけてきました。誰かが「あった！」と叫ぶたびに、ランチはもう決まりです。\n\n友だちやご近所さんが噂を聞いて仲間に入り、今ではGood Plate Huntingがバルセロナに広がっています。ランチひとつずつ。\n\nエディ、ディエゴ＆エリザ、ナンバープレートハンター。プレートはすべて、ランチのチャンス。🍽️",
+del:"削除",
+carsTot:n=>`🚗 うちのプレートで見つかった車：${n}台`,
+clipOk:n=>`🎬 クリップ準備OK（${n}秒）`,
+pfCars:n=>`🚗 ${n}台発見`,
+chgQ:n=>`探すナンバーを${n}に変更しますか？過去の発見はそのまま残ります。`,
+owes:(a,b,n)=>`<b>${a}</b>は<b>${b}</b>にランチ${n}回分の借り`,
+wrongNum:n=>`却下 ❌ このプレートにはあなたの数字${n}が含まれていません。`,
+dbl:w=>`この車はすでにカウント済みです 🚫 ${w}が先に見つけたので、ダブルランチはありません！`,
+photoDup:w=>`この写真は${w}がすでにアップロードしたものに似ています。それでもカウントしますか？`,
+edited:s=>`却下 ❌ この写真は${s}で編集されています。カメラで撮った元の写真を使ってください。`,
+pcOk:d=>`✅ カメラで撮影した写真（${d}）`,
+pcEd:s=>`❌ ${s}で編集済み`,
+toast:w=>`ランチ獲得！🍽️ ${w}の勝ち`},
+ko:{tag:"자동차 번호판에서 내 숫자를 찾고 공짜 점심을 받아요 🍽️",
+share:"📣 친구에게 도전하기",
+h1:"1 · 헌터",
+mT:"메시지",
+mPh:"다른 헌터에게 메시지를 남겨보세요…",
+mSend:"보내기",
+mNone:"아직 메시지가 없어요. 다른 헌터들에게 인사해 보세요! 👋",
+rvT:"리뷰",
+rvNone:"아직 리뷰가 없어요. 가장 먼저 의견을 들려주세요! ⭐",
+rvPh:"Good Plate Hunting, 어떠셨나요?",
+rvSend:"📧 리뷰 보내기",
+rvPick:"먼저 별을 눌러주세요 ⭐",
+rvSub:"Good Plate Hunting 리뷰",
+gT:"헌팅 그룹",
+gInfo:"함께 헌팅하세요: 그룹을 만들고 코드나 초대 링크를 공유하면 모두가 같은 점수판을 봅니다. 이름, 점수, 가려진 번호판은 저희 서버에 저장되고, 사진과 동영상은 각자의 휴대폰에 남습니다.",
+gCreate:"➕ 그룹 만들기",
+gCode:"그룹 코드",
+gJoin:"참여",
+gInvite:"📣 친구 초대",
+gInvTxt:"내 Good Plate Hunting 그룹에 참여해서 누가 공짜 점심을 받는지 겨뤄 봐요!",
+gErr:"⚠️ 지금은 그룹에 연결할 수 없어요. 다시 시도할게요.",
+gNotFound:"그룹을 찾을 수 없어요. 코드를 확인해 주세요.",
+gReplaceQ:"이 휴대폰의 헌터와 발견 기록이 그룹의 것으로 바뀝니다.",
+gLeave:"그룹 나가기",
+gLeaveQ:"이 그룹을 나갈까요? 이 휴대폰에는 내 사본이 남습니다.",
+gDel:"🗑️ 모두를 위해 그룹 삭제",
+gDelQ:"이 그룹과 데이터를 모두에게서 삭제할까요? 되돌릴 수 없습니다.",
+spT:"재미를 널리 알려요",
+addClip:"🎬 동영상 클립 추가 (최대 6초)",
+vLong6:"클립이 6초보다 깁니다. 6초 이내로 잘라 주세요.",
+vWarn:"동영상은 흐림 처리를 할 수 없어요. 번호판이 읽히지 않거나 내 차일 때만 추가하세요. 그래도 추가할까요?",
+drive:"🚦 <b>운전 중이신가요?</b> 운전하는 동안에는 이 앱을 사용하지 마세요. 앞을 잘 보시고, 찾고 기록하는 건 동승자에게 맡기세요!",
+undoS:"↩ 마지막 발견 취소",
+hr:"게임 규칙",
+r1:"<b>번호판 숫자 하나를 정하세요</b> (예: 4830). 가능하면 내(가족) 차의 번호판이 좋아요.",
+r2:"<b>다른 차에서 같은 숫자를 찾으세요.</b> 세계 어디서든 좋아요. 가장 먼저 찾은 헌터가 이깁니다.",
+r3:"<b>번호판 전체를 기록하세요.</b> 원하면 사진이나 최대 6초의 동영상 클립도 추가할 수 있어요. 사진은 진짜여야 하며 글자는 흐리게 처리됩니다.",
+r4:"<b>우승자는 공짜 점심을 받습니다.</b> 그룹의 다른 헌터들이 대신 냅니다.",
+r5:"<b>차 한 대에 점심 한 번.</b> 서로 다른 차는 각각 한 번만 인정됩니다.",
+r6:"<b>헤드 헌터도 함께 플레이해요.</b> 게임을 시작한 첫 번째 헌터도 모두와 함께 헌팅합니다.",
+story:"모든 것은 우리 낡은 마쓰다에서 시작됐어요. 저, 에디가 아이들 디에고, 엘리자와 함께 있을 때 4830 FDY 번호판의 차가 지나갔죠. “이걸 게임으로 만들자”고 우리는 말했어요. “4830을 가장 먼저 찾는 사람이 나머지에게 공짜 점심을 받는 거야.”\n\n그 후로 우리는 여러 나라에서 4830을 찾았고, 누군가 “저기다!”라고 외칠 때마다 점심은 이미 정해졌어요.\n\n친구들과 이웃들이 소문을 듣고 함께하고 싶어 했고, 이제 Good Plate Hunting은 바르셀로나 곳곳으로, 점심 한 끼씩 퍼져 가고 있어요.\n\n에디, 디에고 & 엘리자, 번호판 헌터. 모든 번호판은 점심의 기회예요. 🍽️",
+h2:"2 · 찾을 번호",
+setN:"설정",
+ini:"헤드 헌터",
+initInfo:"처음 추가된 헌터가 헤드 헌터이며, 같은 번호판이 발견되면 점심을 내야 합니다.",
+hshow:"슬라이드쇼",
+addVideo:"🎬 동영상 추가 (최대 9초)",
+storyNote:"여기의 사진과 동영상은 올린 그대로 표시됩니다. 내 차만 추가하거나, 다른 사람의 번호판은 먼저 흐리게 처리하세요. 동영상은 이 기기에만 저장됩니다.",
+vBad:"이 동영상을 읽을 수 없어요. 다른 파일을 시도해 주세요.",
+vLong:"동영상이 9초보다 깁니다. 9초 이내로 잘라 주세요.",
+pfPhoto:"📷 프로필 사진",
+pfBio:"짧은 소개…",
+pfSave:"저장",
+pfClose:"닫기",
+how:"게임 방법: 찾을 번호판 숫자를 하나만 정하세요 (예: 4830, 우리 가족의 번호판은 4830 FDY였어요). 그 숫자가 있는 차를 발견하면 번호판 전체를 기록하고, 원하면 글자를 흐리게 처리한 사진도 추가하세요. 가장 먼저 발견한 사람이 다른 모든 플레이어에게 공짜 점심을 받습니다. 같은 차는 한 번만 인정되니 중복 점심은 없어요. 숫자는 언제든 새로 입력해 바꿀 수 있어요.",
+h3:"3 · 우리 번호판을 찾았다!",
+hs:"점수판",
+ho:"누가 점심을 낼까",
+hl:"발견 기록",
+hst:"우리 이야기",
+phName:"이름 (예: Layla)",
+add:"추가",
+phNum:"예: 4830",
+phPlate:"번호판 전체 (예: 4830 FDY)",
+take:"📷 사진 찍기",
+pick:"🖼️ 사진 선택",
+undo:"마지막 흐림 취소",
+blur:"글자 위로 드래그해서 흐리게 하세요 👇",
+abWait:"🔎 흐리게 할 번호판 글자를 찾는 중…",
+abOk:"✅ 글자를 자동으로 흐리게 했어요. 사진을 확인하고, 필요하면 직접 더 흐리게 하세요.",
+abNone:"⚠️ 글자를 자동으로 찾지 못했어요. 글자 위로 드래그해 주세요.",
+abFail:"⚠️ 자동 흐림 처리를 지금은 사용할 수 없어요 (오프라인?). 직접 흐리게 해주세요.",
+spot:"🎉 찾았다! 점심 사세요",
+addTwo:"두 명 이상 추가하세요",
+addNum:"숫자를 추가하세요",
+noPl:"아직 헌터가 없어요",
+allSq:"정산 완료 🎈",
+none:"아직 발견한 게 없어요. 눈은 도로에 (동승자라면 OK!)",
+paid:"지불 완료 ✓",
+spotW:"발견",
+treatW:"대접",
+setup:"먼저 헌터 2명 이상과 숫자 1개를 추가하세요",
+needPlate:"확인할 수 있도록 번호판 전체(예: 4830 FDY)를 입력해 주세요.",
+badFmt:"올바른 스페인 번호판이 아닌 것 같아요 (숫자 4개 + 글자 3개, 예: 4830 FDY). A, E, I, O, U, Ñ, Q는 사용되지 않아요.",
+noBlur:"아직 흐리게 처리한 곳이 없어요. 이대로 저장할까요?",
+noMeta:"이 사진에는 카메라 정보가 없어요 (스크린샷이거나 편집됐을 수 있어요). 그래도 인정할까요?",
+pcNo:"⚠️ 카메라 정보 없음 (스크린샷이거나 편집됨?)",
+del:"삭제",
+delQ:"이 항목을 삭제할까요?",
+shareTxt:"공짜 점심을 걸고 번호판을 찾고 있어요! 저를 이길 수 있나요?",
+copied:"링크를 복사했어요 📋",
+exp:"💾 백업",
+imp:"📂 복원",
+impQ:"이 휴대폰의 모든 데이터를 백업으로 바꿀까요?",
+impBad:"Good Plate Hunting 백업 파일이 아니에요.",
+impOk:"복원 완료 ✅",
+install:"📲 앱 설치",
+editSt:"✏️ 이야기 편집",
+saveSt:"💾 이야기 저장",
+addProof:"📷 찾을 번호판의 원래 차량 업로드",
+rm:"삭제",
+cap:"설명 (어디서, 언제?)",
+full:"저장 공간이 가득 찼어요. 먼저 사진을 삭제하세요",
+reset:"모두 초기화",
+resetQ:"모든 헌터, 번호, 발견 기록을 삭제할까요?",
+priv:"🔒 번호판을 흐리게 했는데도 사진에서 <b>내 차</b>를 알아보겠고 앱에서 지우고 싶으신가요? 연락 주시면 삭제해 드릴게요.",
+rmBtn:"📧 삭제 요청",
+rmSub:"Good Plate Hunting에서 제 차를 삭제해 주세요",
+rmBody:"안녕하세요.\n\n사진에서 제 차를 알아봤고 삭제를 요청합니다.\n\n발견된 장소와 시기: \n\n감사합니다.",
+carsTot:n=>`🚗 우리 번호판으로 찾은 차: ${n}대`,
+gSync:t=>`✅ 동기화됨 ${t}`,
+gJoinQ:c=>`그룹 ${c}에 참여할까요?`,
+clipOk:n=>`🎬 클립 준비 완료 (${n}초)`,
+pfCars:n=>`🚗 ${n}대 발견`,
+chgQ:n=>`찾을 번호를 ${n}(으)로 바꿀까요? 이전 발견은 그대로 유지됩니다.`,
+owes:(a,b,n)=>`<b>${a}</b>님이 <b>${b}</b>님에게 점심 ${n}번 빚짐`,
+wrongNum:n=>`거부됨 ❌ 이 번호판에는 내 숫자 ${n}이(가) 없어요.`,
+dbl:w=>`이미 인정된 차예요 🚫 ${w}님이 먼저 찾았으니 중복 점심은 없어요!`,
+photoDup:w=>`이 사진은 ${w}님이 이미 올린 사진과 비슷해요. 그래도 인정할까요?`,
+edited:s=>`거부됨 ❌ 이 사진은 ${s}(으)로 편집되었어요. 카메라로 찍은 원본 사진을 사용해 주세요.`,
+pcOk:d=>`✅ 카메라 사진, 촬영일 ${d}`,
+pcEd:s=>`❌ ${s}(으)로 편집됨`,
+toast:w=>`점심 획득! 🍽️ ${w}님 승리`},
+zh:{tag:"在车牌上找到你的号码，赢取免费午餐 🍽️",
+share:"📣 向朋友发起挑战",
+h1:"1 · 猎手",
+mT:"留言",
+mPh:"给其他猎手留个言…",
+mSend:"发送",
+mNone:"还没有留言。向其他猎手打个招呼吧！👋",
+rvT:"评价",
+rvNone:"还没有评价。来做第一个告诉我们你想法的人吧！⭐",
+rvPh:"你觉得 Good Plate Hunting 怎么样？",
+rvSend:"📧 发送评价",
+rvPick:"请先点星星 ⭐",
+rvSub:"我对 Good Plate Hunting 的评价",
+gT:"猎车小组",
+gInfo:"一起狩猎：创建小组，分享代码或邀请链接，所有人就能看到同一个积分榜。姓名、得分和已遮挡的车牌保存在我们的服务器上，照片和视频只留在各自的手机里。",
+gCreate:"➕ 创建小组",
+gCode:"小组代码",
+gJoin:"加入",
+gInvite:"📣 邀请朋友",
+gInvTxt:"加入我的 Good Plate Hunting 小组，看看谁能赢得免费午餐！",
+gErr:"⚠️ 暂时无法连接小组，我们会再试一次。",
+gNotFound:"找不到该小组，请检查代码。",
+gReplaceQ:"这部手机上的猎手和发现记录将被小组的内容替换。",
+gLeave:"退出小组",
+gLeaveQ:"退出这个小组？这部手机会保留自己的副本。",
+gDel:"🗑️ 为所有人删除小组",
+gDelQ:"为所有人删除这个小组及其数据？此操作无法撤销。",
+spT:"把快乐传出去",
+addClip:"🎬 添加视频片段（最长 6 秒）",
+vLong6:"这个片段超过 6 秒，请剪短（最长 6 秒）。",
+vWarn:"视频无法做模糊处理。只有在车牌看不清，或者是你自己的车时才添加。仍要添加吗？",
+drive:"🚦 <b>正在开车？</b>开车时请不要使用本应用。眼睛看路，让乘客来发现和记录！",
+undoS:"↩ 撤销上一次发现",
+hr:"游戏规则",
+r1:"<b>选定一个车牌号码</b>来狩猎，比如 4830，最好是你自己（家人）的车牌。",
+r2:"<b>在另一辆车上找到同一个号码</b>，世界上任何地方都行。最先看到的猎手获胜。",
+r3:"<b>记录完整车牌</b>，也可以附上照片或最长 6 秒的视频片段。照片必须真实，字母会被模糊处理。",
+r4:"<b>获胜者赢得一顿免费午餐。</b>小组里的其他猎手来买单。",
+r5:"<b>一辆车，一顿午餐。</b>每辆不同的车只算一次。",
+r6:"<b>首席猎手也一起玩。</b>发起游戏的第一位猎手，和大家一样参与狩猎。",
+story:"一切都始于我们那辆旧马自达。我，埃迪，和孩子迭戈、伊丽莎在车里，一辆车牌为 4830 FDY 的车从旁边驶过。“把它变成游戏吧，”我们说，“谁先看到 4830，就能从其他人那里赢得一顿免费午餐。”\n\n从那以后，我们在许多国家都找到过 4830，每当有人喊出“在那儿！”，午餐就已经定了。\n\n朋友和邻居听说后也想加入，如今 Good Plate Hunting 正在巴塞罗那一点点传开，一顿午餐接一顿午餐。\n\n埃迪、迭戈和伊丽莎，车牌猎手。每一块车牌，都是一次吃午餐的机会。🍽️",
+h2:"2 · 要找的号码",
+setN:"设定",
+ini:"首席猎手",
+initInfo:"第一个加入的猎手就是首席猎手，如果找到了同一块车牌，要请大家吃午餐。",
+hshow:"幻灯片",
+addVideo:"🎬 添加视频（最长 9 秒）",
+storyNote:"这里的照片和视频会按上传的原样显示。只添加你自己的车，或者先把别人的车牌模糊处理。视频只保存在这台设备上。",
+vBad:"无法读取这个视频，请换一个文件试试。",
+vLong:"这个视频超过 9 秒，请剪短（最长 9 秒）。",
+pfPhoto:"📷 头像",
+pfBio:"简短介绍…",
+pfSave:"保存",
+pfClose:"关闭",
+how:"玩法：只选定一个要找的车牌号码，比如 4830（我们家的车牌是 4830 FDY）。看到带这个号码的车时，记录完整车牌，也可以附上字母已模糊处理的照片。最先发现的人可以从其他所有玩家那里赢得一顿免费午餐。每辆车只算一次，所以不会有重复的午餐。你可以随时输入新号码来更改。",
+h3:"3 · 我们看到自己的车牌了！",
+hs:"积分榜",
+ho:"谁欠午餐",
+hl:"发现记录",
+hst:"我们的故事",
+phName:"姓名（例如 Layla）",
+add:"添加",
+phNum:"例如 4830",
+phPlate:"完整车牌，例如 4830 FDY",
+take:"📷 拍照",
+pick:"🖼️ 选择照片",
+undo:"撤销上一次模糊",
+blur:"在字母上拖动一个框来模糊它们 👇",
+abWait:"🔎 正在寻找要模糊的车牌字母…",
+abOk:"✅ 字母已自动模糊。请检查照片，必要时手动再模糊。",
+abNone:"⚠️ 没能自动找到字母，请在字母上拖动一个框。",
+abFail:"⚠️ 自动模糊暂时不可用（离线？），请手动模糊。",
+spot:"🎉 发现了！他们要请我吃午餐",
+addTwo:"至少添加两个人",
+addNum:"添加一个号码",
+noPl:"还没有猎手",
+allSq:"两清了 🎈",
+none:"还没有发现。眼睛看路（乘客除外！）",
+paid:"已支付 ✓",
+spotW:"发现了",
+treatW:"请客给",
+setup:"请先添加至少 2 名猎手和 1 个号码",
+needPlate:"请输入完整车牌（如 4830 FDY），以便我们核对。",
+badFmt:"这看起来不是有效的西班牙车牌（4 个数字 + 3 个字母，如 4830 FDY）。不使用字母 A、E、I、O、U、Ñ 和 Q。",
+noBlur:"你还没有模糊任何地方。照原样保存照片吗？",
+noMeta:"这张照片没有相机信息（可能是截图或经过编辑）。仍要计入吗？",
+pcNo:"⚠️ 没有相机信息（截图或已编辑？）",
+del:"删除",
+delQ:"删除这一条？",
+shareTxt:"我在找车牌赢免费午餐！你能赢过我吗？",
+copied:"链接已复制 📋",
+exp:"💾 备份",
+imp:"📂 恢复",
+impQ:"用备份替换这部手机上的所有内容？",
+impBad:"该文件不是 Good Plate Hunting 的备份。",
+impOk:"已恢复 ✅",
+install:"📲 安装应用",
+editSt:"✏️ 编辑故事",
+saveSt:"💾 保存故事",
+addProof:"📷 上传带有要找车牌的原车照片",
+rm:"移除",
+cap:"说明（在哪里、什么时候？）",
+full:"存储空间已满，请先删除一张照片",
+reset:"全部重置",
+resetQ:"删除所有猎手、号码和发现记录？",
+priv:"🔒 即使车牌已模糊，你仍能在照片里认出<b>自己的车</b>并希望从我们的应用中删除？请联系我们，我们会删除。",
+rmBtn:"📧 申请删除",
+rmSub:"请从 Good Plate Hunting 中删除我的车",
+rmBody:"你好，\n\n我在一张照片里认出了我的车，希望将其删除。\n\n发现的地点和时间：\n\n谢谢",
+carsTot:n=>`🚗 用我们的车牌找到的车：${n} 辆`,
+gSync:t=>`✅ 已同步 ${t}`,
+gJoinQ:c=>`加入小组 ${c}？`,
+clipOk:n=>`🎬 片段已就绪（${n} 秒）`,
+pfCars:n=>`🚗 已发现 ${n} 辆`,
+chgQ:n=>`把要找的号码改成 ${n}？之前的发现会保留。`,
+owes:(a,b,n)=>`<b>${a}</b> 欠 <b>${b}</b> ${n} 顿午餐`,
+wrongNum:n=>`已拒绝 ❌ 这块车牌不包含你的号码 ${n}。`,
+dbl:w=>`这辆车已经算过了 🚫 ${w} 先发现的，所以没有重复的午餐！`,
+photoDup:w=>`这张照片和 ${w} 已上传的照片很像。仍要计入吗？`,
+edited:s=>`已拒绝 ❌ 这张照片用 ${s} 编辑过。请使用相机拍摄的原图。`,
+pcOk:d=>`✅ 相机照片，拍摄于 ${d}`,
+pcEd:s=>`❌ 已用 ${s} 编辑`,
+toast:w=>`赢得午餐！🍽️ ${w} 获胜`}
 };
 let LG="en";
 try{const s=localStorage.getItem("platelunch.lang");const n=(navigator.language||"en").slice(0,2);LG=LANGS[s]?s:(LANGS[n]?n:"en")}catch(e){}
@@ -200,7 +716,13 @@ try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}
 if(!S.players.length&&!S.events.length&&!S.nums.length){S.nums=["4830"]}
 if(S.nums.length>1)S.nums=[S.nums[0]];
 S.prof=S.prof&&typeof S.prof==="object"?S.prof:{};
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}render();renderMedia()}
+const rid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+function fixS(){S.pt=S.pt&&typeof S.pt==="object"?S.pt:{};S.rt=S.rt&&typeof S.rt==="object"?S.rt:{};S.rmE=Array.isArray(S.rmE)?S.rmE:[];S.numT=+S.numT||0;
+ S.players.forEach((p,i)=>{if(!(p in S.pt))S.pt[p]=1000+i});
+ S.events.forEach(e=>{if(!e.id)e.id=rid()})}
+fixS();
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}render();renderMedia()}
+function save(){persist();schedSync()}
 
 let toastT;function toast(m){const el=$("toast");el.textContent=m;el.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("on"),2800)}
 function confetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
@@ -212,7 +734,7 @@ function confetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)re
 function debts(){const d={};
  for(const e of S.events){
   if(e.t==="spot"){for(const p of S.players)if(p!==e.who){const k=p+"|"+e.who;d[k]=(d[k]||0)+1}}
-  else{const k=e.from+"|"+e.to;d[k]=(d[k]||0)-1}}
+  else if(e.t==="paid"){const k=e.from+"|"+e.to;d[k]=(d[k]||0)-1}}
  const out=[];
  for(let i=0;i<S.players.length;i++)for(let j=i+1;j<S.players.length;j++){
   const a=S.players[i],b=S.players[j],n=(d[a+"|"+b]||0)-(d[b+"|"+a]||0);
@@ -222,24 +744,24 @@ function pcText(p){if(!p)return"";if(p.s==="ok")return t("pcOk",new Date(p.d).to
 function render(){
  $("players").innerHTML=S.players.map((p,i)=>`<span class="chip">${esc(p)}${i===0?`<span class="ini">${t("ini")}</span>`:""}<b data-p="${i}">×</b></span>`).join("")||`<span class="empty">${t("addTwo")}</span>`;
  $("nums").innerHTML=S.nums.map((n,i)=>`<span class="chip"><span class="plate">${esc(n)}</span><b data-n="${i}">×</b></span>`).join("")||`<span class="empty">${t("addNum")}</span>`;
- const o=a=>a.map(x=>`<option>${esc(x)}</option>`).join("");
+ const o=a=>a.map(x=>`<option value="${esc(x)}">${esc(String(x).toUpperCase())}</option>`).join("");
  const ps=$("sp").value;
  $("sp").innerHTML=o(S.players);
  if(S.players.includes(ps))$("sp").value=ps;
+ const mwv=$("mw").value;$("mw").innerHTML=o(S.players);if(S.players.includes(mwv))$("mw").value=mwv;
+ $("mL").innerHTML=S.events.map((e,i)=>({e,i})).filter(x=>x.e.t==="msg").sort((a,b)=>b.e.ts-a.e.ts).slice(0,30).map(({e,i})=>`<div class="log"><b style="text-transform:uppercase">${esc(e.who)}</b> · ${new Date(e.ts).toLocaleString(LG,{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}<button class="x" data-m="${i}" title="${esc(t("del"))}" aria-label="${esc(t("del"))}">✕</button><div style="color:var(--ink);margin-top:2px;white-space:pre-wrap;overflow-wrap:anywhere">${esc(e.text)}</div></div>`).join("")||`<span class="empty">${t("mNone")}</span>`;
  const spots=S.events.filter(e=>e.t==="spot"),cnt=S.players.map(p=>spots.filter(e=>e.who===p).length),max=Math.max(0,...cnt);
  $("score").innerHTML=S.players.map((p,i)=>`<div data-pf="${i}"><img class="ava" src="${ava(p)}" alt=""><div class="n">${cnt[i]}</div>${max>0&&cnt[i]===max?"👑 ":""}${esc(p)}${i===0?` <span class="ini">${t("ini")}</span>`:""}</div>`).join("")||`<span class="empty">${t("noPl")}</span>`;
  const D=debts();
  $("debts").innerHTML=D.map((x,i)=>`<div class="debt"><span>${t("owes",esc(x.from),esc(x.to),x.n)}</span><button class="ok" data-d="${i}">${t("paid")}</button></div>`).join("")||`<span class="empty">${t("allSq")}</span>`;
  window._D=D;
- let h="",shown=0;
- for(let i=S.events.length-1;i>=0&&shown<30;i--,shown++){const e=S.events[i],d=new Date(e.ts).toLocaleDateString(LG),x=`<button class="x" data-x="${i}" title="${esc(t("del"))}" aria-label="${esc(t("del"))}">✕</button>`;
-  h+=e.t==="spot"?`<div class="log">👀 <b>${esc(e.who)}</b> ${t("spotW")} <span class="plate" style="font-size:13px;padding-left:22px">${esc(e.plate||e.num)}</span> · ${d}${x}${e.pc?`<span class="pc">${pcText(e.pc)}</span>`:""}${okImg(e.img)?`<img class="th" src="${e.img}" alt="">`:""}</div>`:`<div class="log">🍽️ ${esc(e.from)} ${t("treatW")} ${esc(e.to)} · ${d}${x}</div>`}
- $("log").innerHTML=h||`<span class="empty">${t("none")}</span>`}
-$("addP").onclick=()=>{const v=$("pn").value.trim();if(v&&!S.players.includes(v)){S.players.push(v);$("pn").value="";save()}};
-$("addN").onclick=()=>{const v=$("nn").value.trim().toUpperCase().replace(/[\s.\-]/g,"");if(!v)return;if(S.nums[0]&&S.nums[0]!==v&&!confirm(t("chgQ",v)))return;S.nums=[v];$("nn").value="";save()};
-$("players").onclick=e=>{const i=e.target.dataset.p;if(i!==undefined){delete S.prof[S.players[i]];S.players.splice(i,1);save()}};
-$("nums").onclick=e=>{const i=e.target.dataset.n;if(i!==undefined){S.nums.splice(i,1);save()}};
-$("log").onclick=e=>{const b=e.target.closest("[data-x]");if(b&&confirm(t("delQ"))){S.events.splice(+b.dataset.x,1);save()}};
+ $("tot").textContent=t("carsTot",spots.length);$("undoS").hidden=!spots.length}
+$("addP").onclick=()=>{const v=$("pn").value.trim().toUpperCase();if(v&&!S.players.some(p=>p.toUpperCase()===v)){S.players.push(v);S.pt[v]=Date.now();$("pn").value="";save()}};
+$("addN").onclick=()=>{const v=$("nn").value.trim().toUpperCase().replace(/[\s.\-]/g,"");if(!v)return;if(S.nums[0]&&S.nums[0]!==v&&!confirm(t("chgQ",v)))return;S.nums=[v];S.numT=Date.now();$("nn").value="";save()};
+$("players").onclick=e=>{const i=e.target.dataset.p;if(i!==undefined){const n=S.players[i];delete S.prof[n];S.rt[n]=Date.now();S.players.splice(i,1);save()}};
+$("nums").onclick=e=>{const i=e.target.dataset.n;if(i!==undefined){S.nums.splice(i,1);S.numT=Date.now();save()}};
+$("undoS").onclick=async()=>{let i=-1;for(let k=S.events.length-1;k>=0;k--)if(S.events[k].t==="spot"){i=k;break}
+ if(i<0||!confirm(t("undoS").replace(/^↩\s*/,"")+"?"))return;const e=S.events[i];if(e.vid)try{await vDel(e.vid)}catch(_){}S.rmE.push(e.id);S.events.splice(i,1);save()};
 
 /* ---- photo: metadata check (heuristic) + manual blur ---- */
 function readExif(buf){const v=new DataView(buf);if(v.byteLength<4||v.getUint16(0)!==0xFFD8)return null;let o=2;
@@ -263,7 +785,7 @@ async function onPhoto(e){const f=e.target.files[0];if(!f)return;
  let ex=null;try{ex=readExif(await f.arrayBuffer())}catch(_){}
  const d=ex&&exifDate(ex.orig),now=Date.now();
  if(ex&&ex.sw&&EDIT.test(ex.sw))pc={s:"ed",sw:ex.sw};
- else if(d&&d.getTime()<=now+864e5)pc=now-d.getTime()>48*36e5?{s:"old",d:d.getTime()}:{s:"ok",d:d.getTime()};
+ else if(d&&d.getTime()<=now+864e5)pc={s:"ok",d:d.getTime()};
  else pc={s:"no"};
  showPc();
  const im=new Image();im.onload=()=>{
@@ -309,6 +831,15 @@ $("undo").onclick=()=>{if(stack.length)cx.putImageData(stack.pop(),0,0)};
 async function hashPlate(p){const s="platelunch|"+p.replace(/[^A-Z0-9]/g,"");
  try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
  catch(e){let h=5381;for(const c of s)h=(h*33)^c.charCodeAt(0);return"x"+(h>>>0)}}
+let pvid=null;
+function showClip(){const el=$("vs");el.hidden=!pvid;$("svX").hidden=!pvid;if(pvid)el.textContent=t("clipOk",pvid.d.toFixed(1))}
+$("sv").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+ const url=URL.createObjectURL(f),v=document.createElement("video");v.preload="metadata";
+ const dur=await new Promise(ok=>{v.onloadedmetadata=()=>ok(v.duration);v.onerror=()=>ok(NaN);v.src=url});URL.revokeObjectURL(url);
+ if(!(dur>0)){alert(t("vBad"));return}
+ if(dur>6.5){alert(t("vLong6"));return}
+ pvid={f,d:dur};showClip()};
+$("svX").onclick=()=>{pvid=null;showClip()};
 const ham=(a,b)=>[...a].filter((c,i)=>c!==b[i]).length;
 $("spot").onclick=async()=>{const who=$("sp").value,num=S.nums[0];
  if(S.players.length<2||!num){alert(t("setup"));return}
@@ -324,27 +855,31 @@ $("spot").onclick=async()=>{const who=$("sp").value,num=S.nums[0];
   if(pc&&pc.s==="no"&&!confirm(t("noMeta")))return;
   const pd=ah&&S.events.find(e=>e.ah&&ham(e.ah,ah)<=4);if(pd&&!confirm(t("photoDup",pd.who)))return;
   if(!stack.length&&!confirm(t("noBlur")))return}
+ let vid=null;
+ if(pvid){if(!confirm(t("vWarn")))return;try{vid=await vPut({blob:pvid.f,type:pvid.f.type,cap:norm.slice(0,4)+"•••"+" · "+who,spot:true,ts:Date.now()})}catch(_){alert(t("full"));return}}
  const img=cvImg?cv.toDataURL("image/jpeg",0.6):null;
- S.events.push({t:"spot",who,num,plate:norm.slice(0,4)+"•••",h,ah:cvImg?ah:null,img,pc:cvImg&&pc?{s:pc.s,d:pc.d||null,sw:pc.sw||null}:null,ts:Date.now()});
- $("pl").value="";$("cw").hidden=true;$("undo").hidden=true;cvImg=null;ah=null;pc=null;abSeq++;abStatus(null);big=null;showPc();save();
+ S.events.push({id:rid(),t:"spot",who,num,plate:norm.slice(0,4)+"•••",h,ah:cvImg?ah:null,img,pc:cvImg&&pc?{s:pc.s,d:pc.d||null,sw:pc.sw||null}:null,vid,ts:Date.now()});
+ $("pl").value="";pvid=null;showClip();$("cw").hidden=true;$("undo").hidden=true;cvImg=null;ah=null;pc=null;abSeq++;abStatus(null);big=null;showPc();save();
  confetti();toast(t("toast",who))};
-$("debts").onclick=e=>{const i=e.target.dataset.d;if(i!==undefined){const x=window._D[i];S.events.push({t:"paid",from:x.from,to:x.to,ts:Date.now()});save()}};
+$("debts").onclick=e=>{const i=e.target.dataset.d;if(i!==undefined){const x=window._D[i];S.events.push({id:rid(),t:"paid",from:x.from,to:x.to,ts:Date.now()});save()}};
 
 /* ---- story ---- */
-let editing=false,ST={text:"It started with me, Eddy, and my kids Diego and Eliza in our old Mazda. We spotted a plate, 4830 FDY, picked 4830 as our number and made a deal: whoever spots 4830 first gets a free lunch from the others.\n\nWe turned it into a game, and since then we have found 4830 in many countries. Friends and neighbours heard about it, started hunting too, and now Good Plate Hunting is spreading around Barcelona, one lunch at a time.\n\nAbout us: Eddy, Diego and Eliza, plate hunters. Every plate is a chance for lunch.",photos:[]};
+let editing=false,ST={text:null,photos:[]};const OLDST="It started with me, Eddy, and my kids Diego and Eliza in our old Mazda. We spotted a plate, 4830 FDY, picked 4830 as our number and made a deal: whoever spots 4830 first gets a free lunch from the others.\n\nWe turned it into a game, and since then we have found 4830 in many countries. Friends and neighbours heard about it, started hunting too, and now Good Plate Hunting is spreading around Barcelona, one lunch at a time.\n\nAbout us: Eddy, Diego and Eliza, plate hunters. Every plate is a chance for lunch.";
+const stText=()=>ST.text==null?t("story"):ST.text;
 try{const r=localStorage.getItem("platelunch.story");if(r)ST=JSON.parse(r)}catch(e){}
+if(ST.text===OLDST||typeof ST.text!=="string")ST.text=null;if(!Array.isArray(ST.photos))ST.photos=[];
 function saveST(){try{localStorage.setItem("platelunch.story",JSON.stringify(ST))}catch(e){alert(t("full"))}renderST()}
-function renderST(){$("stT").textContent=ST.text;
+function renderST(){$("stT").textContent=stText();
  $("stG").innerHTML=ST.photos.filter(p=>okImg(p.img)).map((p,i)=>`<figure><img src="${p.img}" alt=""><figcaption>${esc(p.cap||"")}</figcaption>${editing?`<button class="ghost" data-r="${i}">${t("rm")}</button>`:""}</figure>`).join("");
  $("stT").hidden=editing;$("stE").hidden=!editing;$("stB").textContent=editing?t("saveSt"):t("editSt");renderMedia()}
-$("stB").onclick=()=>{if(editing){ST.text=$("stX").value;editing=false;saveST()}else{editing=true;$("stX").value=ST.text;renderST()}};
+$("stB").onclick=()=>{if(editing){const v=$("stX").value;ST.text=v===stText()?null:v;editing=false;saveST()}else{editing=true;$("stX").value=stText();renderST()}};
 $("stG").onclick=e=>{const i=e.target.dataset.r;if(i!==undefined){ST.photos=ST.photos.filter(p=>okImg(p.img));ST.photos.splice(i,1);saveST()}};
 $("stP").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{const s=Math.min(1,600/im.width),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(im.src);const cap=prompt(t("cap"),"")||"";ST.photos.push({img:c.toDataURL("image/jpeg",.65),cap});saveST()};im.src=URL.createObjectURL(f);e.target.value=""};
 
 /* ---- videos (max 9 s, kept on this device) and slideshow ---- */
 const idb=()=>new Promise((ok,no)=>{const r=indexedDB.open("platelunch-media",1);r.onupgradeneeded=()=>r.result.createObjectStore("v",{keyPath:"id",autoIncrement:true});r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
 async function vAll(){try{const d=await idb();return await new Promise((ok,no)=>{const q=d.transaction("v").objectStore("v").getAll();q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}catch(e){return[]}}
-async function vPut(o){const d=await idb();return new Promise((ok,no)=>{const q=d.transaction("v","readwrite").objectStore("v").add(o);q.onsuccess=()=>ok();q.onerror=()=>no(q.error)})}
+async function vPut(o){const d=await idb();return new Promise((ok,no)=>{const q=d.transaction("v","readwrite").objectStore("v").add(o);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}
 async function vDel(id){const d=await idb();return new Promise((ok,no)=>{const q=d.transaction("v","readwrite").objectStore("v").delete(id);q.onsuccess=()=>ok();q.onerror=()=>no(q.error)})}
 let SHOW=[],shi=0,shT=null,vUrls=[];
 const still=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -356,7 +891,8 @@ function drawShow(){clearTimeout(shT);const c=$("slideCard");c.hidden=!SHOW.leng
  if(s.k==="v"){$("show").querySelector("video").onended=go;shT=setTimeout(go,11000)}else shT=setTimeout(go,4000)}
 $("show").onclick=e=>{const b=e.target.closest("[data-s]");if(b){shi+=+b.dataset.s;drawShow()}};
 async function renderMedia(){vUrls.forEach(u=>URL.revokeObjectURL(u));vUrls=[];const vs=await vAll();
- $("stVd").innerHTML=vs.map(v=>{v._u=URL.createObjectURL(v.blob);vUrls.push(v._u);return`<figure><video src="${v._u}" controls playsinline preload="metadata"></video><figcaption>${esc(v.cap||"")}</figcaption>${editing?`<button class="ghost" data-vr="${v.id}">${t("rm")}</button>`:""}</figure>`}).join("");
+ vs.forEach(v=>{v._u=URL.createObjectURL(v.blob);vUrls.push(v._u)});
+ $("stVd").innerHTML=vs.filter(v=>!v.spot).map(v=>{return`<figure><video src="${v._u}" controls playsinline preload="metadata"></video><figcaption>${esc(v.cap||"")}</figcaption>${editing?`<button class="ghost" data-vr="${v.id}">${t("rm")}</button>`:""}</figure>`}).join("");
  SHOW=[...ST.photos.filter(p=>okImg(p.img)).map(p=>({k:"i",src:p.img,cap:p.cap})),...vs.map(v=>({k:"v",src:v._u,cap:v.cap})),...S.events.filter(e=>e.t==="spot"&&okImg(e.img)).map(e=>({k:"i",src:e.img,cap:(e.plate||e.num)+" · "+e.who}))];
  shi=0;drawShow()}
 $("stVd").onclick=async e=>{const b=e.target.closest("[data-vr]");if(b){try{await vDel(+b.dataset.vr)}catch(_){}renderMedia()}};
@@ -383,7 +919,7 @@ $("pdSave").onclick=()=>{S.prof[pfName]={img:pfImg,bio:$("pdB").value.slice(0,14
 $("pdX").onclick=()=>$("pd").close();
 
 /* ---- share, backup, install, reset, language ---- */
-$("share").onclick=async()=>{const d={title:"Good Plate Hunting",text:t("shareTxt"),url:location.href.split("#")[0]};
+$("share").onclick=async()=>{const si=shareInfo(),d={title:"Good Plate Hunting",text:si.text,url:si.url};
  try{if(navigator.share){await navigator.share(d);return}}catch(e){if(e&&e.name==="AbortError")return}
  try{await navigator.clipboard.writeText(d.text+" "+d.url);toast(t("copied"))}catch(e){prompt(d.text,d.url)}};
 $("exp").onclick=()=>{const b=new Blob([JSON.stringify({app:"goodplatehunting",v:1,S,ST})],{type:"application/json"}),a=document.createElement("a");
@@ -393,17 +929,93 @@ $("impf").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)r
   if(j.app!=="goodplatehunting"||!j.S||!Array.isArray(j.S.players)||!Array.isArray(j.S.events)||!Array.isArray(j.S.nums))throw 0;
   if(!confirm(t("impQ")))return;
   S={players:j.S.players.map(String),nums:j.S.nums.map(String),events:j.S.events.filter(x=>x&&typeof x==="object").map(x=>({...x,img:okImg(x.img)?x.img:null})),prof:Object.fromEntries(Object.entries(j.S.prof&&typeof j.S.prof==="object"?j.S.prof:{}).map(([k,v])=>[String(k),{img:okImg(v&&v.img)?v.img:null,bio:String((v&&v.bio)||"").slice(0,140)}]))};
-  if(j.ST&&typeof j.ST.text==="string"&&Array.isArray(j.ST.photos))ST={text:j.ST.text,photos:j.ST.photos.filter(p=>p&&okImg(p.img)).map(p=>({img:p.img,cap:String(p.cap||"")}))};
+  if(j.ST&&(j.ST.text==null||typeof j.ST.text==="string")&&Array.isArray(j.ST.photos))ST={text:(j.ST.text===OLDST?null:j.ST.text)??null,photos:j.ST.photos.filter(p=>p&&okImg(p.img)).map(p=>({img:p.img,cap:String(p.cap||"")}))};
   try{localStorage.setItem("platelunch.story",JSON.stringify(ST))}catch(_){}
-  save();renderST();toast(t("impOk"))}catch(_){alert(t("impBad"))}};
+  fixS();save();renderST();toast(t("impOk"))}catch(_){alert(t("impBad"))}};
 let dip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;$("inst").hidden=false});
 $("inst").onclick=async()=>{if(!dip)return;dip.prompt();dip=null;$("inst").hidden=true};
-$("reset").onclick=()=>{if(confirm(t("resetQ"))){S={players:[],nums:[],events:[],prof:{}};save()}};
-function applyLang(){document.documentElement.lang=LG;$("lang").value=LG;
+$("reset").onclick=async()=>{if(confirm(t("resetQ"))){try{for(const v of await vAll())if(v.spot)await vDel(v.id)}catch(_){}gLeaveLocal();S={players:[],nums:[],events:[],prof:{},pt:{},rt:{},rmE:[],numT:0};save()}};
+function applyLang(){document.documentElement.lang=LG;document.documentElement.dir=LG==="ar"?"rtl":"ltr";$("lang").value=LG;
  document.querySelectorAll("[data-i]").forEach(el=>el.innerHTML=t(el.dataset.i));
  document.querySelectorAll("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
  $("rmBtn").href="mailto:hello@goodplatehunting.com?subject="+encodeURIComponent(t("rmSub"))+"&body="+encodeURIComponent(t("rmBody"));
- showPc();render();renderST()}
+ showPc();showClip();render();renderST();gRender();renderShare();renderRev()}
 $("lang").onchange=e=>{LG=e.target.value;try{localStorage.setItem("platelunch.lang",LG)}catch(_){}applyLang()};
+/* ---- shared hunt groups (sync with /api/g) ---- */
+const GKEY="platelunch.group";
+let gc=null,gBusy=false,gAgain=false,gTm=null,gSt={ok:0,err:false};
+try{gc=localStorage.getItem(GKEY)||null}catch(_){}
+if(gc&&!/^[A-Z2-9]{10}$/.test(gc))gc=null;
+const gFmt=c=>c.slice(0,5)+"-"+c.slice(5);
+const gNorm=v=>String(v||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+function toDoc(){return{pt:S.pt,rt:S.rt,nums:S.nums.slice(0,1),numT:S.numT||0,rmE:S.rmE,events:S.events.map(e=>{const{img,vid,...r}=e;return r})}}
+function applyDoc(D){
+ S.pt=D.pt||{};S.rt=D.rt||{};S.numT=D.numT||0;S.rmE=D.rmE||[];
+ S.players=Object.keys(S.pt).filter(n=>S.pt[n]>(S.rt[n]||0)).sort((a,b)=>S.pt[a]-S.pt[b]||(a<b?-1:1));
+ S.nums=(D.nums||[]).slice(0,1);
+ const loc=new Map(S.events.map(e=>[e.id,e])),inD=new Set((D.events||[]).map(e=>e.id)),gone=new Set(S.rmE);
+ S.events=[...(D.events||[]).map(e=>loc.get(e.id)||e),...S.events.filter(e=>!inD.has(e.id)&&!gone.has(e.id))]}
+async function sync(){
+ if(!gc)return;if(gBusy){gAgain=true;return}
+ gBusy=true;
+ try{
+  const r=await fetch("/api/g/"+gc+"/sync",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(toDoc())});
+  if(r.status===404){gLeaveLocal();alert(t("gNotFound"));return}
+  if(!r.ok)throw 0;
+  const{doc}=await r.json(),before=JSON.stringify(toDoc());
+  applyDoc(doc);gSt={ok:Date.now(),err:false};
+  if(JSON.stringify(toDoc())!==before)persist();else gRender()}
+ catch(_){gSt.err=true;gRender()}
+ finally{gBusy=false;if(gAgain){gAgain=false;schedSync()}}}
+function schedSync(){if(!gc)return;clearTimeout(gTm);gTm=setTimeout(sync,700)}
+function setGc(c){gc=c;try{localStorage.setItem(GKEY,c)}catch(_){}gRender();renderShare()}
+function gLeaveLocal(){gc=null;try{localStorage.removeItem(GKEY)}catch(_){}gRender();renderShare()}
+function gRender(){$("gOff").hidden=!!gc;$("gOn").hidden=!gc;
+ if(gc){$("gC").textContent=gFmt(gc);const e=$("gSt");
+  e.textContent=gSt.err?t("gErr"):(gSt.ok?t("gSync",new Date(gSt.ok).toLocaleTimeString(LG,{hour:"2-digit",minute:"2-digit"})):"");
+  e.style.color=gSt.err?"var(--bad)":"var(--ok)"}}
+$("gNew").onclick=async()=>{try{const r=await fetch("/api/g",{method:"POST"});if(!r.ok)throw 0;const{code}=await r.json();setGc(code);sync()}catch(_){alert(t("gErr"))}};
+async function gJoinCode(raw){
+ const c=gNorm(raw);if(!/^[A-Z2-9]{10}$/.test(c)){alert(t("gNotFound"));return}
+ try{
+  const r=await fetch("/api/g/"+c);
+  if(r.status===404||r.status===400){alert(t("gNotFound"));return}
+  if(!r.ok)throw 0;
+  const{doc}=await r.json(),has=S.players.length||S.events.length;
+  if(!confirm(t("gJoinQ",gFmt(c))+(has?"\n\n"+t("gReplaceQ"):"")))return;
+  S={players:[],nums:[],events:[],prof:S.prof||{},pt:{},rt:{},rmE:[],numT:0};applyDoc(doc);setGc(c);persist();sync()}
+ catch(_){alert(t("gErr"))}}
+$("gGo").onclick=()=>gJoinCode($("gIn").value);
+$("gIn").onkeydown=e=>{if(e.key==="Enter")gJoinCode($("gIn").value)};
+$("gLv").onclick=()=>{if(confirm(t("gLeaveQ")))gLeaveLocal()};
+$("gDl").onclick=async()=>{if(!gc||!confirm(t("gDelQ")))return;try{const r=await fetch("/api/g/"+gc,{method:"DELETE"});if(!r.ok)throw 0;gLeaveLocal()}catch(_){alert(t("gErr"))}};
+$("gInv").onclick=()=>$("share").onclick();
+setInterval(()=>{if(gc&&document.visibilityState==="visible")sync()},30000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")sync()});
+/* ---- messages and reviews ---- */
+$("mSend").onclick=()=>{const who=$("mw").value,text=$("mt").value.trim().slice(0,200);if(!who){alert(t("addTwo"));return}if(!text)return;S.events.push({id:rid(),t:"msg",who,text,ts:Date.now()});$("mt").value="";save()};
+$("mt").onkeydown=e=>{if(e.key==="Enter")$("mSend").onclick()};
+$("mL").onclick=e=>{const b=e.target.closest("[data-m]");if(!b||!confirm(t("delQ")))return;const i=+b.dataset.m,x=S.events[i];S.rmE.push(x.id);S.events.splice(i,1);save()};
+const REVIEWS=[]; /* real reviews only: {name:"…",stars:5,text:"…"} */
+let rate=0;
+function renderRev(){
+ $("rvL").innerHTML=REVIEWS.map(r=>`<div class="log"><span style="color:#f5a300">${"★".repeat(r.stars)}${"☆".repeat(5-r.stars)}</span> <b>${esc(r.name)}</b><div style="color:var(--ink)">${esc(r.text)}</div></div>`).join("");
+ $("rvE").hidden=REVIEWS.length>0;
+ $("rvS").innerHTML=[1,2,3,4,5].map(n=>`<button class="star" data-s="${n}" aria-label="${n}">${n<=rate?"★":"☆"}</button>`).join("")}
+$("rvS").onclick=e=>{const b=e.target.closest("[data-s]");if(b){rate=+b.dataset.s;renderRev()}};
+$("rvBtn").onclick=()=>{if(!rate){toast(t("rvPick"));return}
+ location.href="mailto:hello@goodplatehunting.com?subject="+encodeURIComponent(t("rvSub")+" "+"★".repeat(rate))+"&body="+encodeURIComponent("★".repeat(rate)+"☆".repeat(5-rate)+"\n\n"+$("rvX").value)};
+/* ---- share links ---- */
+function shareInfo(){
+ const base=/(^|\.)(goodplatehunting\.com|workers\.dev)$/.test(location.hostname)?location.origin:"https://goodplatehunting.com";
+ return{url:gc?base+"/?join="+gc:base,text:gc?t("gInvTxt"):t("shareTxt")}}
+function renderShare(){
+ const{url,text}=shareInfo(),u=encodeURIComponent(url),x=encodeURIComponent(text),both=encodeURIComponent(text+" "+url);
+ $("spL").innerHTML=[["💬 WhatsApp","https://wa.me/?text="+both],["✈️ Telegram","https://t.me/share/url?url="+u+"&text="+x],["𝕏","https://twitter.com/intent/tweet?text="+x+"&url="+u],["📘 Facebook","https://www.facebook.com/sharer/sharer.php?u="+u],["✉️ Email","mailto:?subject="+encodeURIComponent("Good Plate Hunting")+"&body="+both]]
+  .map(([l,h])=>`<a class="up" target="_blank" rel="noopener" href="${h}">${l}</a>`).join("")+`<button class="ghost" id="spC" aria-label="copy">🔗</button>`}
+$("spL").onclick=async e=>{if(e.target.id!=="spC")return;const{url,text}=shareInfo();try{await navigator.clipboard.writeText(text+" "+url);toast(t("copied"))}catch(_){prompt(text,url)}};
 applyLang();
+(function(){try{const u=new URL(location.href),j=u.searchParams.get("join");if(j){u.searchParams.delete("join");history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);if(!(gc&&gNorm(j)===gc))setTimeout(()=>gJoinCode(j),600)}}catch(_){}})();
+if(gc)sync();
+document.querySelectorAll(".belt-in").forEach(b=>{b.innerHTML+=b.innerHTML});
 </script></body></html>
