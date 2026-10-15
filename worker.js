@@ -19,7 +19,7 @@ function mergeDocs(a,b){
 
 const CODE_RE=/^[A-Z2-9]{10}$/;
 const ALPHA="ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-const MAX_BODY=400000, MAX_PHOTO=500000, MAX_PHOTOS=100, TTL=60*60*24*365;
+const MAX_BODY=400000, MAX_PHOTO=500000, MAX_PHOTOS=100, TTL=60*60*24*365, PHOTO_TTL=TTL;
 const ID_RE=/^[A-Za-z0-9_-]{6,40}$/, IMG_RE=/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
 const json=(o,s=200)=>new Response(JSON.stringify(o),{status:s,headers:{"content-type":"application/json","cache-control":"no-store"}});
 const str=(v,n)=>typeof v==="string"?v.replace(/[\u0000-\u001f<>]/g,"").slice(0,n):"";
@@ -111,7 +111,7 @@ async function api(req,env,url,ctx){
     const text=await req.text();if(text.length>MAX_BODY)return json({error:"too big"},413);
     let body;try{body=JSON.parse(text)}catch(_){return json({error:"bad json"},400)}
     const oldIds=new Set((stored.events||[]).map(e=>e.id));
-    const merged=clean(mergeDocs(stored,clean(body)));merged.photos=stored.photos||[];
+    const merged=clean(mergeDocs(stored,clean(body)));merged.photos=(stored.photos||[]).filter(x=>Date.now()-(x.ts||0)<PHOTO_TTL*1000);
     const out=JSON.stringify(merged);
     if(out.length>MAX_BODY*2)return json({error:"group full"},413);
     if(out!==raw)await env.GROUPS.put(key,out,{expirationTtl:TTL});
@@ -144,7 +144,7 @@ async function api(req,env,url,ctx){
       if(!ID_RE.test(id)||typeof img!=="string"||!IMG_RE.test(img))return json({error:"bad photo"},400);
       if(photos.some(x=>x.id===id))return json({doc:stored});
       if(photos.length>=MAX_PHOTOS)return json({error:"too many photos"},413);
-      await env.GROUPS.put("ph:"+code+":"+id,JSON.stringify({img,cap:str(b.cap,120)}),{expirationTtl:TTL});
+      await env.GROUPS.put("ph:"+code+":"+id,JSON.stringify({img,cap:str(b.cap,120)}),{expirationTtl:PHOTO_TTL});
       stored.photos=[...photos,{id,cap:str(b.cap,120),ts:Date.now()}];
       await env.GROUPS.put(key,JSON.stringify(stored),{expirationTtl:TTL});
       return json({doc:stored})}
