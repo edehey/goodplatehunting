@@ -172,6 +172,20 @@ select.lang{min-width:112px;min-height:32px;padding:2px 28px 2px 34px;font-size:
 .langw{border-width:1.5px}
 html[dir=rtl] select.lang{padding:2px 34px 2px 28px}
 .hero>button.thm[aria-pressed="true"]{background:linear-gradient(90deg,#0b1030,#3a2f7a)}
+#nums{justify-content:center}
+#nums .chip{background:none;border:0;padding:0;gap:12px;width:100%;justify-content:center;margin:6px 0}
+#nums .plate{font-size:clamp(46px,17vw,76px);line-height:1.1;padding:8px 20px 8px 66px;border-width:5px;border-radius:16px;box-shadow:0 6px 0 rgba(0,0,0,.3),0 0 0 4px #ffd21f;letter-spacing:.1em;color:#111;background:#fff}
+#nums .plate:before{width:50px;font-size:24px}
+#nums .chip b{font-size:26px;padding:6px}
+:root[data-theme="dark"] #nums .plate{box-shadow:0 6px 0 rgba(0,0,0,.6),0 0 0 4px #ffd21f}
+details.more>summary::after{content:" ▾"}details.more[open]>summary::after{content:" ▴"}details.more[open]>summary{position:sticky;top:6px;z-index:5}
+/* simple small day/night button */
+.hero>button.thm,.hero>button.thm[aria-pressed="true"]{width:34px;height:34px;border-radius:50%;background:rgba(18,48,143,.35);border:1.5px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;right:12px;top:calc(12px + env(safe-area-inset-top,0px))}
+.thm .cl,.thm .st{display:none}
+.thm .kn,.thm[aria-pressed="true"] .kn{position:static;width:auto;height:auto;background:none;box-shadow:none;transform:none;border-radius:0;font-size:18px;line-height:1}
+.thm .kn::after{display:none}
+.thm .kn::before{content:"🌙"}
+.thm[aria-pressed="true"] .kn::before{content:"☀️"}
 </style></head><body><main>
 <div class="hero">
 <button class="thm" id="thm" type="button" aria-label="Day / night mode" aria-pressed="false"><span class="cl">☁️</span><span class="st">✨</span><span class="kn"></span></button><div class="langw"><select id="lang" class="lang" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="nl">Nederlands</option><option value="id">Bahasa Indonesia</option><option value="ar">العربية</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pt">Português</option><option value="tr">Türkçe</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="zh">中文</option></select></div>
@@ -210,7 +224,6 @@ html[dir=rtl] select.lang{padding:2px 34px 2px 28px}
 <div class="drive" id="rem" hidden style="background:#e6efff"><span data-i="remT"></span><div style="margin-top:8px"><button id="remB" data-i="remBtn"></button></div></div>
 
 <details class="card step" id="c2" open><summary class="h2s"><span data-i="h2"></span><span class="sum" id="sum2"></span></summary><details id="howd"><summary class="h2s" style="font-size:14px">ⓘ</summary><p data-i="how"></p></details>
-<p class="own" style="font-size:14px;margin:6px 0 10px" data-i="ownN"></p>
 <div id="nums" class="row" style="margin-bottom:10px"></div>
 <div class="row"><input id="nn" data-ph="phNum" maxlength="8" inputmode="numeric"><button id="addN" data-i="setN"></button></div>
 
@@ -232,9 +245,9 @@ html[dir=rtl] select.lang{padding:2px 34px 2px 28px}
 <p class="empty" data-i="winnerNote" style="margin:10px 0 0"></p><button class="big" id="spot" data-i="spot"></button><button class="ghost" id="winB" hidden data-i="winBtn" style="margin-top:10px;width:100%"></button></div>
 
 <div class="card" id="gcard"><h2 data-i="gT"></h2><p class="empty" data-i="gInfo" style="margin:0 0 6px"></p><p class="empty" data-i="gAddN" style="margin:0 0 8px;font-weight:700"></p><p class="empty" data-i="gBig" style="margin:0 0 8px"></p><details style="margin-bottom:10px"><summary class="h2s" style="font-size:14px">ⓘ</summary><p class="empty" data-i="gPriv" style="margin:6px 0 0"></p></details>
-<div id="gOff"><div class="row"><button id="gNew" data-i="gCreate"></button></div>
+<p class="empty" id="gMore" style="margin:10px 0 6px;font-weight:700" hidden></p><div id="gOff"><div class="row"><button id="gNew" data-i="gCreate"></button></div>
 <div class="row" style="margin-top:8px"><input id="gIn" data-ph="gCode" maxlength="12" autocapitalize="characters" autocomplete="off" style="direction:ltr"><button id="gGo" data-i="gJoin"></button></div></div>
-<div id="gOn" hidden><div class="gcode" id="gC"></div>
+<div id="gOn" hidden><div id="gSwT" class="empty" style="margin:0 0 6px;font-weight:700"></div><div id="gSw" class="row" style="margin-bottom:8px"></div><div class="gcode" id="gC"></div>
 <div class="row" style="margin-top:8px"><button id="gInv" data-i="gInvite"></button></div>
 <div id="gSt" class="pc" style="margin-top:8px"></div>
 <div class="row" style="margin-top:8px"><button class="ghost" id="gLv" data-i="gLeave"></button><button class="ghost" id="gDl" data-i="gDel"></button></div></div></div>
@@ -245,9 +258,9 @@ html[dir=rtl] select.lang{padding:2px 34px 2px 28px}
 <div class="row" style="margin-top:8px"><select id="mw"></select></div>
 <div class="row" style="margin-top:8px"><input id="mt" data-ph="mPh" maxlength="200"><button id="mSend" data-i="mSend"></button></div></div>
 <div class="card"><h2 data-i="spT"></h2><div id="spL" class="row"></div><div id="spQr"></div></div>
-<div class="card"><h2 id="vidT"></h2><p class="empty" id="vidI" style="margin:0 0 8px"></p><button class="ghost" id="capB"></button></div>
 <div class="card" id="rvCard"><h2 data-i="rvT"></h2><div id="rvL"></div><p class="empty" id="rvE" data-i="rvNone" style="margin:0 0 8px"></p>
 <div id="rvS" style="margin-bottom:6px"></div><textarea id="rvX" rows="2" maxlength="300" data-ph="rvPh"></textarea><button id="rvBtn" data-i="rvSend"></button></div>
+<button type="button" class="big" id="moreX" style="margin-bottom:14px"></button>
 </details>
 
 <div class="row" style="justify-content:center;margin-bottom:10px">
@@ -1035,7 +1048,7 @@ function renderST(){$("albBox").hidden=!ADMIN;renderShow();$("stT").textContent=
  $("stAl").innerHTML=ST.photos.map((p,i)=>pf(p,i,true)).join("");
  $("stG").innerHTML=ST.photos.map((p,i)=>pf(p,i,false)).join("");
  {const cp=ST.photos.find(p=>!p.al&&okImg(p.img));$("hP").innerHTML=cp?`<div class="carh">${t("carH")}</div><img class="carp" src="${cp.img}" alt=""><div class="empty" style="margin-top:4px">${esc(cp.cap||"")}</div>`:""}
- $("stT").hidden=editing;$("stE").hidden=!editing;$("stB").textContent=editing?t("saveSt"):t("editSt");renderMedia();remRender()}
+ $("stB").style.display=ADMIN?"":"none"; $("stT").hidden=editing;$("stE").hidden=!editing;$("stB").textContent=editing?t("saveSt"):t("editSt");renderMedia();remRender()}
 $("stB").onclick=()=>{if(editing){const v=$("stX").value;ST.text=v===stText()?null:v;editing=false;saveST()}else{editing=true;$("stX").value=stText();renderST()}};
 $("stAl").onclick=$("stG").onclick=e=>{const i=e.target.dataset.r;if(i!==undefined){const rp=ST.photos[i];if(gc&&rp&&rp.id&&(rp.up||rp.fromGroup))fetch("/api/g/"+gc+"/photo/"+rp.id,{method:"DELETE"}).catch(()=>{});ST.photos.splice(i,1);saveST()}};
 $("stP").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{const s=Math.min(1,600/im.width),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(im.src);const cap=prompt(t("cap"),"")||"";ST.photos.push({id:rid(),img:c.toDataURL("image/jpeg",.65),cap,sh:!!gc});saveST();schedSync()};im.src=URL.createObjectURL(f);e.target.value=""};
@@ -1118,22 +1131,40 @@ function set(m,keep){document.documentElement.setAttribute("data-theme",m);b.set
 let sv=null;try{sv=localStorage.getItem("platelunch.theme")}catch(_){}
 set(sv==="dark"||sv==="light"?sv:cur(),false);
 b.addEventListener("click",()=>set(cur()==="dark"?"light":"dark",true))})();
-const PZ={"en":["What are you playing for?","Lunch (our tip)","Dinner","Cinema","Bubble tea","🏆 The winner gets: {p} – paid by the other hunters!","🚫 No playing for money – ever. Only fun treats."],"es":["¿Por qué jugáis?","Almuerzo (nuestra idea)","Cena","Cine","Bubble tea","🏆 El ganador recibe: {p} – ¡lo pagan los demás cazadores!","🚫 Nada de jugar por dinero. Solo premios divertidos."],"ca":["Per què jugueu?","Dinar (la nostra idea)","Sopar","Cinema","Bubble tea","🏆 El guanyador rep: {p} – el paguen els altres caçadors!","🚫 Res de jugar per diners. Només premis divertits."],"nl":["Waar speel je voor?","Lunch (onze tip)","Diner","Bioscoop","Bubble tea","🏆 De winnaar krijgt: {p} – betaald door de andere jagers!","🚫 Nooit om geld spelen. Alleen leuke traktaties."],"id":["Bermain untuk apa?","Makan siang (saran kami)","Makan malam","Bioskop","Bubble tea","🏆 Pemenang mendapat: {p} – dibayar pemburu lain!","🚫 Dilarang bermain dengan uang. Hanya hadiah seru."],"ar":["على ماذا تلعبون؟","غداء (اقتراحنا)","عشاء","سينما","بابل تي","🏆 يحصل الفائز على: {p} – يدفعه الصيّادون الآخرون!","🚫 ممنوع اللعب على المال. جوائز ممتعة فقط."],"fr":["Pour quoi jouez-vous ?","Déjeuner (notre idée)","Dîner","Cinéma","Bubble tea","🏆 Le gagnant reçoit : {p} – payé par les autres chasseurs !","🚫 Jamais d'argent en jeu. Seulement des petits plaisirs."],"de":["Worum spielt ihr?","Mittagessen (unser Tipp)","Abendessen","Kino","Bubble Tea","🏆 Der Gewinner bekommt: {p} – bezahlt von den anderen Jägern!","🚫 Nie um Geld spielen. Nur kleine Belohnungen."],"it":["Per cosa giocate?","Pranzo (il nostro consiglio)","Cena","Cinema","Bubble tea","🏆 Il vincitore riceve: {p} – pagato dagli altri cacciatori!","🚫 Mai giocare per soldi. Solo premi divertenti."],"pt":["Pelo que jogam?","Almoço (a nossa sugestão)","Jantar","Cinema","Bubble tea","🏆 O vencedor recebe: {p} – pago pelos outros caçadores!","🚫 Nunca se joga por dinheiro. Só prémios divertidos."],"tr":["Ne için oynuyorsunuz?","Öğle yemeği (önerimiz)","Akşam yemeği","Sinema","Bubble tea","🏆 Kazanan şunu alır: {p} – diğer avcılar öder!","🚫 Para karşılığı oynamak yasak. Sadece eğlenceli ikramlar."],"ja":["何をごほうびに遊ぶ？","ランチ（おすすめ）","ディナー","映画","タピオカティー","🏆 勝者がもらうのは：{p}（他のハンターのおごり！）","🚫 お金を賭けるのは禁止。楽しいごほうびだけ。"],"ko":["무엇을 상으로 할까요?","점심 (추천)","저녁","영화관","버블티","🏆 우승자는 {p} – 다른 헌터들이 사 줍니다!","🚫 돈을 걸고 하는 것은 금지. 즐거운 선물만."],"zh":["奖励什么好呢？","午餐（我们的建议）","晚餐","电影","珍珠奶茶","🏆 赢家得到：{p}——由其他猎手请客！","🚫 禁止赌钱。只玩开心的小奖励。"]},PZI=["🍽️","🍝","🎬","🧋"];let PZk=0;try{PZk=Math.max(0,Math.min(3,+localStorage.getItem("platelunch.prize")||0))}catch(_){}
+const PZ2={"en":["The winner gets {p}, paid by the others.","🎉 Spotted it! Let's enjoy {p} together"],"es":["El ganador recibe {p}, pagado por los demás.","🎉 ¡Lo vi! Disfrutemos juntos de {p}"],"ca":["El guanyador rep {p}, pagat pels altres.","🎉 L'he vist! Gaudim junts de {p}"],"nl":["De winnaar krijgt {p}, betaald door de anderen.","🎉 Gespot! Laten we samen genieten van {p}"],"id":["Pemenang mendapat {p}, dibayar oleh yang lain.","🎉 Ketemu! Ayo nikmati {p} bersama"],"ar":["يحصل الفائز على {p} يدفعه الآخرون.","🎉 رأيتها! لنستمتع بـ {p} معًا"],"fr":["Le gagnant reçoit {p}, payé par les autres.","🎉 Repérée ! Profitons de {p} ensemble"],"de":["Der Gewinner bekommt {p}, bezahlt von den anderen.","🎉 Entdeckt! Lasst uns zusammen {p} genießen"],"it":["Il vincitore riceve {p}, pagato dagli altri.","🎉 Visto! Godiamoci {p} insieme"],"pt":["O vencedor recebe {p}, pago pelos outros.","🎉 Avistei! Vamos desfrutar de {p} juntos"],"tr":["Kazanan {p} kazanır, diğerleri öder.","🎉 Gördüm! {p} keyfini birlikte yapalım"],"ja":["勝者は{p}を、他のみんなのおごりで楽しめます。","🎉 見つけた！みんなで{p}を楽しもう"],"ko":["우승자는 다른 사람들이 사 주는 {p}를 받아요.","🎉 찾았다! 함께 {p} 즐겨요"],"zh":["赢家得到{p}，由其他人请客。","🎉 发现啦！一起享用{p}吧"]};const PZ={"en":["What are you playing for?","Lunch (our tip)","Dinner","Cinema","Bubble tea","🏆 The winner gets: {p} – paid by the other hunters!","🚫 No playing for money – ever. Only fun treats."],"es":["¿Por qué jugáis?","Almuerzo (nuestra idea)","Cena","Cine","Bubble tea","🏆 El ganador recibe: {p} – ¡lo pagan los demás cazadores!","🚫 Nada de jugar por dinero. Solo premios divertidos."],"ca":["Per què jugueu?","Dinar (la nostra idea)","Sopar","Cinema","Bubble tea","🏆 El guanyador rep: {p} – el paguen els altres caçadors!","🚫 Res de jugar per diners. Només premis divertits."],"nl":["Waar speel je voor?","Lunch (onze tip)","Diner","Bioscoop","Bubble tea","🏆 De winnaar krijgt: {p} – betaald door de andere jagers!","🚫 Nooit om geld spelen. Alleen leuke traktaties."],"id":["Bermain untuk apa?","Makan siang (saran kami)","Makan malam","Bioskop","Bubble tea","🏆 Pemenang mendapat: {p} – dibayar pemburu lain!","🚫 Dilarang bermain dengan uang. Hanya hadiah seru."],"ar":["على ماذا تلعبون؟","غداء (اقتراحنا)","عشاء","سينما","بابل تي","🏆 يحصل الفائز على: {p} – يدفعه الصيّادون الآخرون!","🚫 ممنوع اللعب على المال. جوائز ممتعة فقط."],"fr":["Pour quoi jouez-vous ?","Déjeuner (notre idée)","Dîner","Cinéma","Bubble tea","🏆 Le gagnant reçoit : {p} – payé par les autres chasseurs !","🚫 Jamais d'argent en jeu. Seulement des petits plaisirs."],"de":["Worum spielt ihr?","Mittagessen (unser Tipp)","Abendessen","Kino","Bubble Tea","🏆 Der Gewinner bekommt: {p} – bezahlt von den anderen Jägern!","🚫 Nie um Geld spielen. Nur kleine Belohnungen."],"it":["Per cosa giocate?","Pranzo (il nostro consiglio)","Cena","Cinema","Bubble tea","🏆 Il vincitore riceve: {p} – pagato dagli altri cacciatori!","🚫 Mai giocare per soldi. Solo premi divertenti."],"pt":["Pelo que jogam?","Almoço (a nossa sugestão)","Jantar","Cinema","Bubble tea","🏆 O vencedor recebe: {p} – pago pelos outros caçadores!","🚫 Nunca se joga por dinheiro. Só prémios divertidos."],"tr":["Ne için oynuyorsunuz?","Öğle yemeği (önerimiz)","Akşam yemeği","Sinema","Bubble tea","🏆 Kazanan şunu alır: {p} – diğer avcılar öder!","🚫 Para karşılığı oynamak yasak. Sadece eğlenceli ikramlar."],"ja":["何をごほうびに遊ぶ？","ランチ（おすすめ）","ディナー","映画","タピオカティー","🏆 勝者がもらうのは：{p}（他のハンターのおごり！）","🚫 お金を賭けるのは禁止。楽しいごほうびだけ。"],"ko":["무엇을 상으로 할까요?","점심 (추천)","저녁","영화관","버블티","🏆 우승자는 {p} – 다른 헌터들이 사 줍니다!","🚫 돈을 걸고 하는 것은 금지. 즐거운 선물만."],"zh":["奖励什么好呢？","午餐（我们的建议）","晚餐","电影","珍珠奶茶","🏆 赢家得到：{p}——由其他猎手请客！","🚫 禁止赌钱。只玩开心的小奖励。"]},PZI=["🍽️","🍝","🎬","🧋"];let PZk=0;try{PZk=Math.max(0,Math.min(3,+localStorage.getItem("platelunch.prize")||0))}catch(_){}
 function prizeRender(){const d=PZ[LG]||PZ.en;$("prT").textContent="🎁 "+d[0];
  $("prO").innerHTML=PZI.map((e,i)=>`<button type="button" class="ghost" data-pz="${i}" aria-pressed="${i===PZk}" style="${i===PZk?"background:var(--acc2);color:#fff;border-color:var(--acc2);font-weight:800":""}">${e} ${d[1+i]}</button>`).join("");
+ {const q=PZ2[LG]||PZ2.en,pp=PZI[PZk]+" "+d[1+PZk].replace(/ \(.*\)/,"");document.querySelectorAll("[data-i=winnerNote]").forEach(e=>e.textContent=q[0].replace("{p}",pp));document.querySelectorAll("[data-i=spot]").forEach(e=>e.textContent=q[1].replace("{p}",pp))}
  $("prW").textContent=d[5].replace("{p}",PZI[PZk]+" "+d[1+PZk].replace(/ \(.*\)/,""));$("prN").textContent=d[6]}
-$("prO").onclick=e=>{const b=e.target.closest("[data-pz]");if(!b)return;PZk=+b.dataset.pz;try{localStorage.setItem("platelunch.prize",PZk)}catch(_){}prizeRender()};
+$("prO").onclick=e=>{const b=e.target.closest("[data-pz]");if(!b)return;PZk=+b.dataset.pz;try{localStorage.setItem("platelunch.prize",PZk)}catch(_){}try{const g=GL.find(x=>x.c===gc);if(g){g.p=PZk;saveGL();gRender()}}catch(_){}prizeRender()};
+const MC={"en": "▲ Close", "es": "▲ Cerrar", "ca": "▲ Tanca", "nl": "▲ Sluiten", "id": "▲ Tutup", "ar": "▲ إغلاق", "fr": "▲ Fermer", "de": "▲ Schließen", "it": "▲ Chiudi", "pt": "▲ Fechar", "tr": "▲ Kapat", "ja": "▲ 閉じる", "ko": "▲ 닫기", "zh": "▲ 关闭"};function moreRender(){$("moreX").textContent=MC[LG]||MC.en}
+$("moreX").onclick=()=>{const d=$("moreD");d.open=false;d.scrollIntoView({behavior:"smooth",block:"center"})};
 function applyLang(){document.documentElement.lang=LG;document.documentElement.dir=LG==="ar"?"rtl":"ltr";$("lang").value=LG;
  document.querySelectorAll("[data-i]").forEach(el=>el.innerHTML=t(el.dataset.i));
  document.querySelectorAll("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
  $("rmBtn").href="mailto:hello@goodplatehunting.com?subject="+encodeURIComponent(t("rmSub"))+"&body="+encodeURIComponent(t("rmBody"));
- showPc();showClip();render();renderST();gRender();renderShare();renderRev();gaRender();prizeRender()}
+ showPc();showClip();render();renderST();gRender();renderShare();renderRev();gaRender();prizeRender();moreRender()}
 $("lang").onchange=e=>{LG=e.target.value;try{localStorage.setItem("platelunch.lang",LG)}catch(_){}applyLang()};
 /* ---- shared hunt groups (sync with /api/g) ---- */
 const GKEY="platelunch.group";
 let gc=null,gBusy=false,gAgain=false,gTm=null,gSt={ok:0,err:false};
 try{gc=localStorage.getItem(GKEY)||null}catch(_){}
 if(gc&&!/^[A-Z2-9]{10}$/.test(gc))gc=null;
+const GLK="platelunch.groups",GMAX=4;let GL=[];
+try{GL=(JSON.parse(localStorage.getItem(GLK)||"[]")||[]).filter(g=>g&&/^[A-Z2-9]{10}$/.test(g.c)).slice(0,GMAX)}catch(_){}
+if(gc&&!GL.some(g=>g.c===gc))GL.push({c:gc,p:PZk});{const g0=GL.find(g=>g.c===gc);if(g0&&g0.p>=0&&g0.p<4)PZk=g0.p}
+const saveGL=()=>{try{localStorage.setItem(GLK,JSON.stringify(GL))}catch(_){}};
+const GT={"en":["You can join up to 3 other groups. Leave one first.","Your groups ({n}/4) – each can have its own prize","➕ Join or create another group (up to 3 other groups, each with its own prize)"],"es":["Puedes unirte a un máximo de 3 grupos más. Sal primero de uno.","Tus grupos ({n}/4): cada uno puede tener su propio premio","➕ Únete o crea otro grupo (hasta 3 grupos más, cada uno con su premio)"],"ca":["Pots unir-te a un màxim de 3 grups més. Surt primer d'un.","Els teus grups ({n}/4): cadascun pot tenir el seu premi","➕ Uneix-te o crea un altre grup (fins a 3 grups més, cadascun amb el seu premi)"],"nl":["Je kunt bij maximaal 3 andere groepen. Verlaat eerst een groep.","Jouw groepen ({n}/4) – elk met een eigen prijs","➕ Sluit je aan bij of maak nog een groep (max. 3 andere groepen, elk met een eigen prijs)"],"id":["Kamu bisa bergabung ke maksimal 3 grup lain. Keluar dari satu grup dulu.","Grupmu ({n}/4) – masing-masing punya hadiah sendiri","➕ Gabung atau buat grup lain (maks. 3 grup lain, masing-masing dengan hadiahnya)"],"ar":["يمكنك الانضمام إلى 3 مجموعات أخرى كحد أقصى. غادر إحداها أولًا.","مجموعاتك ({n}/4) – لكل واحدة جائزتها الخاصة","➕ انضم إلى مجموعة أخرى أو أنشئها (حتى 3 مجموعات أخرى، لكل منها جائزتها)"],"fr":["Tu peux rejoindre au maximum 3 autres groupes. Quitte-en d'abord un.","Tes groupes ({n}/4) – chacun avec son propre prix","➕ Rejoindre ou créer un autre groupe (jusqu'à 3 autres groupes, chacun avec son prix)"],"de":["Du kannst maximal 3 weiteren Gruppen beitreten. Verlasse zuerst eine.","Deine Gruppen ({n}/4) – jede mit eigenem Preis","➕ Weiter Gruppe beitreten oder erstellen (bis zu 3 weitere Gruppen, jede mit eigenem Preis)"],"it":["Puoi unirti a massimo 3 altri gruppi. Prima lasciane uno.","I tuoi gruppi ({n}/4) – ognuno con il suo premio","➕ Unisciti o crea un altro gruppo (fino a 3 altri gruppi, ognuno con il suo premio)"],"pt":["Pode juntar-se a no máximo 3 outros grupos. Saia primeiro de um.","Os seus grupos ({n}/4) – cada um com o seu prémio","➕ Junte-se a outro grupo ou crie um (até 3 outros grupos, cada um com o seu prémio)"],"tr":["En fazla 3 başka gruba katılabilirsin. Önce birinden ayrıl.","Gruplarım ({n}/4) – her birinin kendi ödülü olabilir","➕ Başka bir gruba katıl veya oluştur (en fazla 3 başka grup, her biri kendi ödülüyle)"],"ja":["参加できる他のグループは最大3つまでです。先に1つ退出してください。","あなたのグループ（{n}/4）：それぞれ別のごほうびを設定できます","➕ 別のグループに参加／作成（他に最大3つ、グループごとにごほうび）"],"ko":["다른 그룹은 최대 3개까지 참여할 수 있어요. 먼저 하나를 나가세요.","내 그룹 ({n}/4) – 그룹마다 다른 상품 가능","➕ 다른 그룹 참여/만들기 (최대 3개 더, 그룹마다 상품 설정)"],"zh":["最多只能再加入 3 个其他小组。请先退出一个。","你的小组（{n}/4）——每个小组可有不同奖励","➕ 加入或创建另一个小组（最多再 3 个，各有各的奖励）"]};
+const gT=i=>(GT[LG]||GT.en)[i];
+const stKey=c=>KEY+"."+c;
+function stashS(){if(gc){try{localStorage.setItem(stKey(gc),JSON.stringify(S))}catch(_){}}}
+function freshS(){return{players:[],nums:[],events:[],prof:S.prof||{},pt:{},rt:{},rmE:[],numT:0}}
+function dropGroupPhotos(){ST.photos=ST.photos.filter(p=>!(p.fromGroup||p.up));saveST()}
+let pendZ=null;
+function switchG(c){if(c===gc||!GL.some(g=>g.c===c))return;stashS();let ns=null;try{ns=JSON.parse(localStorage.getItem(stKey(c))||"null")}catch(_){}
+ S=ns&&ns.players?ns:freshS();S.prof=S.prof||{};dropGroupPhotos();gc=c;try{localStorage.setItem(GKEY,c)}catch(_){}
+ const g=GL.find(x=>x.c===c);PZk=g&&g.p>=0&&g.p<4?g.p:0;try{localStorage.setItem("platelunch.prize",PZk)}catch(_){}
+ persist();gRender();renderShare();remRender();prizeRender();sync()}
 const gFmt=c=>c.slice(0,5)+"-"+c.slice(5);
 const gNorm=v=>String(v||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
 function toDoc(){return{pt:S.pt,rt:S.rt,nums:S.nums.slice(0,1),numT:S.numT||0,cs:S.cs||0,ce:S.ce||0,rmE:S.rmE,events:S.events.map(e=>{const{img,vid,...r}=e;return r})}}
@@ -1181,23 +1212,31 @@ const setCreator=v=>{try{v?localStorage.setItem(CKEY,"1"):localStorage.removeIte
 const hasPhoto=()=>ST.photos.some(p=>!p.al&&okImg(p.img));
 function remRender(){$("rem").hidden=!((!gc||isCreator())&&S.players.length>=2&&!hasPhoto())}
 $("remB").onclick=()=>$("stP").click();
-function setGc(c){gc=c;try{localStorage.setItem(GKEY,c)}catch(_){}gRender();renderShare();remRender()}
-function gLeaveLocal(){gc=null;setCreator(false);try{localStorage.removeItem(GKEY)}catch(_){}gRender();renderShare()}
-function gRender(){$("gOff").hidden=!!gc;$("gOn").hidden=!gc;
+function setGc(c){gc=c;try{localStorage.setItem(GKEY,c)}catch(_){}if(!GL.some(g=>g.c===c)){GL.push({c,p:PZk});saveGL()}gRender();renderShare();remRender()}
+function gLeaveLocal(){const old=gc;GL=GL.filter(g=>g.c!==old);saveGL();try{localStorage.removeItem(stKey(old))}catch(_){}
+ gc=null;setCreator(false);try{localStorage.removeItem(GKEY)}catch(_){}
+ if(GL.length){const n=GL[0].c;let ns=null;try{ns=JSON.parse(localStorage.getItem(stKey(n))||"null")}catch(_){}S=ns&&ns.players?ns:freshS();dropGroupPhotos();gc=n;try{localStorage.setItem(GKEY,n)}catch(_){}PZk=GL[0].p||0;persist();prizeRender();sync()}
+ gRender();renderShare()}
+function gRender(){const full=!!gc&&GL.length>=GMAX;$("gOff").hidden=full;$("gMore").hidden=!gc||full;$("gMore").textContent=gT(2);$("gOn").hidden=!gc;
+ if(gc){$("gSwT").textContent=gT(1).replace("{n}",GL.length);$("gSw").innerHTML=GL.map(g=>`<button type="button" class="ghost" data-gs="${g.c}" style="${g.c===gc?"background:var(--acc2);color:#fff;border-color:var(--acc2);font-weight:800":""}">${PZI[g.p]||"🍽️"} ${gFmt(g.c)}</button>`).join("")}
  if(gc){$("gC").textContent=gFmt(gc);const e=$("gSt");
   e.textContent=gSt.err?t("gErr"):(gSt.ok?t("gSync",new Date(gSt.ok).toLocaleTimeString(LG,{hour:"2-digit",minute:"2-digit"})):"");
   e.style.color=gSt.err?"var(--bad)":"var(--ok)"}}
-$("gNew").onclick=async()=>{try{const r=await fetch("/api/g",{method:"POST"});if(!r.ok)throw 0;const{code}=await r.json();setCreator(true);ST.photos.forEach(p=>{if(!p.id)p.id=rid();p.sh=true});saveST();setGc(code);sync()}catch(_){alert(t("gErr"))}};
+$("gNew").onclick=async()=>{if(GL.length>=GMAX){alert(gT(0));return}try{const r=await fetch("/api/g",{method:"POST"});if(!r.ok)throw 0;const{code}=await r.json();if(gc){stashS();S=freshS();dropGroupPhotos();PZk=0;try{localStorage.setItem("platelunch.prize",0)}catch(_){}}setCreator(true);ST.photos.forEach(p=>{if(!p.id)p.id=rid();p.sh=true});saveST();GL.push({c:code,p:PZk});saveGL();setGc(code);persist();sync()}catch(_){alert(t("gErr"))}};
 async function gJoinCode(raw){
  const c=gNorm(raw);if(!/^[A-Z2-9]{10}$/.test(c)){alert(t("gNotFound"));return}
+ if(GL.some(g=>g.c===c)){switchG(c);return}
+ if(GL.length>=GMAX){alert(gT(0));return}
  try{
   const r=await fetch("/api/g/"+c);
   if(r.status===404||r.status===400){alert(t("gNotFound"));return}
   if(!r.ok)throw 0;
-  const{doc}=await r.json(),has=S.players.length||S.events.length;
+  const{doc}=await r.json(),has=!gc&&(S.players.length||S.events.length);
   if(!confirm(t("gJoinQ",gFmt(c))+(has?"\n\n"+t("gReplaceQ"):"")))return;
-  S={players:[],nums:[],events:[],prof:S.prof||{},pt:{},rt:{},rmE:[],numT:0};applyDoc(doc);setCreator(false);setGc(c);persist();sync()}
+  if(gc){stashS();dropGroupPhotos();PZk=0;try{localStorage.setItem("platelunch.prize",0)}catch(_){}}
+  S=freshS();applyDoc(doc);setCreator(false);if(pendZ!=null){PZk=pendZ;pendZ=null}try{localStorage.setItem("platelunch.prize",PZk)}catch(_){}GL.push({c,p:PZk});saveGL();setGc(c);persist();sync()}
  catch(_){alert(t("gErr"))}}
+$("gSw").onclick=e=>{const b=e.target.closest("[data-gs]");if(b)switchG(b.dataset.gs)};
 $("gGo").onclick=()=>gJoinCode($("gIn").value);
 $("gIn").onkeydown=e=>{if(e.key==="Enter")gJoinCode($("gIn").value)};
 $("gLv").onclick=()=>{if(confirm(t("gLeaveQ")))gLeaveLocal()};
@@ -1300,7 +1339,7 @@ $("winB").onclick=winImg;
 /* ---- share links ---- */
 function shareInfo(){
  const base=/(^|\.)(goodplatehunting\.com|workers\.dev)$/.test(location.hostname)?location.origin:"https://goodplatehunting.com";
- const q=[];if(gc)q.push("join="+gc);if(S.nums[0])q.push("n="+S.nums[0]);return{url:q.length?base+"/?"+q.join("&"):base,text:(gc?t("gInvTxt"):t("shareTxt"))+" #GoodPlateHunting"}}
+ const q=[];if(gc){q.push("join="+gc);q.push("z="+PZk)}if(S.nums[0])q.push("n="+S.nums[0]);return{url:q.length?base+"/?"+q.join("&"):base,text:(gc?t("gInvTxt"):t("shareTxt"))+" #GoodPlateHunting"}}
 function renderShare(){
  const{url,text}=shareInfo(),u=encodeURIComponent(url),x=encodeURIComponent(text),both=encodeURIComponent(text+" "+url);
  $("spL").innerHTML=[["💬 WhatsApp","https://wa.me/?text="+both],["✈️ Telegram","https://t.me/share/url?url="+u+"&text="+x],["𝕏 X","https://twitter.com/intent/tweet?text="+x+"&url="+u],["📘 Facebook","https://www.facebook.com/sharer/sharer.php?u="+u],["✉️ Email","mailto:?subject="+encodeURIComponent("Good Plate Hunting")+"&body="+both]]
@@ -1313,21 +1352,20 @@ function xRender(){
  var M="mailto:hello@goodplatehunting.com?subject=";
 
  $("sbA").textContent=tx("sbAll");$("sbK").textContent=tx("sbWk");$("sbA").style.opacity=sbW?.55:1;$("sbK").style.opacity=sbW?1:.55;
- $("bdgL").textContent=tx("bdgL");$("vidT").textContent=tx("vidT");$("vidI").textContent=tx("vidI");$("capB").textContent=tx("capB");
+ $("bdgL").textContent=tx("bdgL");
 
  $("stM").textContent=$("stT").classList.contains("open")?tx("lessB"):tx("moreB");
  if(CHN){$("chB").hidden=false;$("chB").textContent=tx("chT",CHN)}}
 var CHN="";
 (function(){try{var u=new URL(location.href),n=(u.searchParams.get("n")||"").replace(/\D/g,"").slice(0,8);if(n.length>=3){CHN=n;u.searchParams.delete("n");history.replaceState(null,"",u.pathname+(u.search||"")+u.hash)}}catch(_){}})();
 $("sbA").onclick=function(){sbW=false;render();xRender()};$("sbK").onclick=function(){sbW=true;render();xRender()};
-$("capB").onclick=async function(){var x=tx("capTxt");try{await navigator.clipboard.writeText(x);toast(t("copied"))}catch(_){prompt("",x)}};
 $("stM").onclick=function(){$("stT").classList.toggle("open");xRender()};
 $("chB").onclick=function(){$("chB").hidden=true;CHN=""};
 
 var _al0=applyLang;applyLang=function(){_al0();xRender()};
 applyLang();
 (function(){if(S.players.length>=2&&S.nums.length>0){$("c1").open=false;$("c2").open=false;$("rulesD").open=false;document.querySelector("main").insertBefore($("c3"),$("startC").nextSibling)}})();
-(function(){try{const u=new URL(location.href),j=u.searchParams.get("join");if(j){u.searchParams.delete("join");history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);if(!(gc&&gNorm(j)===gc))setTimeout(()=>gJoinCode(j),600)}}catch(_){}})();
+(function(){try{const u=new URL(location.href),j=u.searchParams.get("join"),z=parseInt(u.searchParams.get("z"));if(z>=0&&z<4)pendZ=z;u.searchParams.delete("z");if(j){u.searchParams.delete("join");history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);if(!(gc&&gNorm(j)===gc))setTimeout(()=>gJoinCode(j),600)}}catch(_){}})();
 if(gc)sync();
 document.querySelectorAll(".belt-in").forEach(b=>{b.innerHTML+=b.innerHTML});
 </script></body></html>
