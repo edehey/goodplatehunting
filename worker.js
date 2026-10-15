@@ -25,7 +25,7 @@ const json=(o,s=200)=>new Response(JSON.stringify(o),{status:s,headers:{"content
 const str=(v,n)=>typeof v==="string"?v.replace(/[\u0000-\u001f<>]/g,"").slice(0,n):"";
 const num=v=>Number.isFinite(+v)?+v:0;
 
-function cleanMap(m){const o={};if(m&&typeof m==="object")for(const k of Object.keys(m).slice(0,60)){const n=str(k,24).trim();if(n)o[n]=num(m[k])}return o}
+function cleanMap(m){const o={};if(m&&typeof m==="object")for(const k of Object.keys(m).slice(0,12)){const n=str(k,24).trim();if(n)o[n]=num(m[k])}return o}
 function cleanEvent(e){
   if(!e||typeof e!=="object")return null;
   const id=str(e.id,40);if(!/^[A-Za-z0-9_-]{6,40}$/.test(id))return null;
