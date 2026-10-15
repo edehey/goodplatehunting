@@ -233,7 +233,6 @@ details.more>summary::after{content:" ▾"}details.more[open]>summary::after{con
 <details class="card step" id="c1" open><summary class="h2s"><span data-i="h1"></span><span class="sum" id="sum1"></span></summary><p class="empty" data-i="initInfo" style="margin:0 0 10px"></p>
 <div id="players" class="row" style="margin-bottom:10px"></div>
 <div class="row"><input id="pn" data-ph="phName" maxlength="24"><button id="addP" data-i="add"></button></div></details>
-<div class="drive" id="rem" hidden style="background:#e6efff"><span data-i="remT"></span><div style="margin-top:8px"><button id="remB" data-i="remBtn"></button></div></div>
 <div class="card" id="gcard"><h2 data-i="gT"></h2><div id="tone" class="row" style="margin:0 0 10px"></div><p class="empty" data-i="gInfo" style="margin:0 0 6px"></p><p class="empty" data-i="gAddN" style="margin:0 0 8px;font-weight:700"></p><p class="empty" data-i="gBig" style="margin:0 0 8px"></p><details style="margin-bottom:10px"><summary class="h2s" style="font-size:14px">ⓘ</summary><p class="empty" data-i="gPriv" style="margin:6px 0 0"></p></details>
 <p class="empty" id="gMore" style="margin:10px 0 6px;font-weight:700" hidden></p><div id="gOff"><div class="row"><button id="gNew" data-i="gCreate"></button></div>
 <div class="row" style="margin-top:8px"><input id="gIn" data-ph="gCode" maxlength="12" autocapitalize="characters" autocomplete="off" style="direction:ltr"><button id="gGo" data-i="gJoin"></button></div></div>
@@ -1329,8 +1328,8 @@ const CKEY="platelunch.creator";
 const isCreator=()=>{try{return localStorage.getItem(CKEY)==="1"}catch(_){return false}};
 const setCreator=v=>{try{v?localStorage.setItem(CKEY,"1"):localStorage.removeItem(CKEY)}catch(_){}};
 const hasPhoto=()=>ST.photos.some(p=>!p.al&&okImg(p.img));
-function remRender(){$("rem").hidden=!((!gc||isCreator())&&S.players.length>=2&&!hasPhoto())}
-$("remB").onclick=()=>$("stP").click();
+function remRender(){}
+
 function setGc(c){gc=c;try{localStorage.setItem(GKEY,c)}catch(_){}if(!GL.some(g=>g.c===c)){GL.push({c,p:PZk,pc:PZC});saveGL()}gRender();renderShare();remRender()}
 function gLeaveLocal(){const old=gc;GL=GL.filter(g=>g.c!==old);saveGL();try{localStorage.removeItem(stKey(old))}catch(_){}
  gc=null;setCreator(false);try{localStorage.removeItem(GKEY)}catch(_){}
