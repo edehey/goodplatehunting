@@ -1,3 +1,4 @@
+import {EmailMessage} from "cloudflare:email";
 // Good Plate Hunting: tiny API for shared hunt groups.
 // Static files are served by Cloudflare assets; only /api/* runs this code.
 // Storage: one KV entry per group ("g:<CODE>"). Photos and videos are never sent here.
@@ -13,9 +14,10 @@ function mergeDocs(a,b){
   const aT=A.numT||0,bT=B.numT||0;
   const la=(A.nums||[]).length,lb=(B.nums||[]).length;
   const pickA=aT>bT||(aT===bT&&(la>lb||(la===lb&&JSON.stringify(A.nums||[])>=JSON.stringify(B.nums||[]))));
+  const prof={};for(const m of[A.prof||{},B.prof||{}])for(const k in m)if(!prof[k]||(m[k].t||0)>(prof[k].t||0))prof[k]=m[k];
   const hA=(A.hhT||0)>=(B.hhT||0)?A:B;
   const pzA=(A.pzT||0)>=(B.pzT||0)?A:B,gnA=(A.gnT||0)>=(B.gnT||0)?A:B;
-  return{pt:mx(A.pt,B.pt),rt:mx(A.rt,B.rt),nums:(pickA?A.nums:B.nums)||[],numT:Math.max(aT,bT),cs:(pickA?A.cs:B.cs)||0,ce:(pickA?A.ce:B.ce)||0,hh:hA.hh||"",hhT:hA.hhT||0,pz:pzA.pz||0,pzc:pzA.pzc||"",pzT:pzA.pzT||0,gn:gnA.gn||"",gnT:gnA.gnT||0,rmE,hid,events};
+  return{pt:mx(A.pt,B.pt),rt:mx(A.rt,B.rt),nums:(pickA?A.nums:B.nums)||[],numT:Math.max(aT,bT),cs:(pickA?A.cs:B.cs)||0,ce:(pickA?A.ce:B.ce)||0,prof,hh:hA.hh||"",hhT:hA.hhT||0,pz:pzA.pz||0,pzc:pzA.pzc||"",pzT:pzA.pzT||0,gn:gnA.gn||"",gnT:gnA.gnT||0,rmE,hid,events};
 }
 /*ENDMERGE*/
 
@@ -28,6 +30,7 @@ const str=(v,n)=>typeof v==="string"?v.replace(/[\u0000-\u001f<>]/g,"").slice(0,
 const num=v=>Number.isFinite(+v)?+v:0;
 
 function cleanMap(m){const o={};if(m&&typeof m==="object")for(const k of Object.keys(m).slice(0,12)){const n=str(k,24).trim();if(n)o[n]=num(m[k])}return o}
+function cleanProf(m){const o={};if(m&&typeof m==="object")for(const k of Object.keys(m).slice(0,12)){const n=str(k,24).trim(),r=m[k];if(!n||!r||typeof r!=="object")continue;const img=typeof r.img==="string"&&r.img.length<=16000&&IMG_RE.test(r.img)?r.img:"";const bio=str(r.bio,140);if(img||bio)o[n]={img,bio,t:num(r.t)}}return o}
 function cleanEvent(e){
   if(!e||typeof e!=="object")return null;
   const id=str(e.id,40);if(!/^[A-Za-z0-9_-]{6,40}$/.test(id))return null;
@@ -43,7 +46,7 @@ function cleanEvent(e){
 function clean(d){
   d=d&&typeof d==="object"?d:{};
   const nums=(Array.isArray(d.nums)?d.nums:[]).slice(0,1).map(x=>str(x,8).toUpperCase().replace(/[^A-Z0-9]/g,"")).filter(Boolean);
-  return{pt:cleanMap(d.pt),rt:cleanMap(d.rt),nums,numT:num(d.numT),cs:num(d.cs),ce:num(d.ce),hh:str(d.hh,40),hhT:num(d.hhT),pz:Math.max(0,Math.min(6,Math.floor(num(d.pz)))),pzc:str(d.pzc,30),pzT:num(d.pzT),gn:str(d.gn,30),gnT:num(d.gnT),
+  return{prof:cleanProf(d.prof),pt:cleanMap(d.pt),rt:cleanMap(d.rt),nums,numT:num(d.numT),cs:num(d.cs),ce:num(d.ce),hh:str(d.hh,40),hhT:num(d.hhT),pz:Math.max(0,Math.min(6,Math.floor(num(d.pz)))),pzc:str(d.pzc,30),pzT:num(d.pzT),gn:str(d.gn,30),gnT:num(d.gnT),
     rmE:(Array.isArray(d.rmE)?d.rmE:[]).slice(0,3000).map(x=>str(x,40)).filter(Boolean),
     hid:(Array.isArray(d.hid)?d.hid:[]).slice(-500).map(x=>str(x,40)).filter(Boolean),
     events:(Array.isArray(d.events)?d.events:[]).slice(0,2000).map(cleanEvent).filter(Boolean),
@@ -77,8 +80,30 @@ async function pushGroup(env,code,skipDv){
 const RL=new Map();
 function limited(req,k,max,ms){const ip=req.headers.get("cf-connecting-ip")||"x",key=k+"|"+ip,now=Date.now();let a=(RL.get(key)||[]).filter(t=>now-t<ms);a.push(now);RL.set(key,a);if(RL.size>5000)for(const [kk,v] of RL)if(!v.length||now-v[v.length-1]>ms)RL.delete(kk);return a.length>max}
 const too=()=>json({error:"slow down"},429);
-const EVS=["open","spot","gnew","gjoin","share","report","wk"];
+const EVS=["open","spot","gnew","gjoin","share","report","wk","mob","desk","pwa"];
 async function stat(env,e){const k="st:"+new Date().toISOString().slice(0,10);let o={};try{o=JSON.parse(await env.GROUPS.get(k)||"{}")}catch(_){}o[e]=(o[e]||0)+1;await env.GROUPS.put(k,JSON.stringify(o),{expirationTtl:60*60*24*400})}
+
+// ---- Daily digest email (cron) ----
+const day=d=>new Date(d).toISOString().slice(0,10);
+const b64=s=>{const b=new TextEncoder().encode(s);let o="";for(const x of b)o+=String.fromCharCode(x);return btoa(o)};
+async function digestText(env){
+  const now=Date.now(),t=day(now),y=day(now-864e5),rd=async k=>{try{return JSON.parse(await env.GROUPS.get("st:"+k)||"{}")}catch(_){return{}}};
+  const T=await rd(t),Y=await rd(y);
+  const line=(l,k)=>l.padEnd(22)+String(T[k]||0).padStart(6)+String(Y[k]||0).padStart(12);
+  const m=(o)=>{const a=(o.mob||0)+(o.pwa||0)+(o.desk||0);return a?Math.round(((o.mob||0)+(o.pwa||0))/a*100)+"%":"-"};
+  let groups="?";try{const l=await env.GROUPS.list({prefix:"g:",limit:1000});groups=l.keys.length+(l.list_complete?"":"+")}catch(_){}
+  return["Good Plate Hunting - daily report","",
+    "                        today*   yesterday",
+    line("Visitors (app opens)","open"),line("  on mobile (browser)","mob"),line("  installed app","pwa"),line("  on desktop","desk"),
+    "  share on mobile".padEnd(22)+m(T).padStart(6)+m(Y).padStart(12),"",
+    line("Plates spotted","spot"),line("New groups","gnew"),line("Group joins","gjoin"),line("Shares","share"),line("Individual game","wk"),line("Reports","report"),"",
+    "Groups stored: "+groups,"","* today = since 00:00 UTC (until this email was sent)","Dates: today "+t+", yesterday "+y,"","Full overview: https://www.goodplatehunting.com/stats.html"].join("\n")}
+async function sendDigest(env){
+  const to=env.DIGEST_TO,from=env.DIGEST_FROM||"report@goodplatehunting.com";
+  if(!env.MAIL||!to)return{ok:false,error:"MAIL binding or DIGEST_TO missing"};
+  const body=await digestText(env),subj="Good Plate Hunting - report "+day(Date.now());
+  const raw=["From: Good Plate Hunting <"+from+">","To: "+to,"Subject: =?UTF-8?B?"+b64(subj)+"?=","Date: "+new Date().toUTCString(),"Message-ID: <"+crypto.randomUUID()+"@goodplatehunting.com>","MIME-Version: 1.0","Content-Type: text/plain; charset=UTF-8","Content-Transfer-Encoding: base64","",b64(body).replace(/(.{76})/g,"$1\r\n")].join("\r\n");
+  await env.MAIL.send(new EmailMessage(from,to,raw));return{ok:true}}
 
 function newCode(){const b=crypto.getRandomValues(new Uint8Array(10));return[...b].map(x=>ALPHA[x%ALPHA.length]).join("")}
 
@@ -92,6 +117,9 @@ async function api(req,env,url,ctx){
   if(p[1]==="stats"&&req.method==="GET"){
     if(!env.STATS_KEY||url.searchParams.get("k")!==env.STATS_KEY)return json({error:"not found"},404);
     const l=await env.GROUPS.list({prefix:"st:"}),o={};for(const x of l.keys)o[x.name.slice(3)]=JSON.parse(await env.GROUPS.get(x.name)||"{}");return json(o)}
+  if(p[1]==="digest"&&req.method==="GET"){
+    if(!env.STATS_KEY||url.searchParams.get("k")!==env.STATS_KEY)return json({error:"not found"},404);
+    try{return json(await sendDigest(env))}catch(e){return json({ok:false,error:String(e&&e.message||e)},500)}}
   if(p[1]==="vapid"&&req.method==="GET")return json({pub:(await vapid(env)).pub});
   if(p[1]!=="g")return json({error:"not found"},404);
   if(p.length===2){
@@ -158,6 +186,7 @@ async function api(req,env,url,ctx){
   return json({error:"not found"},404)}
 
 export default{
+  async scheduled(event,env,ctx){ctx.waitUntil(sendDigest(env).catch(()=>{}))},
   async fetch(req,env,ctx){
     const url=new URL(req.url);
     if(url.pathname.startsWith("/api/")){try{return await api(req,env,url,ctx)}catch(e){return json({error:"server"},500)}}
