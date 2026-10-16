@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Hunt Stats</title>
+<style>
+:root{--bg:#fff7e6;--card:#fff;--ink:#1b1b1f;--mut:#6b6b76;--blue:#2740c9;--y:#ffd21f;--ln:#eadfc4}
+@media(prefers-color-scheme:dark){:root{--bg:#14141a;--card:#1f1f28;--ink:#f2f2f5;--mut:#a0a0ad;--blue:#8fa2ff;--ln:#33333f}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,sans-serif;padding:16px;max-width:760px;margin-inline:auto}
+h1{font-size:22px;margin:4px 0 14px}.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:inset 0 5px 0 var(--y)}
+.card h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:6px 0 10px}
+input,button,select{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--ink)}
+button{background:var(--blue);color:#fff;border:0;font-weight:700;cursor:pointer}
+.row{display:flex;gap:8px}.row input{flex:1;min-width:0}
+.k{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.k div{background:var(--bg);border-radius:12px;padding:10px;text-align:center}
+.k b{display:block;font-size:24px}.k span{font-size:12px;color:var(--mut)}
+.bars{display:flex;align-items:flex-end;gap:2px;height:110px;margin-top:6px}.bars i{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px}
+.ax{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;text-align:right;border-bottom:1px solid var(--ln)}th:first-child,td:first-child{text-align:left;white-space:nowrap}th{color:var(--mut);font-weight:600;font-size:12px}
+.mut{color:var(--mut);font-size:13px}.err{color:#d33;font-weight:700}.wrap{overflow-x:auto}
+</style></head><body>
+<h1>📊 Good Plate Hunting – stats</h1>
+<div class="card" id="login"><h2>Private key</h2><div class="row"><input id="key" type="password" placeholder="Your STATS_KEY" autocomplete="off"><button id="go">Show</button></div><p class="err" id="err"></p></div>
+<div id="out" hidden>
+<div class="card"><h2>Period</h2><select id="per"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option><option value="400">All</option></select></div>
+<div class="card"><h2>Totals</h2><div class="k" id="tot"></div></div>
+<div class="card"><h2>App opens per day</h2><div class="bars" id="bars"></div><div class="ax"><span id="a1"></span><span id="a2"></span></div></div>
+<div class="card"><h2>Per day</h2><div class="wrap"><table id="tb"></table></div></div>
+<div class="card"><h2>Countries</h2><p class="mut">Not recorded by the game. See Cloudflare dashboard → your site → Analytics &amp; Logs → Traffic.</p></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const COLS=[["open","Opens"],["mob","Mobile"],["desk","Desktop"],["pwa","App"],["spot","Spots"],["gnew","New groups"],["gjoin","Joins"],["share","Shares"],["wk","Indiv."],["report","Reports"]];
+let DATA=null;
+function draw(){
+ const n=+$("per").value,days=Object.keys(DATA).sort().slice(-n),sum=k=>days.reduce((a,d)=>a+(DATA[d][k]||0),0);
+ $("tot").innerHTML=COLS.map(([k,l])=>`<div><b>${sum(k)}</b><span>${l}</span></div>`).join("")+(()=>{const m=sum("mob")+sum("pwa"),a=m+sum("desk");return `<div><b>${a?Math.round(m/a*100):0}%</b><span>On mobile</span></div>`})();
+ const mx=Math.max(1,...days.map(d=>DATA[d].open||0));
+ $("bars").innerHTML=days.map(d=>`<i title="${d}: ${DATA[d].open||0}" style="height:${Math.round((DATA[d].open||0)/mx*100)}%"></i>`).join("");
+ $("a1").textContent=days[0]||"";$("a2").textContent=days[days.length-1]||"";
+ $("tb").innerHTML="<tr><th>Day</th>"+COLS.map(c=>`<th>${c[1]}</th>`).join("")+"</tr>"+days.slice().reverse().map(d=>`<tr><td>${d.slice(5)}</td>`+COLS.map(([k])=>`<td>${DATA[d][k]||0}</td>`).join("")+"</tr>").join("");
+}
+async function load(k){
+ $("err").textContent="";
+ try{const r=await fetch("/api/stats?k="+encodeURIComponent(k),{cache:"no-store"});
+  if(!r.ok)throw 0;DATA=await r.json();
+  try{sessionStorage.setItem("gphk",k)}catch(_){}
+  $("login").hidden=true;$("out").hidden=false;draw()}
+ catch(_){$("err").textContent="Wrong key, or STATS_KEY is not set on the Worker.";$("login").hidden=false}}
+$("go").onclick=()=>load($("key").value.trim());
+$("key").onkeydown=e=>{if(e.key==="Enter")$("go").click()};
+$("per").onchange=draw;
+try{const k=sessionStorage.getItem("gphk");if(k)load(k)}catch(_){}
+</script></body></html>

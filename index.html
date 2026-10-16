@@ -1564,7 +1564,7 @@ $("wkGo").onclick=()=>{const who=$("wkWho").value,v=$("wkPl").value.toUpperCase(
  S.events.push({id:rid(),t:"wk",who,plate:wn+"•••",w:wi,ts:Date.now()});$("wkPl").value="";confetti();balloons();toast("🏅 "+who.toUpperCase());ev("wk");save()};
 $("nudgeX").onclick=()=>{try{localStorage.setItem("platelunch.nudge",new Date().toDateString())}catch(_){}$("nudge").hidden=true};
 $("tone").onclick=e=>{const b=e.target.closest("[data-tn]");if(!b)return;const i=+b.dataset.tn;tone=tone===i?-1:i;try{localStorage.setItem("platelunch.tone",tone)}catch(_){}toneRender();renderShare()};
-ev("open");
+ev("open");try{const _u=navigator.userAgent,_p=matchMedia("(display-mode: standalone)").matches||navigator.standalone;ev(_p?"pwa":(/Mobi|Android|iPhone|iPad|iPod/i.test(_u)||(navigator.maxTouchPoints>1&&innerWidth<900))?"mob":"desk")}catch(_){}
 (function(){const el=document.getElementById("heroNum");if(!el)return;
  const base=["7215","KLM 9","B 305","2937","٢٧٤٩","日 5-27","7 GPH 41","กข 6184","AB 12","3158","西 0526","가 7406","XK-92","OZ 8830","0426","Ж 482"];let i=0;
  const bg=document.getElementById("heroBlur");

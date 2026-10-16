@@ -91,17 +91,14 @@ async function digestText(env){
   const T=await rd(t),Y=await rd(y);
   const line=(l,k)=>l.padEnd(22)+String(T[k]||0).padStart(6)+String(Y[k]||0).padStart(12);
   const m=(o)=>{const a=(o.mob||0)+(o.pwa||0)+(o.desk||0);return a?Math.round(((o.mob||0)+(o.pwa||0))/a*100)+"%":"-"};
-  let groups="?";try{const l=await env.GROUPS.list({prefix:"g:",limit:1000});groups=l.keys.length+(l.list_complete?"":"+")}catch(_){}
-  return["Good Plate Hunting - daily report","",
+  return["Good Plate Hunting - visitors","",
     "                        today*   yesterday",
     line("Visitors (app opens)","open"),line("  on mobile (browser)","mob"),line("  installed app","pwa"),line("  on desktop","desk"),
-    "  share on mobile".padEnd(22)+m(T).padStart(6)+m(Y).padStart(12),"",
-    line("Plates spotted","spot"),line("New groups","gnew"),line("Group joins","gjoin"),line("Shares","share"),line("Individual game","wk"),line("Reports","report"),"",
-    "Groups stored: "+groups,"","* today = since 00:00 UTC (until this email was sent)","Dates: today "+t+", yesterday "+y,"","Full overview: https://www.goodplatehunting.com/stats.html"].join("\n")}
+    "  share on mobile".padEnd(22)+m(T).padStart(6)+m(Y).padStart(12),"","* today = since 00:00 UTC"].join("\n")}
 async function sendDigest(env){
   const to=env.DIGEST_TO,from=env.DIGEST_FROM||"report@goodplatehunting.com";
   if(!env.MAIL||!to)return{ok:false,error:"MAIL binding or DIGEST_TO missing"};
-  const body=await digestText(env),subj="Good Plate Hunting - report "+day(Date.now());
+  const body=await digestText(env),subj="Good Plate Hunting - visitors "+day(Date.now());
   const raw=["From: Good Plate Hunting <"+from+">","To: "+to,"Subject: =?UTF-8?B?"+b64(subj)+"?=","Date: "+new Date().toUTCString(),"Message-ID: <"+crypto.randomUUID()+"@goodplatehunting.com>","MIME-Version: 1.0","Content-Type: text/plain; charset=UTF-8","Content-Transfer-Encoding: base64","",b64(body).replace(/(.{76})/g,"$1\r\n")].join("\r\n");
   await env.MAIL.send(new EmailMessage(from,to,raw));return{ok:true}}
 
