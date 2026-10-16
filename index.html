@@ -34,7 +34,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-app
 main{max-width:560px;margin:0 auto;padding:16px}
 h1{font-size:26px;margin:4px 0 2px}
 .sub{color:var(--mut);margin:0 0 16px}
-.card{background:var(--card);border:0;border-radius:22px;box-shadow:0 8px 24px rgba(18,48,143,.09);padding:14px;margin-bottom:14px}
+.card{background:var(--card);border:0;border-radius:22px;box-shadow:inset 0 5px 0 #ffd21f,0 8px 24px rgba(18,48,143,.09);padding:14px;margin-bottom:14px}
 h2{font-size:15px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;color:var(--acc2)}
 .plate{display:inline-block;background:#fff;color:#111;border:3px solid #111;border-radius:8px;padding:2px 10px;font:700 20px/1.3 ui-monospace,monospace;letter-spacing:.08em;position:relative;padding-left:26px}
 .plate:before{content:"E";position:absolute;left:0;top:0;bottom:0;width:18px;background:#1f4fd8;color:#fc0;font-size:11px;display:flex;align-items:center;justify-content:center}
@@ -87,7 +87,7 @@ button.star{background:transparent;color:#f5a300;font-size:30px;padding:0 4px;li
 .qrbox{text-align:center;margin-top:12px}.qrbox svg{width:200px;max-width:70%;height:auto;border:3px solid #ffd21f;border-radius:12px;display:block;margin:0 auto 6px}
 html{-webkit-text-size-adjust:100%}button,summary,label.up,a.up,select{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 summary{min-height:44px;display:flex;flex-direction:column;justify-content:center}details.more>summary{display:block}details#howd>summary,#gcard details>summary{min-width:44px}
-.getapp{position:relative;border:3px solid #ffd21f}.getapp h2{padding-inline-end:36px}.gax{position:absolute;top:8px;inset-inline-end:8px;width:40px;height:40px;padding:0;border-radius:50%;background:transparent;color:var(--mut);border:1px solid var(--line);font-size:16px}
+.getapp{position:relative}.getapp h2{padding-inline-end:36px}.gax{position:absolute;top:8px;inset-inline-end:8px;width:40px;height:40px;padding:0;border-radius:50%;background:transparent;color:var(--mut);border:1px solid var(--line);font-size:16px}
 #rvS button,#rvS span{font-size:30px;min-width:44px;min-height:44px}
 .steps{display:flex;gap:8px}.start h2{margin-bottom:8px}.steps a{flex:1;text-decoration:none;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:8px 4px;text-align:center;font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.2}.steps a b{width:26px;height:26px;border-radius:50%;background:#ffd21f;border:2px solid #111;display:flex;align-items:center;justify-content:center;color:#111}.steps a.done span::after{content:" ✓";color:var(--ok)}.steps a.done{border-color:var(--ok)}.steps a.done b{background:var(--ok);color:#fff;border-color:var(--ok)}
 .sum{display:block;text-transform:none;letter-spacing:0;font-weight:600;color:var(--mut);font-size:13px;margin-top:2px;overflow-wrap:anywhere}.step>summary{margin-bottom:8px}.step:not([open])>summary{margin-bottom:0}
@@ -106,13 +106,13 @@ details.more>summary{list-style:none;cursor:pointer;text-align:center;font-weigh
 .thm[aria-pressed="true"]{background:linear-gradient(90deg,#1b1f4d,#3a2f7a)}
 .thm[aria-pressed="true"] .kn{transform:translateX(32px);background:#f3f1e0;box-shadow:inset -8px -3px 0 0 #c9c6b0,0 0 10px 2px rgba(243,241,224,.55)}
 .thm[aria-pressed="true"] .st{opacity:1}.thm[aria-pressed="true"] .cl{opacity:0}
-.showc{border-top:6px solid #ffd21f}.showg{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px}.showg figure{margin:0;flex:0 0 72%;max-width:320px;scroll-snap-align:center}.showg img{width:100%;height:210px;object-fit:cover;border-radius:14px;border:3px solid #ffd21f;display:block;cursor:zoom-in}
+.showg{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px}.showg figure{margin:0;flex:0 0 72%;max-width:320px;scroll-snap-align:center}.showg img{width:100%;height:210px;object-fit:cover;border-radius:14px;border:3px solid #ffd21f;display:block;cursor:zoom-in}
 #ssD{padding:8px;max-width:96vw;width:min(96vw,520px)}#ssD img{width:100%;max-height:68vh;object-fit:contain;background:#111;border-radius:14px;display:block;touch-action:pan-y}#ssD .row button{min-width:48px;font-size:20px}
 #lbD{padding:8px;max-width:96vw;width:auto}#lbD img{max-width:100%;max-height:82vh;border-radius:14px;display:block;margin:0 auto}
 .albh{margin:16px 0 4px;font-size:16px;color:var(--acc2)}.gal:empty{margin:0}
 .carh{font-weight:800;color:var(--acc2);margin:12px 0 6px}
 .carp{width:100%;max-height:280px;object-fit:contain;background:var(--bg);border-radius:14px;border:3px solid #ffd21f;display:block}
-.rules{border-top:6px solid #ffd21f}
+
 .rules ol{list-style:none;margin:0;padding:0;display:grid;gap:9px;counter-reset:r}
 .rules li{counter-increment:r;position:relative;padding-inline-start:38px;min-height:28px;font-size:14px;line-height:1.4}
 .rules li:before{content:counter(r);position:absolute;inset-inline-start:0;top:0;width:26px;height:26px;border-radius:50%;background:#ffd21f;color:#111;border:2px solid #111;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 0 #111}
@@ -169,7 +169,7 @@ body,.card,.hero{transition:background-color .5s,color .5s,border-color .5s}
 :root[data-theme="dark"] .hero .veh{color:#ffe9a8}
 :root[data-theme="dark"] .road{border-bottom-color:rgba(255,255,255,.2)}
 :root[data-theme="dark"] .road span,:root[data-theme="dark"] .sky span{filter:brightness(.85) drop-shadow(0 0 6px rgba(255,255,255,.25))}
-:root[data-theme="dark"] .card{box-shadow:0 2px 14px rgba(0,0,0,.45);border-color:var(--line)}
+:root[data-theme="dark"] .card{box-shadow:inset 0 5px 0 #ffd21f,0 2px 14px rgba(0,0,0,.45);border-color:var(--line)}
 :root[data-theme="dark"] .hero>button.thm{border-color:rgba(255,255,255,.7)}
 :root[data-theme="dark"] .thm .st{animation:twk 2s ease-in-out infinite}
 :root[data-theme="dark"] input,:root[data-theme="dark"] textarea{background:#1c1b24;color:var(--ink);border-color:var(--line)}
@@ -221,7 +221,7 @@ button,.ghost,.share,a.up,select{min-height:44px}
 <div class="hero">
 <button class="thm" id="thm" type="button" aria-label="Day / night mode" aria-pressed="false"><span class="cl">☁️</span><span class="st">✨</span><span class="kn"></span></button><div class="langw"><select id="lang" class="lang" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ca">Català</option><option value="nl">Nederlands</option><option value="id">Bahasa Indonesia</option><option value="ar">العربية</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pt">Português</option><option value="tr">Türkçe</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="zh">中文</option></select></div>
 <div class="belt" aria-hidden="true"><div class="belt-in"><span class="set"><b class="pp"><i>E</i>7215 KLM</b><b class="pp yl"><i>NL</i>XK-92-LP</b><b class="pp us"><small>SUNNY STATE</small>HUN·2937</b><b class="pp bk">M AB 6071</b><b class="pp"><i>D</i>HH-GP 318</b><b class="pp gn">EV·0526</b><b class="pp">あ 12-90</b><b class="pp rd">FUN 123</b></span></div></div>
-<svg viewBox="36 160 580 240" role="img" aria-label="Good Plate Hunting"><defs><clipPath id="c2"><rect x="56" y="170" width="540" height="150" rx="24"/></clipPath></defs><g><circle cx="128" cy="322" r="30" fill="#111"/><circle cx="128" cy="322" r="12" fill="#ffd21f"/><circle cx="524" cy="322" r="30" fill="#111"/><circle cx="524" cy="322" r="12" fill="#ffd21f"/></g><rect x="56" y="170" width="540" height="150" rx="24" fill="#fff"/><g clip-path="url(#c2)"><rect x="56" y="170" width="58" height="150" fill="#1f4fd8"/></g><g fill="#ffd21f"><circle cx="85" cy="212" r="5"/><circle cx="85" cy="278" r="5"/><circle cx="68" cy="245" r="5"/><circle cx="102" cy="245" r="5"/><circle cx="74" cy="223" r="5"/><circle cx="96" cy="223" r="5"/><circle cx="74" cy="267" r="5"/><circle cx="96" cy="267" r="5"/></g><rect x="56" y="170" width="540" height="150" rx="24" fill="none" stroke="#111" stroke-width="10"/><text id="heroNum" x="355" y="270" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-weight="800" font-size="80" fill="#111" letter-spacing="2" style="transition:opacity .35s">4830</text><g fill="#9a9a9a"><rect x="422" y="208" width="26" height="26"/><rect x="448" y="234" width="26" height="26" fill="#c4c4c4"/><rect x="474" y="208" width="26" height="26" fill="#bbb"/><rect x="422" y="260" width="26" height="26" fill="#bbb"/><rect x="474" y="260" width="26" height="26"/></g><circle cx="400" cy="248" r="96" fill="#ffd21f" fill-opacity=".18" stroke="#ffd21f" stroke-width="24"/><line x1="468" y1="316" x2="524" y2="378" stroke="#ffd21f" stroke-width="34" stroke-linecap="round"/><g fill="#ffd21f"><path class="tw" d="M64 170Q64 184 78 184Q64 184 64 198Q64 184 50 184Q64 184 64 170Z"/><path class="tw" style="animation-delay:.5s" d="M602 186Q602 196 612 196Q602 196 602 206Q602 196 592 196Q602 196 602 186Z"/><path class="tw" style="animation-delay:1s" d="M46 363Q46 372 55 372Q46 372 46 381Q46 372 37 372Q46 372 46 363Z"/></g></svg>
+<svg viewBox="36 160 580 240" role="img" aria-label="Good Plate Hunting"><defs><clipPath id="hc2"><rect x="56" y="170" width="540" height="150" rx="24"/></clipPath></defs><g><circle cx="128" cy="322" r="30" fill="#111"/><circle cx="128" cy="322" r="12" fill="#ffd21f"/><circle cx="524" cy="322" r="30" fill="#111"/><circle cx="524" cy="322" r="12" fill="#ffd21f"/></g><rect x="56" y="170" width="540" height="150" rx="24" fill="#fff"/><g clip-path="url(#hc2)"><rect x="56" y="170" width="58" height="150" fill="#1f4fd8"/></g><g fill="#ffd21f"><circle cx="85" cy="212" r="5"/><circle cx="85" cy="278" r="5"/><circle cx="68" cy="245" r="5"/><circle cx="102" cy="245" r="5"/><circle cx="74" cy="223" r="5"/><circle cx="96" cy="223" r="5"/><circle cx="74" cy="267" r="5"/><circle cx="96" cy="267" r="5"/></g><rect x="56" y="170" width="540" height="150" rx="24" fill="none" stroke="#111" stroke-width="10"/><text id="heroNum" x="355" y="270" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-weight="800" font-size="80" fill="#111" letter-spacing="2" style="transition:opacity .35s">4830</text><g fill="#9a9a9a"><rect x="422" y="208" width="26" height="26"/><rect x="448" y="234" width="26" height="26" fill="#c4c4c4"/><rect x="474" y="208" width="26" height="26" fill="#bbb"/><rect x="422" y="260" width="26" height="26" fill="#bbb"/><rect x="474" y="260" width="26" height="26"/></g><circle cx="400" cy="248" r="96" fill="#ffd21f" fill-opacity=".18" stroke="#ffd21f" stroke-width="24"/><line x1="468" y1="316" x2="524" y2="378" stroke="#ffd21f" stroke-width="34" stroke-linecap="round"/><g fill="#ffd21f"><path class="tw" d="M64 170Q64 184 78 184Q64 184 64 198Q64 184 50 184Q64 184 64 170Z"/><path class="tw" style="animation-delay:.5s" d="M602 186Q602 196 612 196Q602 196 602 206Q602 196 592 196Q602 196 602 186Z"/><path class="tw" style="animation-delay:1s" d="M46 363Q46 372 55 372Q46 372 46 381Q46 372 37 372Q46 372 46 363Z"/></g></svg>
 <h1>GOOD PLATE <span>HUNTING</span></h1>
 <p class="sub" data-i="tag"></p>
 <p class="sub veh" data-i="vehL"></p><p class="sub" id="ageB" style="font-weight:800;margin:2px 0 6px"></p>
@@ -305,7 +305,7 @@ button,.ghost,.share,a.up,select{min-height:44px}
 
 <div class="card shr" style="margin-top:12px;text-align:center;padding:14px 14px 12px;background:linear-gradient(135deg,#3b6bff,#6a2bd9);border:0;color:#fff;overflow:hidden;position:relative"><div aria-hidden="true" style="font-size:22px;letter-spacing:6px;margin:0 0 4px">🚗 🛵 🚌 🚕</div><p style="margin:0 0 10px;font-weight:800;font-size:15px;line-height:1.3;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2)" data-i="likeT"></p><div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap"><button class="share" id="share2" data-i="share" style="font-size:13px;padding:4px 14px;margin:0;min-height:36px;height:36px;width:auto;box-shadow:0 3px 0 #111"></button><a id="ttB" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0;box-shadow:0 3px 0 rgba(0,0,0,.45)">🎵 TikTok</a></div><p style="margin:10px auto 0;display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px">#GoodPlateHunting · goodplatehunting.com</p></div>
 <div class="drive sm" role="note" data-i="drive"></div>
-<div class="card legal"><p id="cnT" style="font-weight:700;margin-bottom:8px"></p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px"><a id="cnB" href="#" role="button" style="display:inline-block;margin:0;padding:8px 16px;border:2px solid var(--acc2);border-radius:999px;color:var(--acc2);font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="ttF" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a></div><details id="lgD"><summary class="h2s" id="lgS" style="font-size:12px;cursor:pointer"></summary><div style="margin-top:8px"><p data-i="disc"></p><p data-i="priv"></p><p data-i="priv2"></p><a id="rmBtn" href="#" data-i="rmBtn"></a></div></details></div>
+<div class="card legal"><p id="cnT" style="font-weight:700;margin-bottom:8px"></p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px"><a id="cnB" href="#" role="button" style="display:inline-block;margin:0;padding:8px 16px;border:2px solid var(--acc2);border-radius:999px;color:var(--acc2);font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="ttF" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="waF" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a></div><details id="lgD"><summary class="h2s" id="lgS" style="font-size:12px;cursor:pointer"></summary><div style="margin-top:8px"><p data-i="disc"></p><p data-i="priv"></p><p data-i="priv2"></p><a id="rmBtn" href="#" data-i="rmBtn"></a></div></details></div>
 <p style="text-align:center;font-size:12px;color:var(--mut,#6b7280);margin:8px 0 24px">© 2026 Eliza de Heij · Good Plate Hunting™ · All rights reserved</p>
 </main>
 <dialog id="pd"><div style="text-align:center"><label style="cursor:pointer;display:block"><img id="pdA" class="ava big" alt=""><span class="up" style="font-size:13px;padding:4px 12px" data-i="pfPhoto"></span><input id="pdF" type="file" accept="image/*" hidden></label><h2 id="pdN" style="margin:10px 0 2px"></h2><div id="pdI"></div></div><textarea id="pdB" rows="3" maxlength="140" data-ph="pfBio" style="margin-top:10px"></textarea><div id="pdS" style="font-size:14px;margin-bottom:12px"></div><div class="row"><button id="pdSave" data-i="pfSave"></button><button class="ghost" id="pdX" data-i="pfClose"></button></div></dialog>
@@ -330,7 +330,7 @@ addTwo:"Add at least two people",addNum:"Add a number",noPl:"No hunters yet",all
 owes:(a,b,n)=>`<b>${a}</b> owes <b>${b}</b> ${n} lunch${n>1?"es":""}`,spotW:"spotted",treatW:"treated",
 setup:"Add at least 2 hunters and 1 number first",needPlate:"Please type the full plate (like 4830 FDY) so we can check it.",
 badFmt:"That doesn't look like a plate. Type the full plate with at least 3 numbers, from any country.",numMin:"Use at least 3 numbers (digits only). Letters don't count.",
-wrongNum:n=>`Rejected ❌ This plate doesn't contain your number ${n}.`,dbl:w=>`This car was already counted 🚫 ${w} spotted it first, so no double lunches!`,photoDup:w=>`This photo looks like one ${w} already uploaded. Count it anyway?`,noBlur:"You haven't blurred anything yet. Save the photo as is?",
+wrongNum:n=>`Rejected ❌ This plate doesn't contain your number ${n}.`,dbl:w=>`This car was already counted 🚫 ${w} spotted it first, so no double wins!`,photoDup:w=>`This photo looks like one ${w} already uploaded. Count it anyway?`,noBlur:"You haven't blurred anything yet. Save the photo as is?",
 old:"Rejected ❌ This photo was taken more than 2 days ago. Please take a fresh one.",edited:s=>`Rejected ❌ This photo was edited with ${s}. Please use the original camera photo.`,noMeta:"This photo has no camera information (it may be a screenshot or edited). Count it anyway?",
 pcOk:d=>`✅ Camera photo, taken ${d}`,pcOld:"❌ Photo older than 2 days",pcEd:s=>`❌ Edited with ${s}`,pcNo:"⚠️ No camera info (screenshot or edited?)",
 toast:w=>`Lunch earned! 🍽️ ${w} wins`,del:"Delete",delQ:"Delete this entry?",shareTxt:"I'm hunting number plates for free lunches! Can you beat me?",copied:"Link copied 📋",
@@ -343,7 +343,7 @@ addTwo:"Añade al menos dos personas",addNum:"Añade un número",noPl:"Aún no h
 owes:(a,b,n)=>`<b>${a}</b> debe <b>${b}</b> ${n} almuerzo${n>1?"s":""}`,spotW:"vio",treatW:"invitó a",
 setup:"Añade al menos 2 cazadores y 1 número primero",needPlate:"Escribe la matrícula completa (como 4830 FDY) para poder comprobarla.",
 badFmt:"Eso no parece una matrícula. Escribe la matrícula completa con al menos 3 números, de cualquier país.",numMin:"Usa al menos 3 números (solo cifras). Las letras no cuentan.",
-wrongNum:n=>`Rechazado ❌ Esta matrícula no contiene tu número ${n}.`,dbl:w=>`Este coche ya se contó 🚫 ¡${w} lo vio primero, nada de almuerzos dobles!`,photoDup:w=>`Esta foto se parece a otra que ya subió ${w}. ¿Contarla de todos modos?`,noBlur:"Aún no has difuminado nada. ¿Guardar la foto tal cual?",
+wrongNum:n=>`Rechazado ❌ Esta matrícula no contiene tu número ${n}.`,dbl:w=>`Este coche ya se contó 🚫 ¡${w} lo vio primero, así que no hay premios dobles!`,photoDup:w=>`Esta foto se parece a otra que ya subió ${w}. ¿Contarla de todos modos?`,noBlur:"Aún no has difuminado nada. ¿Guardar la foto tal cual?",
 old:"Rechazado ❌ Esta foto se hizo hace más de 2 días. Haz una nueva.",edited:s=>`Rechazado ❌ Esta foto fue editada con ${s}. Usa la foto original de la cámara.`,noMeta:"Esta foto no tiene datos de cámara (¿captura de pantalla o editada?). ¿Contarla de todos modos?",
 pcOk:d=>`✅ Foto de cámara, hecha el ${d}`,pcOld:"❌ Foto de hace más de 2 días",pcEd:s=>`❌ Editada con ${s}`,pcNo:"⚠️ Sin datos de cámara (¿captura o editada?)",
 toast:w=>`¡Almuerzo ganado! 🍽️ Gana ${w}`,del:"Borrar",delQ:"¿Borrar esta entrada?",shareTxt:"¡Cazo matrículas para ganar almuerzos gratis! ¿Puedes ganarme?",copied:"Enlace copiado 📋",
@@ -356,7 +356,7 @@ addTwo:"Afegeix almenys dues persones",addNum:"Afegeix un número",noPl:"Encara 
 owes:(a,b,n)=>`<b>${a}</b> deu <b>${b}</b> ${n} dinar${n>1?"s":""}`,spotW:"ha vist",treatW:"ha convidat",
 setup:"Afegeix almenys 2 caçadors i 1 número primer",needPlate:"Escriu la matrícula completa (com 4830 FDY) per poder comprovar-la.",
 badFmt:"Això no sembla una matrícula. Escriu la matrícula completa amb almenys 3 números, de qualsevol país.",numMin:"Fes servir almenys 3 números (només xifres). Les lletres no compten.",
-wrongNum:n=>`Rebutjat ❌ Aquesta matrícula no conté el teu número ${n}.`,dbl:w=>`Aquest cotxe ja s'ha comptat 🚫 ${w} l'ha vist primer, res de dinars dobles!`,photoDup:w=>`Aquesta foto s'assembla a una que ja ha pujat ${w}. Comptar-la igualment?`,noBlur:"Encara no has difuminat res. Desar la foto tal qual?",
+wrongNum:n=>`Rebutjat ❌ Aquesta matrícula no conté el teu número ${n}.`,dbl:w=>`Aquest cotxe ja s'ha comptat 🚫 ${w} l'ha vist primer, així que no hi ha premis dobles!`,photoDup:w=>`Aquesta foto s'assembla a una que ja ha pujat ${w}. Comptar-la igualment?`,noBlur:"Encara no has difuminat res. Desar la foto tal qual?",
 old:"Rebutjat ❌ Aquesta foto es va fer fa més de 2 dies. Fes-ne una de nova.",edited:s=>`Rebutjat ❌ Aquesta foto s'ha editat amb ${s}. Fes servir la foto original de la càmera.`,noMeta:"Aquesta foto no té dades de càmera (captura de pantalla o editada?). Comptar-la igualment?",
 pcOk:d=>`✅ Foto de càmera, feta el ${d}`,pcOld:"❌ Foto de fa més de 2 dies",pcEd:s=>`❌ Editada amb ${s}`,pcNo:"⚠️ Sense dades de càmera (captura o editada?)",
 toast:w=>`Dinar guanyat! 🍽️ Guanya ${w}`,del:"Esborra",delQ:"Esborrar aquesta entrada?",shareTxt:"Caço matrícules per guanyar dinars gratis! Em pots guanyar?",copied:"Enllaç copiat 📋",
@@ -369,7 +369,7 @@ addTwo:"Voeg minstens twee personen toe",addNum:"Voeg een nummer toe",noPl:"Nog 
 owes:(a,b,n)=>`<b>${a}</b> is <b>${b}</b> ${n} lunch${n>1?"es":""} verschuldigd`,spotW:"zag",treatW:"trakteerde",
 setup:"Voeg eerst minstens 2 jagers en 1 nummer toe",needPlate:"Typ het volledige kenteken (zoals 4830 FDY) zodat we het kunnen controleren.",
 badFmt:"Dat lijkt geen kenteken. Typ het volledige kenteken met minstens 3 cijfers, uit elk land.",numMin:"Gebruik minstens 3 cijfers (alleen cijfers). Letters tellen niet mee.",
-wrongNum:n=>`Afgewezen ❌ Dit kenteken bevat jouw nummer ${n} niet.`,dbl:w=>`Deze auto is al geteld 🚫 ${w} zag hem als eerste, dus geen dubbele lunches!`,photoDup:w=>`Deze foto lijkt op een foto die ${w} al uploadde. Toch meetellen?`,noBlur:"Je hebt nog niets vervaagd. De foto toch opslaan?",
+wrongNum:n=>`Afgewezen ❌ Dit kenteken bevat jouw nummer ${n} niet.`,dbl:w=>`Deze auto is al geteld 🚫 ${w} zag hem als eerste, dus geen dubbele winst!`,photoDup:w=>`Deze foto lijkt op een foto die ${w} al uploadde. Toch meetellen?`,noBlur:"Je hebt nog niets vervaagd. De foto toch opslaan?",
 old:"Afgewezen ❌ Deze foto is meer dan 2 dagen geleden gemaakt. Maak een verse foto.",edited:s=>`Afgewezen ❌ Deze foto is bewerkt met ${s}. Gebruik de originele camerafoto.`,noMeta:"Deze foto heeft geen cameragegevens (screenshot of bewerkt?). Toch meetellen?",
 pcOk:d=>`✅ Camerafoto, gemaakt op ${d}`,pcOld:"❌ Foto ouder dan 2 dagen",pcEd:s=>`❌ Bewerkt met ${s}`,pcNo:"⚠️ Geen cameragegevens (screenshot of bewerkt?)",
 toast:w=>`Lunch verdiend! 🍽️ ${w} wint`,del:"Verwijderen",delQ:"Dit item verwijderen?",shareTxt:"Ik jaag op kentekens voor gratis lunches! Kun jij me verslaan?",copied:"Link gekopieerd 📋",
@@ -382,7 +382,7 @@ addTwo:"Tambahkan minimal dua orang",addNum:"Tambahkan nomor",noPl:"Belum ada pe
 owes:(a,b,n)=>`<b>${a}</b> berutang <b>${b}</b> ${n} makan siang`,spotW:"melihat",treatW:"mentraktir",
 setup:"Tambahkan dulu minimal 2 pemburu dan 1 nomor",needPlate:"Ketik plat lengkap (seperti 4830 FDY) agar bisa kami periksa.",
 badFmt:"Itu tidak terlihat seperti plat nomor. Ketik plat lengkap dengan minimal 3 angka, dari negara mana pun.",numMin:"Gunakan minimal 3 angka (hanya angka). Huruf tidak dihitung.",
-wrongNum:n=>`Ditolak ❌ Plat ini tidak memuat nomormu ${n}.`,dbl:w=>`Mobil ini sudah dihitung 🚫 ${w} yang melihatnya lebih dulu, jadi tidak ada makan siang ganda!`,photoDup:w=>`Foto ini mirip dengan foto yang sudah diunggah ${w}. Tetap hitung?`,noBlur:"Kamu belum memburamkan apa pun. Simpan foto apa adanya?",
+wrongNum:n=>`Ditolak ❌ Plat ini tidak memuat nomormu ${n}.`,dbl:w=>`Mobil ini sudah dihitung 🚫 ${w} yang melihatnya lebih dulu, jadi tidak ada kemenangan ganda!`,photoDup:w=>`Foto ini mirip dengan foto yang sudah diunggah ${w}. Tetap hitung?`,noBlur:"Kamu belum memburamkan apa pun. Simpan foto apa adanya?",
 edited:s=>`Ditolak ❌ Foto ini diedit dengan ${s}. Gunakan foto asli dari kamera.`,noMeta:"Foto ini tidak punya info kamera (mungkin tangkapan layar atau diedit). Tetap hitung?",
 pcOk:d=>`✅ Foto kamera, diambil pada ${d}`,pcEd:s=>`❌ Diedit dengan ${s}`,pcNo:"⚠️ Tanpa info kamera (tangkapan layar atau diedit?)",
 toast:w=>`Makan siang didapat! 🍽️ ${w} menang`,del:"Hapus",delQ:"Hapus entri ini?",shareTxt:"Aku memburu plat mobil demi makan siang gratis! Bisakah kamu mengalahkanku?",copied:"Tautan disalin 📋",
@@ -400,7 +400,7 @@ addTwo:"أضف شخصين على الأقل",addNum:"أضف رقمًا",noPl:"ل
 owes:(a,b,n)=>`<b>${a}</b> مدين لـ <b>${b}</b> بـ ${n} غداء`,spotW:"رأى",treatW:"دعا",
 setup:"أضف أولًا صيّادَين على الأقل ورقمًا واحدًا",needPlate:"من فضلك اكتب اللوحة كاملة (مثل 4830 FDY) لنتمكن من التحقق منها.",
 badFmt:"هذا لا يبدو كلوحة سيارة. اكتب اللوحة كاملة بثلاثة أرقام على الأقل، من أي بلد.",numMin:"استخدم 3 أرقام على الأقل (أرقام فقط). الحروف لا تُحسب.",
-wrongNum:n=>`مرفوضة ❌ لا تحتوي هذه اللوحة على رقمك ${n}.`,dbl:w=>`تم احتساب هذه السيارة مسبقًا 🚫 ${w} رآها أولًا، فلا غداء مضاعف!`,photoDup:w=>`تشبه هذه الصورة صورة رفعها ${w} من قبل. هل تحتسبها رغم ذلك؟`,noBlur:"لم تموّه أي شيء بعد. هل تحفظ الصورة كما هي؟",
+wrongNum:n=>`مرفوضة ❌ لا تحتوي هذه اللوحة على رقمك ${n}.`,dbl:w=>`تم احتساب هذه السيارة مسبقًا 🚫 ${w} رآها أولًا، فلا فوز مضاعف!`,photoDup:w=>`تشبه هذه الصورة صورة رفعها ${w} من قبل. هل تحتسبها رغم ذلك؟`,noBlur:"لم تموّه أي شيء بعد. هل تحفظ الصورة كما هي؟",
 edited:s=>`مرفوضة ❌ تم تعديل هذه الصورة باستخدام ${s}. استخدم الصورة الأصلية من الكاميرا.`,noMeta:"لا تحتوي هذه الصورة على بيانات الكاميرا (ربما لقطة شاشة أو معدّلة). هل تحتسبها رغم ذلك؟",
 pcOk:d=>`✅ صورة كاميرا، التُقطت في ${d}`,pcEd:s=>`❌ معدّلة باستخدام ${s}`,pcNo:"⚠️ لا توجد بيانات كاميرا (لقطة شاشة أو معدّلة؟)",
 toast:w=>`تم كسب الغداء! 🍽️ فاز ${w}`,del:"حذف",delQ:"حذف هذا الإدخال؟",shareTxt:"أصطاد لوحات السيارات لأربح غداءً مجانيًا! هل تستطيع التغلب عليّ؟",copied:"تم نسخ الرابط 📋",
@@ -418,7 +418,7 @@ addTwo:"Ajoute au moins deux personnes",addNum:"Ajoute un numéro",noPl:"Pas enc
 owes:(a,b,n)=>`<b>${a}</b> doit <b>${b}</b> ${n} déjeuner${n>1?"s":""}`,spotW:"a repéré",treatW:"a invité",
 setup:"Ajoute d'abord au moins 2 chasseurs et 1 numéro",needPlate:"Saisis la plaque complète (comme 4830 FDY) pour qu'on puisse la vérifier.",
 badFmt:"Cela ne ressemble pas à une plaque. Saisis la plaque complète avec au moins 3 chiffres, de n'importe quel pays.",numMin:"Utilise au moins 3 chiffres (chiffres uniquement). Les lettres ne comptent pas.",
-wrongNum:n=>`Refusé ❌ Cette plaque ne contient pas ton numéro ${n}.`,dbl:w=>`Cette voiture a déjà été comptée 🚫 ${w} l'a repérée en premier, pas de double déjeuner !`,photoDup:w=>`Cette photo ressemble à une photo déjà envoyée par ${w}. La compter quand même ?`,noBlur:"Tu n'as encore rien flouté. Enregistrer la photo telle quelle ?",
+wrongNum:n=>`Refusé ❌ Cette plaque ne contient pas ton numéro ${n}.`,dbl:w=>`Cette voiture a déjà été comptée 🚫 ${w} l'a repérée en premier, donc pas de double victoire !`,photoDup:w=>`Cette photo ressemble à une photo déjà envoyée par ${w}. La compter quand même ?`,noBlur:"Tu n'as encore rien flouté. Enregistrer la photo telle quelle ?",
 edited:s=>`Refusé ❌ Cette photo a été retouchée avec ${s}. Utilise la photo originale de l'appareil.`,noMeta:"Cette photo n'a pas d'infos d'appareil (capture d'écran ou retouchée ?). La compter quand même ?",
 pcOk:d=>`✅ Photo d'appareil, prise le ${d}`,pcEd:s=>`❌ Retouchée avec ${s}`,pcNo:"⚠️ Pas d'infos d'appareil (capture ou retouchée ?)",
 toast:w=>`Déjeuner gagné ! 🍽️ ${w} gagne`,del:"Supprimer",delQ:"Supprimer cette entrée ?",shareTxt:"Je chasse les plaques d'immatriculation pour des déjeuners gratuits ! Tu peux me battre ?",copied:"Lien copié 📋",
@@ -436,7 +436,7 @@ addTwo:"Füge mindestens zwei Personen hinzu",addNum:"Füge eine Nummer hinzu",n
 owes:(a,b,n)=>`<b>${a}</b> schuldet <b>${b}</b> ${n} Mittagessen`,spotW:"sah",treatW:"spendierte",
 setup:"Füge zuerst mindestens 2 Jäger und 1 Nummer hinzu",needPlate:"Bitte gib das vollständige Kennzeichen ein (wie 4830 FDY), damit wir es prüfen können.",
 badFmt:"Das sieht nicht nach einem Kennzeichen aus. Gib das vollständige Kennzeichen mit mindestens 3 Ziffern ein, aus jedem Land.",numMin:"Nimm mindestens 3 Ziffern (nur Ziffern). Buchstaben zählen nicht.",
-wrongNum:n=>`Abgelehnt ❌ Dieses Kennzeichen enthält deine Nummer ${n} nicht.`,dbl:w=>`Dieses Auto wurde schon gezählt 🚫 ${w} hat es zuerst gesehen, also keine doppelten Mittagessen!`,photoDup:w=>`Dieses Foto ähnelt einem, das ${w} schon hochgeladen hat. Trotzdem zählen?`,noBlur:"Du hast noch nichts verwischt. Foto trotzdem speichern?",
+wrongNum:n=>`Abgelehnt ❌ Dieses Kennzeichen enthält deine Nummer ${n} nicht.`,dbl:w=>`Dieses Auto wurde schon gezählt 🚫 ${w} hat es zuerst gesehen, also keine doppelten Gewinne!`,photoDup:w=>`Dieses Foto ähnelt einem, das ${w} schon hochgeladen hat. Trotzdem zählen?`,noBlur:"Du hast noch nichts verwischt. Foto trotzdem speichern?",
 edited:s=>`Abgelehnt ❌ Dieses Foto wurde mit ${s} bearbeitet. Bitte nutze das Originalfoto der Kamera.`,noMeta:"Dieses Foto hat keine Kamera-Infos (Screenshot oder bearbeitet?). Trotzdem zählen?",
 pcOk:d=>`✅ Kamerafoto, aufgenommen am ${d}`,pcEd:s=>`❌ Bearbeitet mit ${s}`,pcNo:"⚠️ Keine Kamera-Infos (Screenshot oder bearbeitet?)",
 toast:w=>`Mittagessen verdient! 🍽️ ${w} gewinnt`,del:"Löschen",delQ:"Diesen Eintrag löschen?",shareTxt:"Ich jage Kennzeichen für kostenlose Mittagessen! Kannst du mich schlagen?",copied:"Link kopiert 📋",
@@ -454,7 +454,7 @@ addTwo:"Aggiungi almeno due persone",addNum:"Aggiungi un numero",noPl:"Ancora ne
 owes:(a,b,n)=>`<b>${a}</b> deve <b>${b}</b> ${n} pranz${n>1?"i":"o"}`,spotW:"ha visto",treatW:"ha offerto a",
 setup:"Aggiungi prima almeno 2 cacciatori e 1 numero",needPlate:"Scrivi la targa completa (come 4830 FDY) così possiamo controllarla.",
 badFmt:"Non sembra una targa. Scrivi la targa completa con almeno 3 numeri, di qualsiasi paese.",numMin:"Usa almeno 3 numeri (solo cifre). Le lettere non contano.",
-wrongNum:n=>`Rifiutata ❌ Questa targa non contiene il tuo numero ${n}.`,dbl:w=>`Questa auto è già stata contata 🚫 Il primo avvistamento è di ${w}, quindi niente pranzi doppi!`,photoDup:w=>`Questa foto somiglia a una già caricata da ${w}. Contarla comunque?`,noBlur:"Non hai ancora sfocato nulla. Salvare la foto così com'è?",
+wrongNum:n=>`Rifiutata ❌ Questa targa non contiene il tuo numero ${n}.`,dbl:w=>`Questa auto è già stata contata 🚫 Il primo avvistamento è di ${w}, quindi niente vittorie doppie!`,photoDup:w=>`Questa foto somiglia a una già caricata da ${w}. Contarla comunque?`,noBlur:"Non hai ancora sfocato nulla. Salvare la foto così com'è?",
 edited:s=>`Rifiutata ❌ Questa foto è stata modificata con ${s}. Usa la foto originale della fotocamera.`,noMeta:"Questa foto non ha dati della fotocamera (screenshot o modificata?). Contarla comunque?",
 pcOk:d=>`✅ Foto della fotocamera, scattata il ${d}`,pcEd:s=>`❌ Modificata con ${s}`,pcNo:"⚠️ Nessun dato della fotocamera (screenshot o modificata?)",
 toast:w=>`Pranzo guadagnato! 🍽️ Vince ${w}`,del:"Elimina",delQ:"Eliminare questa voce?",shareTxt:"Caccio le targhe per vincere pranzi gratis! Riesci a battermi?",copied:"Link copiato 📋",
@@ -472,7 +472,7 @@ addTwo:"Adicione pelo menos duas pessoas",addNum:"Adicione um número",noPl:"Ain
 owes:(a,b,n)=>`<b>${a}</b> deve <b>${b}</b> ${n} almoço${n>1?"s":""}`,spotW:"viu",treatW:"pagou o almoço de",
 setup:"Adicione primeiro pelo menos 2 caçadores e 1 número",needPlate:"Digite a placa completa (como 4830 FDY) para podermos verificá-la.",
 badFmt:"Isso não parece uma matrícula. Escreva a matrícula completa com pelo menos 3 números, de qualquer país.",numMin:"Use pelo menos 3 números (só dígitos). As letras não contam.",
-wrongNum:n=>`Recusada ❌ Esta placa não contém o seu número ${n}.`,dbl:w=>`Este carro já foi contado 🚫 ${w} viu primeiro, então nada de almoços em dobro!`,photoDup:w=>`Esta foto parece uma que ${w} já enviou. Contar mesmo assim?`,noBlur:"Você ainda não desfocou nada. Salvar a foto como está?",
+wrongNum:n=>`Recusada ❌ Esta placa não contém o seu número ${n}.`,dbl:w=>`Este carro já foi contado 🚫 ${w} viu primeiro, por isso não há vitórias duplas!`,photoDup:w=>`Esta foto parece uma que ${w} já enviou. Contar mesmo assim?`,noBlur:"Você ainda não desfocou nada. Salvar a foto como está?",
 edited:s=>`Recusada ❌ Esta foto foi editada com ${s}. Use a foto original da câmera.`,noMeta:"Esta foto não tem dados da câmera (captura de tela ou editada?). Contar mesmo assim?",
 pcOk:d=>`✅ Foto da câmera, tirada em ${d}`,pcEd:s=>`❌ Editada com ${s}`,pcNo:"⚠️ Sem dados da câmera (captura de tela ou editada?)",
 toast:w=>`Almoço ganho! 🍽️ ${w} vence`,del:"Excluir",delQ:"Excluir esta entrada?",shareTxt:"Estou caçando placas por almoços grátis! Você consegue me vencer?",copied:"Link copiado 📋",
@@ -490,7 +490,7 @@ addTwo:"En az iki kişi ekle",addNum:"Bir numara ekle",noPl:"Henüz avcı yok",a
 owes:(a,b,n)=>`<b>${a}</b>, <b>${b}</b> kişisine ${n} öğle yemeği borçlu`,spotW:"gördü",treatW:"ısmarladı:",
 setup:"Önce en az 2 avcı ve 1 numara ekle",needPlate:"Kontrol edebilmemiz için lütfen tam plakayı yaz (4830 FDY gibi).",
 badFmt:"Bu bir plakaya benzemiyor. Herhangi bir ülkeden, en az 3 rakam içeren tam plakayı yaz.",numMin:"En az 3 rakam kullan (yalnızca rakamlar). Harfler sayılmaz.",
-wrongNum:n=>`Reddedildi ❌ Bu plaka ${n} numaranı içermiyor.`,dbl:w=>`Bu araç zaten sayıldı 🚫 İlk gören ${w} oldu, çifte öğle yemeği yok!`,photoDup:w=>`Bu fotoğraf ${w} kişisinin yüklediği birine benziyor. Yine de sayılsın mı?`,noBlur:"Henüz hiçbir şeyi bulanıklaştırmadın. Fotoğraf olduğu gibi kaydedilsin mi?",
+wrongNum:n=>`Reddedildi ❌ Bu plaka ${n} numaranı içermiyor.`,dbl:w=>`Bu araç zaten sayıldı 🚫 İlk gören ${w} oldu, yani çifte kazanç yok!`,photoDup:w=>`Bu fotoğraf ${w} kişisinin yüklediği birine benziyor. Yine de sayılsın mı?`,noBlur:"Henüz hiçbir şeyi bulanıklaştırmadın. Fotoğraf olduğu gibi kaydedilsin mi?",
 edited:s=>`Reddedildi ❌ Bu fotoğraf ${s} ile düzenlenmiş. Lütfen kameranın orijinal fotoğrafını kullan.`,noMeta:"Bu fotoğrafta kamera bilgisi yok (ekran görüntüsü ya da düzenlenmiş olabilir). Yine de sayılsın mı?",
 pcOk:d=>`✅ Kamera fotoğrafı, ${d} tarihinde çekildi`,pcEd:s=>`❌ ${s} ile düzenlenmiş`,pcNo:"⚠️ Kamera bilgisi yok (ekran görüntüsü ya da düzenlenmiş?)",
 toast:w=>`Öğle yemeği kazanıldı! 🍽️ ${w} kazandı`,del:"Sil",delQ:"Bu kayıt silinsin mi?",shareTxt:"Bedava öğle yemekleri için plaka avlıyorum! Beni yenebilir misin?",copied:"Bağlantı kopyalandı 📋",
@@ -591,7 +591,7 @@ pfCars:n=>`🚗 ${n}台発見`,
 chgQ:n=>`探すナンバーを${n}に変更しますか？過去の発見はそのまま残ります。`,
 owes:(a,b,n)=>`<b>${a}</b>は<b>${b}</b>にランチ${n}回分の借り`,
 wrongNum:n=>`却下 ❌ このプレートにはあなたの数字${n}が含まれていません。`,
-dbl:w=>`この車はすでにカウント済みです 🚫 ${w}が先に見つけたので、ダブルランチはありません！`,
+dbl:w=>`この車はすでにカウント済みです 🚫 ${w}が先に見つけたので、二重の勝利はありません！`,
 photoDup:w=>`この写真は${w}がすでにアップロードしたものに似ています。それでもカウントしますか？`,
 edited:s=>`却下 ❌ この写真は${s}で編集されています。カメラで撮った元の写真を使ってください。`,
 pcOk:d=>`✅ カメラで撮影した写真（${d}）`,
@@ -714,7 +714,7 @@ pfCars:n=>`🚗 ${n}대 발견`,
 chgQ:n=>`찾을 번호를 ${n}(으)로 바꿀까요? 이전 발견은 그대로 유지됩니다.`,
 owes:(a,b,n)=>`<b>${a}</b>님이 <b>${b}</b>님에게 점심 ${n}번 빚짐`,
 wrongNum:n=>`거부됨 ❌ 이 번호판에는 내 숫자 ${n}이(가) 없어요.`,
-dbl:w=>`이미 인정된 차예요 🚫 ${w}님이 먼저 찾았으니 중복 점심은 없어요!`,
+dbl:w=>`이미 인정된 차예요 🚫 ${w}님이 먼저 찾았으니 이중 승리는 없어요!`,
 photoDup:w=>`이 사진은 ${w}님이 이미 올린 사진과 비슷해요. 그래도 인정할까요?`,
 edited:s=>`거부됨 ❌ 이 사진은 ${s}(으)로 편집되었어요. 카메라로 찍은 원본 사진을 사용해 주세요.`,
 pcOk:d=>`✅ 카메라 사진, 촬영일 ${d}`,
@@ -837,7 +837,7 @@ pfCars:n=>`🚗 已发现 ${n} 辆`,
 chgQ:n=>`把要找的号码改成 ${n}？之前的发现会保留。`,
 owes:(a,b,n)=>`<b>${a}</b> 欠 <b>${b}</b> ${n} 顿午餐`,
 wrongNum:n=>`已拒绝 ❌ 这块车牌不包含你的号码 ${n}。`,
-dbl:w=>`这辆车已经算过了 🚫 ${w} 先发现的，所以没有重复的午餐！`,
+dbl:w=>`这辆车已经算过了 🚫 ${w} 先发现的，所以不会重复获胜！`,
 photoDup:w=>`这张照片和 ${w} 已上传的照片很像。仍要计入吗？`,
 edited:s=>`已拒绝 ❌ 这张照片用 ${s} 编辑过。请使用相机拍摄的原图。`,
 pcOk:d=>`✅ 相机照片，拍摄于 ${d}`,
@@ -891,6 +891,7 @@ function stepState(){const d1=S.players.length>=2,d2=S.nums.length>0,d3=S.events
 for(const[a,c]of[["s1","c1"],["s2","c2"],["s3","c3"]])$(a).onclick=e=>{e.preventDefault();const el=$(c);if(el.tagName==="DETAILS")el.open=true;el.scrollIntoView({behavior:"smooth",block:"start"})};
 var LGS=["en","es","ca","nl","id","ar","fr","de","it","pt","tr","ja","ko","zh"];
 var XL={
+waF:["💬 Share on WhatsApp", "💬 Compartir por WhatsApp", "💬 Comparteix per WhatsApp", "💬 Deel via WhatsApp", "💬 Bagikan lewat WhatsApp", "💬 شارك عبر واتساب", "💬 Partager sur WhatsApp", "💬 Per WhatsApp teilen", "💬 Condividi su WhatsApp", "💬 Partilhar no WhatsApp", "💬 WhatsApp'ta paylaş", "💬 WhatsAppでシェア", "💬 WhatsApp으로 공유", "💬 通过 WhatsApp 分享"],
 hwS:["ⓘ How does it work?", "ⓘ ¿Cómo funciona?", "ⓘ Com funciona?", "ⓘ Hoe werkt het?", "ⓘ Bagaimana cara kerjanya?", "ⓘ كيف تعمل اللعبة؟", "ⓘ Comment ça marche ?", "ⓘ Wie funktioniert's?", "ⓘ Come funziona?", "ⓘ Como funciona?", "ⓘ Nasıl çalışır?", "ⓘ 遊び方は？", "ⓘ 어떻게 하나요?", "ⓘ 怎么玩？"],
 ttF:["🎵 Follow us on TikTok", "🎵 Síguenos en TikTok", "🎵 Segueix-nos a TikTok", "🎵 Volg ons op TikTok", "🎵 Ikuti kami di TikTok", "🎵 تابعنا على تيك توك", "🎵 Suis-nous sur TikTok", "🎵 Folge uns auf TikTok", "🎵 Seguici su TikTok", "🎵 Siga-nos no TikTok", "🎵 Bizi TikTok'ta takip et", "🎵 TikTokでフォロー", "🎵 TikTok에서 팔로우", "🎵 在 TikTok 关注我们"],
 cnT:["💬 Questions, ideas or found a bug? We'd love to hear from you!", "💬 ¿Preguntas, ideas o has encontrado un error? ¡Nos encantará saberlo!", "💬 Preguntes, idees o has trobat un error? Ens encantarà saber-ho!", "💬 Vragen, ideeën of een bug gevonden? We horen het graag!", "💬 Ada pertanyaan, ide, atau menemukan bug? Kami senang mendengarnya!", "💬 أسئلة أو أفكار أو وجدت خطأً؟ يسعدنا أن نسمع منك!", "💬 Des questions, des idées ou un bug ? On adore avoir de tes nouvelles !", "💬 Fragen, Ideen oder einen Fehler gefunden? Wir freuen uns auf deine Nachricht!", "💬 Domande, idee o hai trovato un bug? Ci farebbe piacere sentirti!", "💬 Perguntas, ideias ou encontrou um erro? Adoramos ouvir de si!", "💬 Sorular, fikirler ya da bir hata mı buldun? Senden haber almak isteriz!", "💬 質問やアイデア、不具合を見つけたら、ぜひ教えてください！", "💬 질문, 아이디어, 버그 발견? 언제든 알려 주세요!", "💬 有问题、好点子或发现了错误？欢迎告诉我们！"],
@@ -982,8 +983,8 @@ function flag(c){return String.fromCodePoint.apply(null,c.split("").map(function
 var ccLG="";function fillCc(){if(ccLG===LG)return;ccLG=LG;var s=$("cc"),cur=s.value,dn;if(!cur)try{cur=localStorage.getItem("platelunch.cc")||""}catch(_){cur=""}try{dn=new Intl.DisplayNames([LG],{type:"region"})}catch(_){}
  s.innerHTML='<option value="">—</option>'+CCS.map(function(c){return'<option value="'+c+'">'+flag(c)+" "+(dn?dn.of(c):c)+"</option>"}).join("");s.value=cur}
 function streakOf(p,spots){var days={};spots.filter(function(e){return e.who===p}).forEach(function(e){days[new Date(e.ts).toDateString()]=1});var d=new Date(),n=0;if(!days[d.toDateString()])d.setDate(d.getDate()-1);while(days[d.toDateString()]){n++;d.setDate(d.getDate()-1)}return n}
-var TN=["stF","stFr","stC"],tone=1;
-function toneRender(){var hs=$("hwS");if(hs)hs.textContent=tx("hwS");var tf=$("ttF");if(tf)tf.textContent=tx("ttF");["cnT","cnB"].forEach(function(k){var e=$(k);if(e)e.textContent=tx(k)});["gMi","gMgS"].forEach(function(k){var e=$(k);if(e)e.textContent=tx(k)});var gl=$("gCl");if(gl)gl.textContent=tx("gCl");var gs=$("gpS");if(gs)gs.textContent=tx("gpS");var ab=$("ageB");if(ab)ab.textContent=tx("ageT");var ls=$("lgS");if(ls)ls.textContent=tx("lgS");["gI","gS1","gS2","gN"].forEach(function(k){var e=$(k);if(e)e.textContent=tx(k)});$("tone").innerHTML='<span class="empty" style="width:100%;font-weight:700">'+esc(tx("stT"))+"</span>"+TN.map(function(k,i){return'<button type="button" class="ghost" data-tn="'+i+'" style="'+(i===tone?"background:var(--acc2);color:#fff;border-color:var(--acc2);font-weight:800":"")+'">'+esc(tx(k))+"</button>"}).join("")}
+var TN=["stF","stFr","stC"],tone=-1;
+function toneRender(){var wf=$("waF");if(wf){wf.textContent=tx("waF");try{var si0=shareInfo();wf.href="https://wa.me/?text="+encodeURIComponent(si0.text+" "+si0.url)}catch(_){wf.href="https://wa.me/?text="+encodeURIComponent("https://www.goodplatehunting.com/")}}var hs=$("hwS");if(hs)hs.textContent=tx("hwS");var tf=$("ttF");if(tf)tf.textContent=tx("ttF");["cnT","cnB"].forEach(function(k){var e=$(k);if(e)e.textContent=tx(k)});["gMi","gMgS"].forEach(function(k){var e=$(k);if(e)e.textContent=tx(k)});var gl=$("gCl");if(gl)gl.textContent=tx("gCl");var gs=$("gpS");if(gs)gs.textContent=tx("gpS");var ab=$("ageB");if(ab)ab.textContent=tx("ageT");var ls=$("lgS");if(ls)ls.textContent=tx("lgS");["gI","gS1","gS2","gN"].forEach(function(k){var e=$(k);if(e)e.textContent=tx(k)});$("tone").innerHTML='<span class="empty" style="width:100%;font-weight:700">'+esc(tx("stT"))+"</span>"+TN.map(function(k,i){return'<button type="button" class="ghost" data-tn="'+i+'" style="'+(i===tone?"background:var(--acc2);color:#fff;border-color:var(--acc2);font-weight:800":"")+'">'+esc(tx(k))+"</button>"}).join("")}
 function ev(n){try{if(navigator.doNotTrack==="1")return;navigator.sendBeacon("/api/ev",JSON.stringify({e:n}))}catch(_){}}
 function render(){
  $("players").innerHTML=S.players.map((p,i)=>`<span class="chip">${esc(p)}${i===0?`<span class="ini">${t("ini")}</span>`:""}<b data-p="${i}">×</b></span>`).join("")||`<span class="empty">${t("addTwo")}</span>`;
