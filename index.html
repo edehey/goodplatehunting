@@ -34,7 +34,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-app
 main{max-width:560px;margin:0 auto;padding:16px}
 h1{font-size:26px;margin:4px 0 2px}
 .sub{color:var(--mut);margin:0 0 16px}
-.card{background:var(--card);border:0;border-radius:22px;box-shadow:inset 0 5px 0 #ffd21f,0 8px 24px rgba(18,48,143,.09);padding:14px;margin-bottom:14px}
+.card{background:var(--card);border:0;border-radius:22px;box-shadow:inset 0 5px 0 #ffd21f,0 8px 24px rgba(18,48,143,.09);padding:18px 14px 14px;margin-bottom:14px}.card:has(details:only-child:not([open])),details.card:not([open]){padding-bottom:12px}.card details:not([open])>summary,details.card:not([open])>summary{margin-bottom:0!important}
 h2{font-size:15px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;color:var(--acc2)}
 .plate{display:inline-block;background:#fff;color:#111;border:3px solid #111;border-radius:8px;padding:2px 10px;font:700 20px/1.3 ui-monospace,monospace;letter-spacing:.08em;position:relative;padding-left:26px}
 .plate:before{content:"E";position:absolute;left:0;top:0;bottom:0;width:18px;background:#1f4fd8;color:#fc0;font-size:11px;display:flex;align-items:center;justify-content:center}
@@ -91,7 +91,7 @@ summary{min-height:44px;display:flex;flex-direction:column;justify-content:cente
 #rvS button,#rvS span{font-size:30px;min-width:44px;min-height:44px}
 .steps{display:flex;gap:8px}.start h2{margin-bottom:8px}.steps a{flex:1;text-decoration:none;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:8px 4px;text-align:center;font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.2}.steps a b{width:26px;height:26px;border-radius:50%;background:#ffd21f;border:2px solid #111;display:flex;align-items:center;justify-content:center;color:#111}.steps a.done span::after{content:" ✓";color:var(--ok)}.steps a.done{border-color:var(--ok)}.steps a.done b{background:var(--ok);color:#fff;border-color:var(--ok)}
 .sum{display:block;text-transform:none;letter-spacing:0;font-weight:600;color:var(--mut);font-size:13px;margin-top:2px;overflow-wrap:anywhere}.step>summary{margin-bottom:8px}.step:not([open])>summary{margin-bottom:0}
-details.more>summary{list-style:none;cursor:pointer;text-align:center;font-weight:700;color:var(--acc2);background:var(--card);border-radius:22px;padding:14px;margin-bottom:14px;box-shadow:0 8px 24px rgba(18,48,143,.09)}details.more>summary::-webkit-details-marker{display:none}
+details.more>summary{list-style:none;cursor:pointer;text-align:center;font-weight:700;color:var(--acc2);background:var(--card);border-radius:22px;padding:14px;margin-bottom:14px;box-shadow:inset 0 5px 0 #ffd21f,0 8px 24px rgba(18,48,143,.09);padding-top:18px}details.more>summary::-webkit-details-marker{display:none}
 .drive.sm{padding:6px 12px;font-size:13px;margin-bottom:10px}
 #winBan{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-90px);background:#ffd21f;color:#111;border:3px solid #111;border-radius:18px;font-weight:800;font-size:18px;padding:14px 20px;z-index:101;opacity:0;pointer-events:none;transition:.3s;max-width:92vw;text-align:center;box-shadow:0 5px 0 #111}#winBan.on{opacity:1;transform:translate(-50%,0)}
 .rvw{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}.rvb{position:relative;flex:1 1 220px;max-width:100%;padding:12px 14px;border-radius:22px;font:700 17px/1.35 "Chalkboard SE","Marker Felt","Comic Sans MS","Trebuchet MS",system-ui,sans-serif;color:#1c2a5a;box-shadow:0 4px 0 rgba(0,0,0,.12);transform:rotate(var(--r,0deg));cursor:pointer;transition:transform .2s}.rvb:active{transform:rotate(0) scale(.97)}.rvb small{display:block;margin-top:6px;font-size:14px;font-weight:800;opacity:.8}.rvb .em{font-size:22px;margin-right:4px}.rvt{margin:0 0 14px}.rvt .rvb{flex:none;width:100%;box-sizing:border-box}
@@ -157,7 +157,7 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
 .dots i.on{background:var(--acc2)}
 .gal video{width:100%;border-radius:12px;display:block}
-.plate,#pl,#nn{direction:ltr;unicode-bidi:isolate}
+.plate,#pl,#nn{direction:ltr;unicode-bidi:isolate}#nn{flex:0 0 auto;width:min(70%,210px);text-align:center}
 #pl,#nn{text-align:start}
 .ini{margin-left:0;margin-inline-start:4px}
 
@@ -193,12 +193,12 @@ details.more>summary::after{content:" ▾"}details.more[open]>summary::after{con
 .thm .kn::after{display:none}
 .thm .kn::before{content:"🌙"}
 .thm[aria-pressed="true"] .kn::before{content:"☀️"}
-.drive.sm{padding:12px 14px;font-size:14px;font-weight:600;text-align:center;border:3px solid #e5484d;border-radius:18px;background:#fff3c4;color:#4a1d00;box-shadow:0 0 0 3px #ffd21f;margin:8px 3px 16px}
+.drive.sm{padding:12px 14px;font-size:14px;font-weight:600;text-align:center;border:3px solid #e5484d;border-radius:18px;background:#fff3c4;color:#4a1d00;box-shadow:inset 0 5px 0 #ffd21f;margin:8px 0 16px;padding-top:16px}
 :root[data-theme="dark"] .drive.sm{background:#3a2d10;color:#ffe9a8;border-color:#ff6b6f}
 #gTabs{display:flex;gap:8px;overflow-x:auto;margin:0 0 14px;padding:2px 2px 6px;-webkit-overflow-scrolling:touch}
 #gTabs button{flex:none;border-radius:99px;padding:8px 14px;font-weight:800;font-size:14px;min-height:40px;background:var(--card);color:var(--ink);border:2px solid var(--line)}
 #gTabs button.on{background:var(--acc2);color:#fff;border-color:var(--acc2)}
-.legal{margin-top:14px;padding:12px 14px;box-shadow:none;background:transparent;border:1px solid var(--line)}
+.legal{margin-top:14px;box-shadow:inset 0 5px 0 #ffd21f,0 8px 24px rgba(18,48,143,.09);background:var(--card);border:0;padding-top:16px}
 .legal p{margin:0 0 8px;font-size:11.5px;line-height:1.5;color:var(--mut);text-align:left}
 .legal b{font-weight:700;color:var(--mut)}
 .legal a{color:var(--mut);text-decoration:underline;font-size:11.5px}
@@ -263,7 +263,7 @@ button,.ghost,.share,a.up,select{min-height:44px}
 
 <details class="card step" id="c2" open><summary class="h2s"><span data-i="h2"></span><span class="sum" id="sum2"></span></summary><details id="howd"><summary class="h2s" id="hwS" style="font-size:13px"></summary><p data-i="how"></p></details>
 <div id="nums" class="row" style="margin-bottom:10px"></div>
-<div class="row"><input id="nn" data-ph="phNum" maxlength="8" inputmode="numeric"><button id="addN" data-i="setN"></button></div>
+<div class="row" style="flex-direction:column;align-items:center;gap:8px"><input id="nn" data-ph="phNum" maxlength="8" inputmode="numeric"><button id="addN" data-i="setN"></button></div>
 
 <div id="hP"></div>
 <div class="row" style="margin-top:10px"><label class="up"><span data-i="addProof"></span><input id="stP" type="file" accept="image/*" hidden></label><label class="up" style="display:none"><span data-i="addVideo"></span><input id="stV" type="file" accept="video/*" hidden></label></div>
@@ -304,8 +304,7 @@ button,.ghost,.share,a.up,select{min-height:44px}
 <button class="ghost" id="reset" data-i="reset"></button></div>
 
 <div class="card shr" style="margin-top:12px;text-align:center;padding:14px 14px 12px;background:linear-gradient(135deg,#3b6bff,#6a2bd9);border:0;color:#fff;overflow:hidden;position:relative"><div aria-hidden="true" style="font-size:22px;letter-spacing:6px;margin:0 0 4px">🚗 🛵 🚌 🚕</div><p style="margin:0 0 10px;font-weight:800;font-size:15px;line-height:1.3;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2)" data-i="likeT"></p><div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap"><button class="share" id="share2" data-i="share" style="font-size:13px;padding:4px 14px;margin:0;min-height:36px;height:36px;width:auto;box-shadow:0 3px 0 #111"></button><a id="ttB" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0;box-shadow:0 3px 0 rgba(0,0,0,.45)">🎵 TikTok</a></div><p style="margin:10px auto 0;display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px">#GoodPlateHunting · goodplatehunting.com</p></div>
-<div class="drive sm" role="note" data-i="drive"></div>
-<div class="card legal"><p id="cnT" style="font-weight:700;margin-bottom:8px"></p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px"><a id="cnB" href="#" role="button" style="display:inline-block;margin:0;padding:8px 16px;border:2px solid var(--acc2);border-radius:999px;color:var(--acc2);font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="ttF" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="waF" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a></div><details id="lgD"><summary class="h2s" id="lgS" style="font-size:12px;cursor:pointer"></summary><div style="margin-top:8px"><p data-i="disc"></p><p data-i="priv"></p><p data-i="priv2"></p><a id="rmBtn" href="#" data-i="rmBtn"></a></div></details></div>
+<div class="card legal"><p id="cnT" style="font-weight:700;margin-bottom:8px"></p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px"><a id="cnB" href="#" role="button" style="display:inline-block;margin:0;padding:8px 16px;border:2px solid var(--acc2);border-radius:999px;color:var(--acc2);font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="ttF" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a><a id="waF" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin:0;padding:8px 16px;border-radius:999px;background:#25d366;color:#fff;font-weight:800;font-size:13px;text-decoration:none;min-height:0"></a></div><details id="lgD"><summary class="h2s" id="lgS" style="font-size:12px;cursor:pointer"></summary><div style="margin-top:8px"><p data-i="drive"></p><p data-i="disc"></p><p data-i="priv"></p><p data-i="priv2"></p><a id="rmBtn" href="#" data-i="rmBtn"></a></div></details></div>
 <p style="text-align:center;font-size:12px;color:var(--mut,#6b7280);margin:8px 0 24px">© 2026 Eliza de Heij · Good Plate Hunting™ · All rights reserved</p>
 </main>
 <dialog id="pd"><div style="text-align:center"><label style="cursor:pointer;display:block"><img id="pdA" class="ava big" alt=""><span class="up" style="font-size:13px;padding:4px 12px" data-i="pfPhoto"></span><input id="pdF" type="file" accept="image/*" hidden></label><h2 id="pdN" style="margin:10px 0 2px"></h2><div id="pdI"></div></div><textarea id="pdB" rows="3" maxlength="140" data-ph="pfBio" style="margin-top:10px"></textarea><div id="pdS" style="font-size:14px;margin-bottom:12px"></div><div class="row"><button id="pdSave" data-i="pfSave"></button><button class="ghost" id="pdX" data-i="pfClose"></button></div></dialog>
