@@ -34,6 +34,7 @@ function cleanEvent(e){
     if(!r.who||!r.h)return null;
     if(e.pc&&typeof e.pc==="object")r.pc={s:["ok","old","ed","no"].includes(e.pc.s)?e.pc.s:"no",d:typeof e.pc.d==="number"?e.pc.d:(typeof e.pc.d==="string"?str(e.pc.d,40):null),sw:e.pc.sw?str(e.pc.sw,40):null};else r.pc=null;
     return r}
+  if(e.t==="wk"){const r={id,t:"wk",who:str(e.who,24),plate:str(e.plate,12),w:num(e.w),ts:num(e.ts)};return r.who&&r.w?r:null}
   if(e.t==="msg"){const r={id,t:"msg",who:str(e.who,24),text:str(e.text,200),ts:num(e.ts)};return r.who&&r.text?r:null}
   if(e.t==="paid"){const r={id,t:"paid",from:str(e.from,24),to:str(e.to,24),ts:num(e.ts)};return r.from&&r.to?r:null}
   return null}
@@ -74,7 +75,7 @@ async function pushGroup(env,code,skipDv){
 const RL=new Map();
 function limited(req,k,max,ms){const ip=req.headers.get("cf-connecting-ip")||"x",key=k+"|"+ip,now=Date.now();let a=(RL.get(key)||[]).filter(t=>now-t<ms);a.push(now);RL.set(key,a);if(RL.size>5000)for(const [kk,v] of RL)if(!v.length||now-v[v.length-1]>ms)RL.delete(kk);return a.length>max}
 const too=()=>json({error:"slow down"},429);
-const EVS=["open","spot","gnew","gjoin","share","report"];
+const EVS=["open","spot","gnew","gjoin","share","report","wk"];
 async function stat(env,e){const k="st:"+new Date().toISOString().slice(0,10);let o={};try{o=JSON.parse(await env.GROUPS.get(k)||"{}")}catch(_){}o[e]=(o[e]||0)+1;await env.GROUPS.put(k,JSON.stringify(o),{expirationTtl:60*60*24*400})}
 
 function newCode(){const b=crypto.getRandomValues(new Uint8Array(10));return[...b].map(x=>ALPHA[x%ALPHA.length]).join("")}
