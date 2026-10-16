@@ -13,8 +13,9 @@ function mergeDocs(a,b){
   const aT=A.numT||0,bT=B.numT||0;
   const la=(A.nums||[]).length,lb=(B.nums||[]).length;
   const pickA=aT>bT||(aT===bT&&(la>lb||(la===lb&&JSON.stringify(A.nums||[])>=JSON.stringify(B.nums||[]))));
+  const hA=(A.hhT||0)>=(B.hhT||0)?A:B;
   const pzA=(A.pzT||0)>=(B.pzT||0)?A:B,gnA=(A.gnT||0)>=(B.gnT||0)?A:B;
-  return{pt:mx(A.pt,B.pt),rt:mx(A.rt,B.rt),nums:(pickA?A.nums:B.nums)||[],numT:Math.max(aT,bT),cs:(pickA?A.cs:B.cs)||0,ce:(pickA?A.ce:B.ce)||0,pz:pzA.pz||0,pzc:pzA.pzc||"",pzT:pzA.pzT||0,gn:gnA.gn||"",gnT:gnA.gnT||0,rmE,hid,events};
+  return{pt:mx(A.pt,B.pt),rt:mx(A.rt,B.rt),nums:(pickA?A.nums:B.nums)||[],numT:Math.max(aT,bT),cs:(pickA?A.cs:B.cs)||0,ce:(pickA?A.ce:B.ce)||0,hh:hA.hh||"",hhT:hA.hhT||0,pz:pzA.pz||0,pzc:pzA.pzc||"",pzT:pzA.pzT||0,gn:gnA.gn||"",gnT:gnA.gnT||0,rmE,hid,events};
 }
 /*ENDMERGE*/
 
@@ -42,7 +43,7 @@ function cleanEvent(e){
 function clean(d){
   d=d&&typeof d==="object"?d:{};
   const nums=(Array.isArray(d.nums)?d.nums:[]).slice(0,1).map(x=>str(x,8).toUpperCase().replace(/[^A-Z0-9]/g,"")).filter(Boolean);
-  return{pt:cleanMap(d.pt),rt:cleanMap(d.rt),nums,numT:num(d.numT),cs:num(d.cs),ce:num(d.ce),pz:Math.max(0,Math.min(6,Math.floor(num(d.pz)))),pzc:str(d.pzc,30),pzT:num(d.pzT),gn:str(d.gn,30),gnT:num(d.gnT),
+  return{pt:cleanMap(d.pt),rt:cleanMap(d.rt),nums,numT:num(d.numT),cs:num(d.cs),ce:num(d.ce),hh:str(d.hh,40),hhT:num(d.hhT),pz:Math.max(0,Math.min(6,Math.floor(num(d.pz)))),pzc:str(d.pzc,30),pzT:num(d.pzT),gn:str(d.gn,30),gnT:num(d.gnT),
     rmE:(Array.isArray(d.rmE)?d.rmE:[]).slice(0,3000).map(x=>str(x,40)).filter(Boolean),
     hid:(Array.isArray(d.hid)?d.hid:[]).slice(-500).map(x=>str(x,40)).filter(Boolean),
     events:(Array.isArray(d.events)?d.events:[]).slice(0,2000).map(cleanEvent).filter(Boolean),
