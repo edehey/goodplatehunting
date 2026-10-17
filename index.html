@@ -1370,7 +1370,7 @@ function applyDoc(D,_code){
  {const _g=GL.find(x=>x.c===(_code||gc));if(D.gn&&_g&&(D.gnT||0)>(_g.nt||0)){_g.n=String(D.gn).slice(0,30);_g.nt=D.gnT;saveGL()}
   if((D.pzT||0)>PZT&&D.pz>=0&&D.pz<7&&(D.pz!==PZk||(D.pzc||"")!==PZC)){PZk=D.pz|0;PZC=PZk===6?String(D.pzc||"").slice(0,30):"";PZT=D.pzT;try{localStorage.setItem("platelunch.prize",PZk);localStorage.setItem("platelunch.prizec",PZC);localStorage.setItem("platelunch.prizet",PZT)}catch(_){}if(_g){_g.p=PZk;_g.pc=PZC;_g.pzt=PZT;saveGL()}setTimeout(function(){try{applyLang()}catch(_){}},0)}}
  S.pt=D.pt||{};S.rt=D.rt||{};S.numT=D.numT||0;S.cs=D.cs||0;S.ce=D.ce||0;S.rmE=D.rmE||[];S.hid=D.hid||[];
- S.players=Object.keys(S.pt).filter(n=>S.pt[n]>(S.rt[n]||0)).sort((a,b)=>S.pt[a]-S.pt[b]||(a<b?-1:1));S.hh=D.hh||"";S.hhT=D.hhT||0;{const _i=S.players.indexOf(S.hh);if(_i>0){S.players.splice(_i,1);S.players.unshift(S.hh)}}
+ S.players=Object.keys(S.pt).filter(n=>S.pt[n]>(S.rt[n]||0)).sort((a,b)=>S.pt[a]-S.pt[b]||(a<b?-1:1));if((D.hhT||0)>=(S.hhT||0)){S.hh=D.hh||"";S.hhT=D.hhT||0}else setTimeout(schedSync,0);{const _i=S.players.indexOf(S.hh);if(_i>0){S.players.splice(_i,1);S.players.unshift(S.hh)}}
  S.nums=(D.nums||[]).slice(0,1);
  if(D.prof&&typeof D.prof==="object"){let ch=0;for(const n in D.prof){const r=D.prof[n]||{},l=S.prof[n];if((r.t||0)>((l&&l.t)||0)){S.prof[n]={img:okImg(r.img)?r.img:null,bio:String(r.bio||"").slice(0,140),t:r.t};ch=1}}}
  const loc=new Map(S.events.map(e=>[e.id,e])),inD=new Set((D.events||[]).map(e=>e.id)),gone=new Set(S.rmE);
