@@ -4,6 +4,14 @@ self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(C
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C&&x!=="gph-meta").map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener("fetch",e=>{const r=e.request,u=new URL(r.url);
  if(r.method!=="GET"||u.origin!==location.origin||u.pathname.startsWith("/api/"))return;
+ /* Opening the app: use the network, but if it takes longer than 3 s (slow wifi) show the saved copy; the fresh page is still saved for next time. */
+ if(r.mode==="navigate"){const net=fetch(r).then(res=>{if(res.ok){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp)).catch(()=>{})}return res});
+  e.respondWith(new Promise(ok=>{let done=false;const fin=x=>{if(!done&&x){done=true;ok(x)}};
+   const t=setTimeout(()=>caches.match(r).then(m=>fin(m||null)),3000);
+   net.then(res=>{clearTimeout(t);fin(res)}).catch(()=>caches.match(r).then(m=>m||caches.match("/")).then(m=>fin(m||Response.error())));
+   net.then(()=>{},()=>{});
+   setTimeout(()=>net.then(fin,()=>{}),3000)}));
+  e.waitUntil(net.then(()=>{},()=>{}));return}
  e.respondWith(fetch(r).then(res=>{if(res.ok){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp))}return res}).catch(()=>caches.match(r).then(m=>m||caches.match("/"))))});
 
 /* Push alerts: the server sends an empty push when a group member logs a plate. The text is chosen here, in the language the app saved. */
