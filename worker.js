@@ -183,7 +183,8 @@ async function api(req,env,url,ctx){
   return json({error:"not found"},404)}
 
 export default{
-  async scheduled(event,env,ctx){ctx.waitUntil(sendDigest(env).catch(()=>{}))},
+  // Visitor report emails switched off at Eddy's request (31 Oct 2026). Stats stay on /stats.html.
+  async scheduled(event,env,ctx){},
   async fetch(req,env,ctx){
     const url=new URL(req.url);
     if(url.pathname.startsWith("/api/")){try{return await api(req,env,url,ctx)}catch(e){return json({error:"server"},500)}}
