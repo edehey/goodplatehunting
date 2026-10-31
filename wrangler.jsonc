@@ -8,7 +8,7 @@
     "run_worker_first": ["/api/*"]
   },
   "vars": { "DIGEST_TO": "eddy@eddydeheij.com" },
-  "triggers": { "crons": [] },
+  "triggers": { "crons": ["0 7 * * *"] },
   "send_email": [{ "name": "MAIL" }],
   "kv_namespaces": [
     { "binding": "GROUPS" }
