@@ -183,8 +183,8 @@ async function api(req,env,url,ctx){
   return json({error:"not found"},404)}
 
 export default{
-  // Visitor report emails switched off at Eddy's request (31 Oct 2026). Stats stay on /stats.html.
-  async scheduled(event,env,ctx){},
+  // Visitor report email once a day, 07:00 UTC (08:00 Madrid in winter, 09:00 in summer).
+  async scheduled(event,env,ctx){ctx.waitUntil(sendDigest(env).catch(()=>{}))},
   async fetch(req,env,ctx){
     const url=new URL(req.url);
     if(url.pathname.startsWith("/api/")){try{return await api(req,env,url,ctx)}catch(e){return json({error:"server"},500)}}
